@@ -1,14 +1,30 @@
 #include "ReferenceFrame.hpp"
 #include <cmath>
 
+namespace
+{
+    static const FlightData::Mat4<double> IDENTITY_MAT4{
+        1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        0.0, 0.0, 0.0, 1.0
+    };
+}
+
 namespace FlightData
 {
     ReferenceFrame::ReferenceFrame() 
+        : frame_{IDENTITY_MAT4}
+        , rotation_matrix_{IDENTITY_MAT4}
+        , translation_matrix_{IDENTITY_MAT4}
     {
     
     };
 
-    ReferenceFrame::ReferenceFrame(const Position position) 
+    ReferenceFrame::ReferenceFrame(const Position position)
+        : frame_{IDENTITY_MAT4}
+        , rotation_matrix_{IDENTITY_MAT4}
+        , translation_matrix_{IDENTITY_MAT4}
     {
         SetPosition(position);
     }
