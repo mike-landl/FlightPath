@@ -4,7 +4,7 @@
 #include <string>
 #include <cstdint>
 #include <iostream>
-#include <iomanip>
+#include <format>
 #include <initializer_list>
 
 #include "ColumnVector.hpp"
@@ -135,10 +135,10 @@ namespace FlightData
     {
         for (size_t row = 0; row < rows_; ++row)
         {
-            for (size_t col = 0; col < cols_; ++col)
+            std::cout << std::format("{:>12.4f}", (*this)(row, 0));
+            for (size_t col = 1; col < cols_; ++col)
             {
-                std::cout << std::setw(12) << std::right << std::setprecision(4) << std::fixed
-                          << (*this)(row, col) << " ";
+                std::cout << std::format(" {:>12.4f}", (*this)(row, col));
             }
             std::cout << "\n";
         }
