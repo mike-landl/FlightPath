@@ -58,13 +58,18 @@ namespace FlightData
         ~ReferenceFrame() = default;
 
         auto SetPosition(const Position position) -> void;
-        auto GetAttitude() -> Attitude;
-        auto GetPosition() -> Position;
+        auto GetAttitude() const -> Attitude;
+        auto GetPosition() const -> Position;
 
         auto Translate(const Vector3 t) -> void;
         auto RotateX(const double angle) -> void;
         auto RotateY(const double angle) -> void;
         auto RotateZ(const double angle) -> void;
+
+    private:
+        auto GetEarth2GeodeticMatrix(const Position position) const -> Mat4<double>;
+        auto GetGeodetic2EarthMatrix(const Position position) const -> Mat4<double>;
+        auto GetGeodetic2BodyfixedMatrix(const Position position) const -> Mat4<double>;
 
     private:
         static constexpr double earth_radius_ = 6366707.0_m;

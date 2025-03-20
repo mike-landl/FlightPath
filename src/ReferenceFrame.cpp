@@ -80,7 +80,7 @@ namespace FlightData
         frame_ = frame_ * rotation_matrix_;
     }
 
-    auto ReferenceFrame::GetPosition() -> Position
+    auto ReferenceFrame::GetPosition() const -> Position
     {
         const double i_14 = frame_(0, 3);
         const double i_24 = frame_(1, 3);
@@ -99,38 +99,52 @@ namespace FlightData
         };
     }
 
-    auto ReferenceFrame::GetAttitude() -> Attitude
+    auto ReferenceFrame::GetEarth2GeodeticMatrix(const Position position) const -> Mat4<double>
     {
         using std::sin;
         using std::cos;
-
-        auto position = GetPosition();
 
         const double L = position.latitude;
         const double B = position.altitude;
         const double r = earth_radius_ + position.altitude;
 
-        // transformation matrix from earth to geodetic
-        auto iE2G = Mat4({
+        return Mat4<double>({
            -cos(L)*sin(B), -sin(L), -cos(L)*cos(B), r*cos(L)*cos(B),
            -sin(L)*sin(B),  cos(L), -sin(L)*cos(B), r*sin(L)*cos(B),
                    cos(B),     0.0,        -sin(B),        r*sin(B),
                       0.0,     0.0,            0.0,             1.0
         });
+    }
 
-        // transformation matrix from geodetic to earth
-        auto iG2E = Mat4({
+    auto ReferenceFrame::GetGeodetic2EarthMatrix(const Position position) const -> Mat4<double>
+    {
+        using std::sin;
+        using std::cos;
+
+        const double L = position.latitude;
+        const double B = position.altitude;
+        const double r = earth_radius_ + position.altitude;
+
+        return Mat4<double>({
             -cos(L)*sin(B), -sin(L)*sin(B),  cos(B), r*cos(L)*cos(B),
                    -sin(L),         cos(L),     0.0, r*sin(L)*cos(B),
             -cos(L)*cos(B), -sin(L)*cos(B), -sin(B),        r*sin(B),
                        0.0,            0.0,     0.0,             1.0
         });
+    }
 
-        // transformation matrix from earth to bodyfixed (i.e. our reference frame)
-        auto &iE2B = frame_;
+    auto ReferenceFrame::GetGeodetic2BodyfixedMatrix(const Position position) const -> Mat4<double>
+    {
+        const auto  iG2E = GetGeodetic2EarthMatrix(position);
+        const auto &iE2B = frame_; // transformation matrix from earth to bodyfixed (i.e. our reference frame)
+        const auto  iG2B = iG2E * iE2B;
+        return iG2B;
+    }
 
-        // transformation matrix from geodetic to bodyfixed
-        auto iG2B = iG2E * iE2B;
+    auto ReferenceFrame::GetAttitude() const -> Attitude
+    {
+        const auto position = GetPosition();
+        const auto iG2B = GetGeodetic2BodyfixedMatrix(position);
 
         // extract needed matrix entries
         const double i_11 = iG2B(0, 0);
