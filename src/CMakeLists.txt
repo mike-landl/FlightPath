@@ -4,6 +4,7 @@ add_executable(FlightData
     ReferenceFrame.cpp
     Matrix.cpp
     Mat4.cpp
+    Exception.cpp
 )
 
 target_include_directories(FlightData PUBLIC ${PROJECT_SOURCE_DIR})
