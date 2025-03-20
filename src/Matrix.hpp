@@ -8,6 +8,7 @@
 #include <initializer_list>
 
 #include "ColumnVector.hpp"
+#include "Error.hpp"
 
 namespace FlightData
 {
@@ -34,12 +35,8 @@ namespace FlightData
         // The initializer list is always supplied in RowMajor layout!
         void SetMatrix(std::initializer_list<REAL> values)
         {
-            if (values.size() != elements_)
-            {
-                std::cout << "Error: Length of initializer list does not match matrix dimensions!";
-                exit(0);
-            }
-
+            Ensure(values.size() == elements_, "Error: Length of initializer list does not match matrix dimensions!");
+            
             if constexpr (LAYOUT == MatrixLayout::RowMajor)
             {
                 std::copy(values.begin(), values.end(), data_.begin());
