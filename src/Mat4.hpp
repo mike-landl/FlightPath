@@ -1,7 +1,8 @@
 #include <array>
-#include <print>
 #include <iostream>
-#include <iomanip>
+#include <format>
+
+#include "Error.hpp"
 
 namespace FlightData
 {
@@ -13,11 +14,7 @@ namespace FlightData
 
         Mat4(std::initializer_list<REAL> values)
         { 
-            if (values.size() != elements_)
-            {
-                std::println("Error: Length of initializer list does not match matrix dimensions!");
-                exit(0);
-            }
+            Ensure(values.size() == elements_, "Error: Length of initializer list does not match matrix dimensions!");
 
             std::copy(values.begin(), values.end(), data_.begin());
         };
@@ -29,6 +26,7 @@ namespace FlightData
             std::copy(values.begin(), values.end(), data_.begin());
         }
 
+        // Operator overloading
               REAL& operator()(size_t row, size_t col)       { return data_[row * cols_ + col]; }
         const REAL& operator()(size_t row, size_t col) const { return data_[row * cols_ + col]; }
 
@@ -37,7 +35,7 @@ namespace FlightData
         {
             Mat4<REAL> C;
 
-            for (size_t i = 0; i < 4; ++i)
+            for (size_t i = 0; i < rows_; ++i)
             {
                 const double Ai0 = (*this)(i, 0);
                 const double Ai1 = (*this)(i, 1);
@@ -53,32 +51,16 @@ namespace FlightData
             return C;
         }
 
-        void DebugPrint(std::string label)
-        {
-            std::println(label);
-            DebugPrint();
-        };
-
-        void DebugPrint() const
-        {
-            for (size_t row = 0; row < rows_; ++row)
-            {
-                for (size_t col = 0; col < cols_; ++col)
-                {
-                    std::cout << std::setw(12) << std::right << std::setprecision(4) << std::fixed
-                              << (*this)(row, col) << " ";
-                }
-                std::cout << "\n";
-            }
-        }
+        void DebugPrint(std::string label);
+        void DebugPrint() const;
 
         // getters for private members
-              REAL* RawPtr()       { return data_.data(); }
-        const REAL* RawPtr() const { return data_.data(); }
+        auto RawPtr()       ->       REAL* { return data_.data(); }
+        auto RawPtr() const -> const REAL* { return data_.data(); }
 
-        size_t rows()     const { return rows_; }
-        size_t cols()     const { return cols_; }
-        size_t elements() const { return elements_; }
+        auto rows()     const -> size_t { return rows_; }
+        auto cols()     const -> size_t { return cols_; }
+        auto elements() const -> size_t { return elements_; }
 
     private:
         std::array<REAL, 16> data_;
@@ -86,4 +68,25 @@ namespace FlightData
         static constexpr size_t cols_ = 4;
         static constexpr size_t elements_ = 16;
     };
+
+    template <typename REAL>
+    void Mat4<REAL>::DebugPrint(std::string label)
+    {
+        std::println(label);
+        DebugPrint();
+    };
+
+    template <typename REAL>
+    void Mat4<REAL>::DebugPrint() const
+    {
+        for (size_t row = 0; row < rows_; ++row)
+        {
+            std::cout << std::format(" {:12.4f}", (*this)(row, 0));
+            for (size_t col = 1; col < cols_; ++col)
+            {
+                std::cout << std::format(" {:12.4f}", (*this)(row, col));
+            }
+            std::cout << "\n";
+        }
+    }
 }
