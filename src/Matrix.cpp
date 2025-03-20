@@ -5,8 +5,6 @@
 
 namespace FlightData
 {
-    
-
     TEST_CASE("GEMM", "[matrix]")
     {
         // Setup test data
