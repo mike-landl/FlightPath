@@ -21,7 +21,7 @@ namespace FlightData
         , rotation_matrix_{IDENTITY_MAT4}
         , translation_matrix_{IDENTITY_MAT4}
     {
-    
+        SetPosition(Position{.longitude=0.0_deg, .latitude=0.0_deg, .altitude=300.0_m});
     };
 
     ReferenceFrame::ReferenceFrame(const Position position)
