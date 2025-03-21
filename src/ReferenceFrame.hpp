@@ -2,34 +2,7 @@
 
 #include "Mat4.hpp"
 
-static constexpr long double PI = 3.14159265358979323846264338327950288419716939937510l;
-
-constexpr double deg2rad(long double value)
-{
-    constexpr long double factor = PI / 180.0l;
-    return static_cast<double>(value * factor);
-}
-
-constexpr double rad2deg(long double value)
-{
-    constexpr long double factor = 180.0l / PI;
-    return static_cast<double>(value * factor);
-}
-
-constexpr double operator"" _deg(long double value)
-{
-    return deg2rad(value);
-}
-
-constexpr double operator"" _m(long double value)
-{
-    return static_cast<double>(value);
-}
-
-constexpr double operator"" _km(long double value)
-{
-    return static_cast<double>(value * 1000.0l);
-}
+#include "Units.hpp"
 
 namespace FlightData
 {
