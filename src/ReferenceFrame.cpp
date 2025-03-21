@@ -121,8 +121,8 @@ namespace FlightData
         using std::sin;
         using std::cos;
 
-        const double L = position.latitude;
-        const double B = position.altitude;
+        const double L = position.longitude;
+        const double B = position.latitude;
         const double r = earth_radius_ + position.altitude;
 
         return Mat4<double>({
@@ -138,8 +138,8 @@ namespace FlightData
         using std::sin;
         using std::cos;
 
-        const double L = position.latitude;
-        const double B = position.altitude;
+        const double L = position.longitude;
+        const double B = position.latitude;
         const double r = earth_radius_ + position.altitude;
 
         return Mat4<double>({
