@@ -1,6 +1,8 @@
 #include "ReferenceFrame.hpp"
 #include <cmath>
+#include <print>
 #include "Vec3.hpp"
+#include "Units.hpp"
 
 namespace
 {
@@ -175,5 +177,33 @@ namespace FlightData
         const double roll    = std::atan2(i_32, i_33);
 
         return Attitude{.heading=heading, .pitch=pitch, .roll=roll};
+    }
+
+    auto ReferenceFrame::PrintPosition() const -> void
+    {
+        PrintPosition(GetPosition());
+    }
+    
+    auto ReferenceFrame::PrintAttitude() const -> void
+    {
+        PrintAttitude(GetAttitude());
+    }
+    
+    auto ReferenceFrame::PrintPosition(const Position position) const -> void
+    {
+        std::println("Longitude {:.2f}\370, Latitude {:.2f}\370, Altitude {:.2f} m", 
+            rad2deg(position.longitude), 
+            rad2deg(position.latitude), 
+            position.altitude
+        );
+    }
+
+    auto ReferenceFrame::PrintAttitude(const Attitude attitude) const -> void
+    {
+        std::println("Heading {:.2f}\370, Pitch {:.2f}\370, Roll {:.2f}\370",
+            rad2deg(attitude.heading),
+            rad2deg(attitude.pitch),
+            rad2deg(attitude.roll)
+        );
     }
 }

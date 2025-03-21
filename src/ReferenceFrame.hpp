@@ -28,6 +28,11 @@ namespace FlightData
         auto GetAttitude() const -> Attitude;
         auto GetPosition() const -> Position;
 
+        auto PrintPosition() const -> void;
+        auto PrintAttitude() const -> void;
+        auto PrintPosition(const Position position) const -> void;
+        auto PrintAttitude(const Attitude attitude) const -> void;
+
         auto Translate(const Vec3<double> t) -> void;
         auto RotateX(const double angle) -> void;
         auto RotateY(const double angle) -> void;
