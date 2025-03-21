@@ -35,9 +35,9 @@ namespace FlightData
         using std::sin;
         using std::cos;
 
-        const double r = earth_radius_ + position.altitude;
         const double L = position.longitude;
         const double B = position.latitude;
+        const double r = earth_radius_ + position.altitude;
 
         frame_.SetMatrix( 
         { -cos(L)*sin(B), -sin(L), -cos(L)*cos(B), r*cos(L)*cos(B),
@@ -121,8 +121,8 @@ namespace FlightData
         using std::sin;
         using std::cos;
 
-        const double L = position.latitude;
-        const double B = position.altitude;
+        const double L = position.longitude;
+        const double B = position.latitude;
         const double r = earth_radius_ + position.altitude;
 
         return Mat4<double>({
@@ -138,13 +138,13 @@ namespace FlightData
         using std::sin;
         using std::cos;
 
-        const double L = position.latitude;
-        const double B = position.altitude;
+        const double L = position.longitude;
+        const double B = position.latitude;
         const double r = earth_radius_ + position.altitude;
 
         return Mat4<double>({
             -cos(L)*sin(B), -sin(L)*sin(B),  cos(B), r*cos(L)*cos(B),
-                   -sin(L),         cos(L),     0.0, r*sin(L)*cos(B),
+            -sin(L)       ,  cos(L)       ,     0.0, r*sin(L)*cos(B),
             -cos(L)*cos(B), -sin(L)*cos(B), -sin(B),        r*sin(B),
                        0.0,            0.0,     0.0,             1.0
         });
