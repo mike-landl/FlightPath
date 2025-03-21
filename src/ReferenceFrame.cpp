@@ -49,6 +49,13 @@ namespace FlightData
         });
     }
 
+    auto ReferenceFrame::SetAttitude(const Attitude attitude) -> void
+    {
+        RotateZ(attitude.heading);
+        RotateY(attitude.pitch);
+        RotateX(attitude.roll);
+    }
+
     auto ReferenceFrame::Translate(const Vec3<double> t) -> void
     {
         translation_matrix_.SetMatrix({
