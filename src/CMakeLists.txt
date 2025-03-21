@@ -6,6 +6,7 @@ add_executable(FlightData
     Mat4.cpp
     ReferenceFrame.cpp
     Solver.cpp
+    Units.cpp
     Vec3.cpp
     VelocityState.cpp
 )
