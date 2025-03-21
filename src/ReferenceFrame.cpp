@@ -1,5 +1,6 @@
 #include "ReferenceFrame.hpp"
 #include <cmath>
+#include "Vec3.hpp"
 
 namespace
 {
@@ -46,7 +47,7 @@ namespace FlightData
         });
     }
 
-    auto ReferenceFrame::Translate(const Vector3 t) -> void
+    auto ReferenceFrame::Translate(const Vec3<double> t) -> void
     {
         translation_matrix_.SetMatrix({
             1.0, 0.0, 0.0, t.x,
