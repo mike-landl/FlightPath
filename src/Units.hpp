@@ -1,6 +1,8 @@
 #pragma once
 
-static constexpr long double PI = 3.14159265358979323846264338327950288419716939937510l;
+static constexpr long double     PI = 3.14159265358979323846264338327950288419716939937510l;
+static constexpr long double TWO_PI = 2.0l * PI;
+
 
 constexpr double deg2rad(long double value)
 {
