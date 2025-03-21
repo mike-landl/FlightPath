@@ -1,17 +1,11 @@
 #pragma once
 
 #include "Mat4.hpp"
-
+#include "Vec3.hpp"
 #include "Units.hpp"
 
 namespace FlightData
 {
-    struct Vector3
-    {
-        double x, y, z;
-        Vector3() : x(0), y(0), z(0) {};
-        Vector3(double x, double y, double z) : x(x), y(y), z(z) {}
-    };
 
     struct Position
     {
@@ -34,7 +28,7 @@ namespace FlightData
         auto GetAttitude() const -> Attitude;
         auto GetPosition() const -> Position;
 
-        auto Translate(const Vector3 t) -> void;
+        auto Translate(const Vec3<double> t) -> void;
         auto RotateX(const double angle) -> void;
         auto RotateY(const double angle) -> void;
         auto RotateZ(const double angle) -> void;
