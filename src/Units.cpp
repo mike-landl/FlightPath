@@ -37,6 +37,20 @@ namespace FlightData
         CheckDouble(45668.0_mm,     45.668     );
     }
 
+    TEST_CASE("feet literal", "[units]")
+    {
+        CheckDouble(   -0.00468_ft, -0.001426464);
+        CheckDouble(    1.0_ft,      0.3048     );
+        CheckDouble(45668.0_ft,     13919.6064  );
+    }
+
+    TEST_CASE("meter to feet conversion", "[units]")
+    {
+        CheckDouble(m2ft(-0.001426464),    -0.00468);
+        CheckDouble(m2ft( 0.3048     ),     1.0    );
+        CheckDouble(m2ft(13919.6064  ), 45668.0    );
+    }
+
     TEST_CASE("degree literal", "[units]")
     {
         CheckDouble(  0.0_deg, 0.0/4.0*PI);
