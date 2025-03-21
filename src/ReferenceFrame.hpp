@@ -27,6 +27,7 @@ namespace FlightData
         auto SetPosition(const Position position) -> void;
         auto GetAttitude() const -> Attitude;
         auto GetPosition() const -> Position;
+        auto GetAttitude(const bool positive_heading = true) const -> Attitude;
 
         auto PrintPosition() const -> void;
         auto PrintAttitude() const -> void;
