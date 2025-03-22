@@ -4,6 +4,7 @@ add_executable(FlightData
     Main.cpp
     Matrix.cpp
     Mat4.cpp
+    Recorder.cpp
     ReferenceFrame.cpp
     Solver.cpp
     Units.cpp
