@@ -2,6 +2,36 @@
 
 #include <source_location>
 #include <print>
+#include <format>
+#include <string_view>
+
+namespace AnsiColor
+{
+    enum class Color
+    {
+        Reset,
+        BrightBlue,
+        BrightGreen,
+        BrightYellow,
+        BrightRed
+    };
+
+    template <Color color>
+    inline constexpr std::string_view ToAnsiCode()
+    {
+        if      constexpr (color == Color::Reset)        return "\x1B[0m";
+        else if constexpr (color == Color::BrightBlue)   return "\x1B[94m";
+        else if constexpr (color == Color::BrightGreen)  return "\x1B[92m";
+        else if constexpr (color == Color::BrightYellow) return "\x1B[93m";
+        else if constexpr (color == Color::BrightRed)    return "\x1B[91m";
+    }
+
+    template <Color color>
+    inline std::string ColoredString(std::string_view str)
+    {
+        return std::format("{}{}{}", ToAnsiCode<color>(), str, ToAnsiCode<Color::Reset>());
+    }
+}
 
 namespace FlightData::Log
 {
@@ -24,11 +54,13 @@ namespace FlightData::Log
     {
         print(const char *msg, Args && ...args, std::source_location loc = std::source_location::current())
         {
-            auto c = "?";
-                 if constexpr (L==Level::DEBUG) { c = "\x1B[94m[D]\033[0m"; } // bright blue   [D]
-            else if constexpr (L==Level::INFO ) { c = "\x1B[92m[I]\033[0m"; } // bright green  [I]
-            else if constexpr (L==Level::WARN ) { c = "\x1B[93m[W]\033[0m"; } // bright yellow [W]
-            else if constexpr (L==Level::ERROR) { c = "\x1B[91m[E]\033[0m"; } // bright red    [E]
+            using namespace AnsiColor;
+
+            std::string c = "?";
+                 if constexpr (L==Level::DEBUG) { c = ColoredString<Color::BrightBlue  >("[D]"); }
+            else if constexpr (L==Level::INFO ) { c = ColoredString<Color::BrightGreen >("[I]"); }
+            else if constexpr (L==Level::WARN ) { c = ColoredString<Color::BrightYellow>("[W]"); }
+            else if constexpr (L==Level::ERROR) { c = ColoredString<Color::BrightRed   >("[E]"); }
 
             // only use file name (without path)
             std::string_view file = loc.file_name();
@@ -49,5 +81,4 @@ namespace FlightData::Log
     template <class ... args> using Info  = print<Level::INFO,  args ...>;
     template <class ... args> using Warn  = print<Level::WARN,  args ...>;
     template <class ... args> using Error = print<Level::ERROR, args ...>;
-
 }
