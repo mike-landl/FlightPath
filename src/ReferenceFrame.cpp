@@ -1,13 +1,13 @@
 #include "ReferenceFrame.hpp"
 
 #include <cmath>
-#include <print>
 
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 
 #include "Vec3.hpp"
 #include "Units.hpp"
+#include "Log.hpp"
 
 namespace
 {
@@ -203,16 +203,16 @@ namespace FlightData
     
     auto ReferenceFrame::PrintPosition(const Position position) const -> void
     {
-        std::println("Longitude {:.2f}\370, Latitude {:.2f}\370, Altitude {:.2f} m", 
+        Log::Info("Longitude {:.2f}\370, Latitude {:.2f}\370, Altitude {:.2f} m", 
             rad2deg(position.longitude), 
             rad2deg(position.latitude), 
-            position.altitude
+            static_cast<double>(position.altitude) // cast to a non const temporary... there might be a better way to handle this
         );
     }
 
     auto ReferenceFrame::PrintAttitude(const Attitude attitude) const -> void
     {
-        std::println("Heading {:.2f}\370, Pitch {:.2f}\370, Roll {:.2f}\370",
+        Log::Info("Heading {:.2f}\370, Pitch {:.2f}\370, Roll {:.2f}\370",
             rad2deg(attitude.heading),
             rad2deg(attitude.pitch),
             rad2deg(attitude.roll)
