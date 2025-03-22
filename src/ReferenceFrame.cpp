@@ -184,7 +184,7 @@ namespace FlightData
         const double i_32 = iG2B(2, 1);
         const double i_33 = iG2B(2, 2);
 
-        const double heading = positive_heading ? std::fmod(static_cast<double>(TWO_PI) + std::atan2(i_21, i_11), static_cast<double>(TWO_PI)) : std::atan2(i_21, i_11);
+        const double heading = positive_heading ? std::fmod(TWO_PI_d + std::atan2(i_21, i_11), TWO_PI_d) : std::atan2(i_21, i_11);
         const double pitch   = std::asin(-i_31);
         const double roll    = std::atan2(i_32, i_33);
 

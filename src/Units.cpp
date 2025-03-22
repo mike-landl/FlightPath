@@ -53,27 +53,27 @@ namespace FlightData
 
     TEST_CASE("degree literal", "[units]")
     {
-        CheckDouble(  0.0_deg, 0.0/4.0*PI);
-        CheckDouble( 45.0_deg, 1.0/4.0*PI);
-        CheckDouble( 90.0_deg, 2.0/4.0*PI);
-        CheckDouble(135.0_deg, 3.0/4.0*PI);
-        CheckDouble(180.0_deg, 4.0/4.0*PI);
-        CheckDouble(225.0_deg, 5.0/4.0*PI);
-        CheckDouble(270.0_deg, 6.0/4.0*PI);
-        CheckDouble(315.0_deg, 7.0/4.0*PI);
-        CheckDouble(360.0_deg, 8.0/4.0*PI);
+        CheckDouble(  0.0_deg, 0.0/4.0*PI_d);
+        CheckDouble( 45.0_deg, 1.0/4.0*PI_d);
+        CheckDouble( 90.0_deg, 2.0/4.0*PI_d);
+        CheckDouble(135.0_deg, 3.0/4.0*PI_d);
+        CheckDouble(180.0_deg, 4.0/4.0*PI_d);
+        CheckDouble(225.0_deg, 5.0/4.0*PI_d);
+        CheckDouble(270.0_deg, 6.0/4.0*PI_d);
+        CheckDouble(315.0_deg, 7.0/4.0*PI_d);
+        CheckDouble(360.0_deg, 8.0/4.0*PI_d);
     }
 
     TEST_CASE("radian to degrees", "[units]")
     {
-        CheckDouble(rad2deg(0.0/4.0*PI),   0.0);
-        CheckDouble(rad2deg(1.0/4.0*PI),  45.0);
-        CheckDouble(rad2deg(2.0/4.0*PI),  90.0);
-        CheckDouble(rad2deg(3.0/4.0*PI), 135.0);
-        CheckDouble(rad2deg(4.0/4.0*PI), 180.0);
-        CheckDouble(rad2deg(5.0/4.0*PI), 225.0);
-        CheckDouble(rad2deg(6.0/4.0*PI), 270.0);
-        CheckDouble(rad2deg(7.0/4.0*PI), 315.0);
-        CheckDouble(rad2deg(8.0/4.0*PI), 360.0);
+        CheckDouble(rad2deg(0.0/4.0*PI_d),   0.0);
+        CheckDouble(rad2deg(1.0/4.0*PI_d),  45.0);
+        CheckDouble(rad2deg(2.0/4.0*PI_d),  90.0);
+        CheckDouble(rad2deg(3.0/4.0*PI_d), 135.0);
+        CheckDouble(rad2deg(4.0/4.0*PI_d), 180.0);
+        CheckDouble(rad2deg(5.0/4.0*PI_d), 225.0);
+        CheckDouble(rad2deg(6.0/4.0*PI_d), 270.0);
+        CheckDouble(rad2deg(7.0/4.0*PI_d), 315.0);
+        CheckDouble(rad2deg(8.0/4.0*PI_d), 360.0);
     }
 }
