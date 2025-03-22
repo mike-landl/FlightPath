@@ -1,18 +1,29 @@
 #pragma once
 
-static constexpr long double     PI = 3.14159265358979323846264338327950288419716939937510l;
-static constexpr long double TWO_PI = 2.0l * PI;
+template <typename T>
+constexpr T PI()
+{
+    return static_cast<T>(3.14159265358979323846264338327950288419716939937510l);
+}
 
+template <typename T>
+constexpr T TWO_PI()
+{
+    return static_cast<T>(2.0l * PI<T>());
+}
+
+constexpr double PI_d = PI<double>();
+constexpr double TWO_PI_d = TWO_PI<double>();
 
 constexpr double deg2rad(long double value)
 {
-    constexpr long double factor = PI / 180.0l;
+    constexpr long double factor = PI<long double>() / 180.0l;
     return static_cast<double>(value * factor);
 }
 
 constexpr double rad2deg(long double value)
 {
-    constexpr long double factor = 180.0l / PI;
+    constexpr long double factor = 180.0l / PI<long double>();
     return static_cast<double>(value * factor);
 }
 
