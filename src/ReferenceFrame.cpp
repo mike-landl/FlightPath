@@ -245,8 +245,8 @@ namespace FlightData
         CheckDouble(position.latitude,  initial_position.latitude , 1);
         CheckDouble(position.altitude,  initial_position.altitude , 1000);
 
-        ref_frame.PrintPosition();
-        ref_frame.PrintAttitude();
+        //ref_frame.PrintPosition();
+        //ref_frame.PrintAttitude();
     }
 
     TEST_CASE("Set Attitude", "[ReferenceFrame]")
@@ -259,7 +259,7 @@ namespace FlightData
         
         ref_frame.SetAttitude(Attitude{.heading=heading, .pitch=pitch, .roll=roll});
         Attitude attitude = ref_frame.GetAttitude();
-        ref_frame.PrintAttitude(attitude);
+        //ref_frame.PrintAttitude(attitude);
 
         CheckDouble(attitude.heading, heading, 1);
         CheckDouble(attitude.pitch,   pitch,   1);
@@ -291,8 +291,8 @@ namespace FlightData
         CheckDouble(position.latitude,  initial_position.latitude , 1);
         CheckDouble(position.altitude,  initial_position.altitude , 1000);
 
-        ref_frame.PrintPosition();
-        ref_frame.PrintAttitude();
+        //ref_frame.PrintPosition();
+        //ref_frame.PrintAttitude();
     }
 
 
