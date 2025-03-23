@@ -56,8 +56,31 @@ namespace FlightData
         Entry entry{};
 		while (file >> entry)
 		{
-			data_.push_back(entry);
+			input_data_.push_back(entry);
 		}
+        
+        // copy first line of input to output
+        output_data_.push_back(input_data_[0]);
+    }
+
+    auto Recorder::WriteData(const Position &position, const Attitude &attitude, const Vec3<double> &velocity) -> void
+    {
+        // start with a copy of the input data at n and overwrite fields with our calculation
+        Entry entry = input_data_[output_data_.size()];
+        
+        entry.longitude    = rad2deg(position.longitude);
+        entry.latitude     = rad2deg(position.latitude);
+        entry.altitude     = position.altitude;
+        
+        entry.true_heading = rad2deg(attitude.heading);
+        entry.pitch        = rad2deg(attitude.pitch);
+        entry.roll         = rad2deg(attitude.roll);
+        
+        entry.v_x          = velocity.x;
+        entry.v_y          = velocity.y;
+        entry.v_z          = velocity.z;
+        
+        output_data_.push_back(entry);
     }
 
     static auto CheckDouble(const double value, const double expected) -> void
