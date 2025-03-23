@@ -67,7 +67,7 @@ namespace FlightData
             reference_frame_.Dot(eye_4 + twist_matrix * dt);
 
             // correct the transform
-            reference_frame_.Orthogonalize();
+            reference_frame_.Orthonormalize();
 
             // store flight data
             

@@ -21,6 +21,7 @@ namespace FlightData
     {
     public:
         ReferenceFrame();
+        ReferenceFrame(const Mat4<double> frame);
         ReferenceFrame(const Position position);
         ~ReferenceFrame() = default;
 
@@ -42,7 +43,9 @@ namespace FlightData
 
         auto Dot(const Mat4<double> &other) -> void;
 
-        auto Orthogonalize() -> void;
+        auto Orthonormalize() -> void;
+        auto GetOrthogonalError() -> double;
+        auto GetLengthError() -> double;
 
     private:
         auto GetEarth2GeodeticMatrix(const Position position) const -> Mat4<double>;
