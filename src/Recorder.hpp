@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+#include "ReferenceFrame.hpp"
+
 namespace FlightData
 {
     struct Entry
@@ -33,11 +35,13 @@ namespace FlightData
 
         auto ReadFile(const std::string &path) -> void;
 
-        auto GetData() const -> const std::vector<Entry>& { return data_; }
+        auto GetData() const -> const std::vector<Entry>& { return input_data_; }
+        auto WriteData(const Position &position, const Attitude &attitude, const Vec3<double> &velocity) -> void;
 
     private:
 
     private:
-        std::vector<Entry> data_;
+        std::vector<Entry>  input_data_;
+        std::vector<Entry> output_data_;
     };
 }
