@@ -230,7 +230,7 @@ namespace FlightData
         );
     }
 
-    TEST_CASE("Set Get Position Roundtrip", "[ReferenceFrame]")
+    TEST_CASE("[ReferenceFrame] Set Get Position Roundtrip", "[ReferenceFrame]")
     {
         Position initial_position{
             .longitude = 15.34359762_deg,
@@ -249,7 +249,7 @@ namespace FlightData
         //ref_frame.PrintAttitude();
     }
 
-    TEST_CASE("Set Attitude", "[ReferenceFrame]")
+    TEST_CASE("[ReferenceFrame] Set Attitude", "[ReferenceFrame]")
     {
         constexpr double heading = 280.0_deg;
         constexpr double pitch   =  -2.0_deg;
@@ -266,7 +266,7 @@ namespace FlightData
         CheckDouble(attitude.roll,    roll,    1);
     }
 
-    TEST_CASE("Attitude does not influence position", "[ReferenceFrame]")
+    TEST_CASE("[ReferenceFrame] Attitude does not influence position", "[ReferenceFrame]")
     {
         Position initial_position{
             .longitude = 15.34359762_deg,

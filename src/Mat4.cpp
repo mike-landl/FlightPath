@@ -5,7 +5,7 @@
 
 namespace FlightData
 {
-    TEST_CASE("Identity Matrix Multiplication", "[mat4]")
+    TEST_CASE("[mat4] Matrix Matrix Multiplication - 1x Identity", "[mat4]")
     {
         // Setup test data
         Mat4<double> A({
@@ -37,7 +37,7 @@ namespace FlightData
         }
     }
 
-    TEST_CASE("Matrix Matrix Multiplication B", "[mat4]")
+    TEST_CASE("[mat4] Matrix Matrix Multiplication - 2x Quadratic", "[mat4]")
     {
         // Setup test data
         Mat4<double> A({
