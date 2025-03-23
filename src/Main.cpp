@@ -4,7 +4,6 @@
 #define CATCH_CONFIG_RUNNER
 #include <catch2/catch_session.hpp> 
 
-#include "Matrix.hpp"
 #include "Log.hpp"
 #include "Error.hpp"
 #include "Solver.hpp"

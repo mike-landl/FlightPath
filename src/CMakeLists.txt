@@ -2,7 +2,6 @@
 add_executable(FlightData
     Exception.cpp
     Main.cpp
-    Matrix.cpp
     Mat4.cpp
     Recorder.cpp
     ReferenceFrame.cpp
