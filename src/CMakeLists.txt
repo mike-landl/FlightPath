@@ -1,9 +1,13 @@
 
 add_executable(FlightData
+    Exception.cpp
     Main.cpp
-    ReferenceFrame.cpp
-    Matrix.cpp
     Mat4.cpp
+    Recorder.cpp
+    ReferenceFrame.cpp
+    Solver.cpp
+    Units.cpp
+    Vec3.cpp
 )
 
 target_include_directories(FlightData PUBLIC ${PROJECT_SOURCE_DIR})
