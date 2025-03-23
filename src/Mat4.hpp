@@ -33,11 +33,11 @@ namespace FlightData
               REAL& operator()(size_t row, size_t col)       { return data_[row * cols_ + col]; }
         const REAL& operator()(size_t row, size_t col) const { return data_[row * cols_ + col]; }
 
-        auto operator+(const Mat4<REAL>& other) const -> Mat4<REAL>;
-        auto operator-(const Mat4<REAL>& other) const -> Mat4<REAL>;
+        auto operator + (const Mat4<REAL>& other) const -> Mat4<REAL>;
+        auto operator - (const Mat4<REAL>& other) const -> Mat4<REAL>;
 
-        auto operator*(const Mat4<REAL>& B) const -> Mat4<REAL>; // Matrix Matrix Product        
-        auto operator*(const REAL scalar)   const -> Mat4<REAL>; // Matrix Scalar Product
+        auto operator * (const Mat4<REAL>& B) const -> Mat4<REAL>; // Matrix Matrix Product        
+        auto operator * (const REAL scalar)   const -> Mat4<REAL>; // Matrix Scalar Product
         
         auto DebugPrint(std::string label) -> void;
         auto DebugPrint() const -> void;
@@ -58,7 +58,7 @@ namespace FlightData
     };
 
     template <typename REAL>
-    auto inline Mat4<REAL>::operator+(const Mat4<REAL>& other) const -> Mat4<REAL>
+    auto inline Mat4<REAL>::operator + (const Mat4<REAL>& other) const -> Mat4<REAL>
     {
         Mat4<REAL> C;
 
@@ -79,7 +79,7 @@ namespace FlightData
     }
 
     template <typename REAL>
-    auto inline Mat4<REAL>::operator-(const Mat4<REAL>& other) const -> Mat4<REAL>
+    auto inline Mat4<REAL>::operator - (const Mat4<REAL>& other) const -> Mat4<REAL>
     {
         Mat4<REAL> C;
 
@@ -100,7 +100,7 @@ namespace FlightData
     }
 
     template <typename REAL>
-    auto inline Mat4<REAL>::operator*(const REAL scalar) const -> Mat4<REAL>
+    auto inline Mat4<REAL>::operator * (const REAL scalar) const -> Mat4<REAL>
     {
         Mat4<REAL> C;
 
