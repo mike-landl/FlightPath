@@ -8,6 +8,7 @@
 #include "Vec3.hpp"
 #include "Units.hpp"
 #include "Log.hpp"
+#include "Types.hpp"
 
 namespace
 {
@@ -222,6 +223,63 @@ namespace FlightData
             rad2deg(attitude.pitch),
             rad2deg(attitude.roll)
         );
+    }
+
+    auto ReferenceFrame::Orthogonalize() -> void
+    {
+        // Get vectors from rotation part of frame
+        Vec3<double> c_i{frame_(0, 0), frame_(1, 0), frame_(2, 0)};
+        Vec3<double> c_j{frame_(0, 1), frame_(1, 1), frame_(2, 1)};
+        Vec3<double> c_k{frame_(0, 2), frame_(1, 2), frame_(2, 2)};
+
+        // calculate initial deviation from orthogonality
+        double d_ij = c_i.Dot(c_j);
+        double d_jk = c_j.Dot(c_k);
+        double d_ki = c_k.Dot(c_i);
+
+        double error_sq = d_ij*d_ij + d_jk*d_jk + d_ki*d_ki;
+
+        constexpr double max_error = 1e-15;
+        constexpr i32 max_iter = 10;
+        for (i32 iter = 0; iter < max_iter; ++iter)
+        {
+            if (error_sq < max_error * max_error) break;
+
+            // ortho correction of i,j pair
+            d_ij = c_i.Dot(c_j);
+            Vec3<double> c_i_hat = c_i - 0.5 * d_ij * c_j;
+            Vec3<double> c_j_hat = c_j - 0.5 * d_ij * c_i;
+
+            // Ortho correction of j,k pair
+            d_jk = c_j_hat.Dot(c_k);
+            Vec3<double> c_j_hh  = c_j_hat - 0.5 * d_jk * c_k;
+            Vec3<double> c_k_hat = c_k     - 0.5 * d_jk * c_j_hat;
+
+            // Ortho correction of k,i pair
+            d_ki = c_k_hat.Dot(c_i_hat);
+            Vec3<double> c_k_hh = c_k_hat - 0.5 * d_ki * c_i_hat;
+            Vec3<double> c_i_hh = c_i_hat - 0.5 * d_ki * c_k_hat;
+
+            // Calculate final derivation from orthogonality
+            d_ij = c_i_hh.Dot(c_j_hh);
+            d_jk = c_j_hh.Dot(c_k_hh);
+            d_ki = c_k_hh.Dot(c_i_hh);
+            error_sq = d_ij*d_ij + d_jk*d_jk + d_ki*d_ki;
+
+            // Norm correction (fast approximation)
+            double d_ii = 1.0 - c_i_hh.Dot(c_i_hh);
+            double d_jj = 1.0 - c_j_hh.Dot(c_j_hh);
+            double d_kk = 1.0 - c_k_hh.Dot(c_k_hh);
+
+            c_i = c_i_hh * (1.0 + 0.5 * d_ii);
+            c_j = c_j_hh * (1.0 + 0.5 * d_jj);
+            c_k = c_k_hh * (1.0 + 0.5 * d_kk);
+        }
+
+        // Write back to frame
+        frame_(0, 0) = c_i.x; frame_(0, 1) = c_j.x; frame_(0, 2) = c_k.x;
+        frame_(1, 0) = c_i.y; frame_(1, 1) = c_j.y; frame_(1, 2) = c_k.y;
+        frame_(2, 0) = c_i.z; frame_(2, 1) = c_j.z; frame_(2, 2) = c_k.z;
     }
 
     static auto CheckDouble(const double value, const double expected, const double factor) -> void

@@ -67,7 +67,8 @@ namespace FlightData
             reference_frame_.Dot(eye_4 + twist_matrix * dt);
 
             // correct the transform
-            
+            reference_frame_.Orthogonalize();
+
             // store flight data
         }
         Log::Info("Calculating flight path... Done");
