@@ -49,18 +49,18 @@ namespace FlightData::Log
     
     };
 
-    template <Level L, class ... Args>
-    struct print<L, const char *, Args ...>
+    template <Level level, class ... Args>
+    struct print<level, const char *, Args ...>
     {
         print(const char *msg, Args && ...args, std::source_location loc = std::source_location::current())
         {
             using namespace AnsiColor;
 
             std::string c = "?";
-                 if constexpr (L==Level::DEBUG) { c = ColoredString<Color::BrightBlue  >("[D]"); }
-            else if constexpr (L==Level::INFO ) { c = ColoredString<Color::BrightGreen >("[I]"); }
-            else if constexpr (L==Level::WARN ) { c = ColoredString<Color::BrightYellow>("[W]"); }
-            else if constexpr (L==Level::ERROR) { c = ColoredString<Color::BrightRed   >("[E]"); }
+                 if constexpr (level==Level::DEBUG) { c = ColoredString<Color::BrightBlue  >("[D]"); }
+            else if constexpr (level==Level::INFO ) { c = ColoredString<Color::BrightGreen >("[I]"); }
+            else if constexpr (level==Level::WARN ) { c = ColoredString<Color::BrightYellow>("[W]"); }
+            else if constexpr (level==Level::ERROR) { c = ColoredString<Color::BrightRed   >("[E]"); }
 
             // only use file name (without path)
             std::string_view file = loc.file_name();
