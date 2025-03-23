@@ -40,6 +40,8 @@ namespace FlightData
         auto RotateY(const double angle) -> void;
         auto RotateZ(const double angle) -> void;
 
+        auto Dot(const Mat4<double> &other) -> void;
+
     private:
         auto GetEarth2GeodeticMatrix(const Position position) const -> Mat4<double>;
         auto GetGeodetic2EarthMatrix(const Position position) const -> Mat4<double>;
