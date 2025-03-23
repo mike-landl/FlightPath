@@ -348,9 +348,9 @@ namespace FlightData
     TEST_CASE("[ReferenceFrame] Set Get Position Roundtrip", "[ReferenceFrame]")
     {
         Position initial_position{
-            .longitude = 15.34359762_deg,
-            .latitude  = 46.80092545_deg,
-            .altitude = 3902.4_m,
+            .longitude =    15.34359762_deg,
+            .latitude  =    46.80092545_deg,
+            .altitude  = 3'902.4_m,
         };
 
         ReferenceFrame ref_frame(initial_position);
