@@ -71,7 +71,7 @@ namespace FlightData
         );
     }
 
-    TEST_CASE("[recorder] Read File", "[recorder]")
+    TEST_CASE("[Recorder] Read File", "[Recorder]")
     {
         Recorder recorder;
 
