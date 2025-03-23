@@ -69,8 +69,17 @@ namespace FlightData::Log
             {
                 file.remove_prefix(pos + 1);
             }
-            // print a line with [LEVEL] FILE:LINE MESSAGE
-            std::println("{} {}:{} {}", c, file, loc.line(), std::vformat(msg, std::make_format_args(args ...)));
+            
+            if constexpr (level==Level::INFO)
+            {
+                // [LEVEL] MESSAGE (I'm not interestd where the message comes from if the log level is info)
+                std::println("{} {}", c, std::vformat(msg, std::make_format_args(args ...)));
+            }
+            else
+            {
+                // [LEVEL] FILE:LINE MESSAGE
+                std::println("{} {}:{} {}", c, file, loc.line(), std::vformat(msg, std::make_format_args(args ...)));
+            }
         }
     };
 
