@@ -49,13 +49,13 @@ namespace FlightData
             vb_n_ = vb_np1_;
 
             // calculate acceleration (ab and ob comes from logfile)
-            Vec3<double> ab = Vec3<double>(data[idx-1].a_x,     data[idx-1].a_y,     data[idx-1].a_z);
-            Vec3<double> ob = Vec3<double>(data[idx-1].omega_x, data[idx-1].omega_y, data[idx-1].omega_z);
+            const Vec3<double> ab = Vec3<double>(data[idx-1].a_x,     data[idx-1].a_y,     data[idx-1].a_z);
+            const Vec3<double> ob = Vec3<double>(data[idx-1].omega_x, data[idx-1].omega_y, data[idx-1].omega_z);
             const double dt = data[idx].time - data[idx-1].time;
 
-            Vec3<double> dv_dt_b = ab - ob.Cross(vb_n_);
+            const Vec3<double> dv_dt_b = ab - ob.Cross(vb_n_);
 
-            Mat4<double> twist_matrix = {
+            const Mat4<double> twist_matrix = {
                   0.0, -ob.z,  ob.y, vb_n_.x,
                  ob.z,   0.0, -ob.x, vb_n_.y,
                 -ob.y,  ob.x,   0.0, vb_n_.z,
@@ -70,6 +70,7 @@ namespace FlightData
             reference_frame_.Orthogonalize();
 
             // store flight data
+            
         }
         Log::Info("Calculating flight path... Done");
         Log::Info("Final Position:");
