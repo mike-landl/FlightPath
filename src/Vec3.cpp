@@ -25,7 +25,7 @@ namespace FlightData
         CheckDouble(actual.z, expected.z);
     }
 
-    TEST_CASE("[vec3] add", "[vec3]")
+    TEST_CASE("[Vec3] add", "[Vec3]")
     {
         Vec3<double> a{.x=1, .y=2, .z= 3};
         Vec3<double> b{.x=1, .y=5, .z=-1};
@@ -35,7 +35,7 @@ namespace FlightData
         CheckVec3(c, Vec3<double>(2, 7, 2));
     }
 
-    TEST_CASE("[vec3] subtract", "[vec3]")
+    TEST_CASE("[Vec3] subtract", "[Vec3]")
     {
         Vec3<double> a{.x=1, .y=2, .z= 3};
         Vec3<double> b{.x=1, .y=5, .z=-1};
@@ -45,7 +45,7 @@ namespace FlightData
         CheckVec3(c, Vec3<double>(0, -3, 4));
     }
 
-    TEST_CASE("[vec3] scalar product", "[vec3]")
+    TEST_CASE("[Vec3] scalar product", "[Vec3]")
     {
         Vec3<double> a{.x=1, .y=2, .z=3};
 
@@ -54,7 +54,7 @@ namespace FlightData
         CheckVec3(c, Vec3<double>(5, 10, 15));
     }
 
-    TEST_CASE("[vec3] dot product", "[vec3]")
+    TEST_CASE("[Vec3] dot product", "[Vec3]")
     {
         Vec3<double> a{.x=1, .y=2, .z= 3};
         Vec3<double> b{.x=1, .y=5, .z=-1};
@@ -64,7 +64,7 @@ namespace FlightData
         CheckDouble(c, 8);
     }
 
-    TEST_CASE("[vec3] cross product", "[vec3]")
+    TEST_CASE("[Vec3] cross product", "[Vec3]")
     {
         Vec3<double> a{.x=1, .y=2, .z= 3};
         Vec3<double> b{.x=1, .y=5, .z=-1};
