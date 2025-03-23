@@ -5,9 +5,10 @@ namespace FlightData
 {
     Solver::Solver()
     {
+        Log::Info("Reading flight data file...");
         recorder_.ReadFile("../../../data/2017-01-17_Graz-Gleichenberg.txt");
         const auto& data = recorder_.GetData();
-        Log::Info("Successfully read flight data file with {} entries.", data.size());
+        Log::Info("Reading flight data file... Done {} entries.", data.size());
         
         const auto &entry = data[0];
         reference_frame_.SetPosition(
@@ -17,15 +18,19 @@ namespace FlightData
                 .altitude  = entry.altitude}
         );
 
+        Log::Info("Initializing reference frame...");
         reference_frame_.SetAttitude(
             Attitude{
                 .heading = entry.true_heading, 
                 .pitch   = entry.pitch,    
                 .roll    = entry.roll}
         );
-        Log::Info("Initialized reference frame to");
+        Log::Info("Initializing reference frame... Done");
         reference_frame_.PrintPosition();
         reference_frame_.PrintAttitude();
+
+        Log::Info("Initializing aircraft velocity... Done");
+        vb_np1_ = Vec3(entry.v_x, entry.v_y, entry.v_z);
     }
 
     auto Solver::Run() -> void
@@ -37,32 +42,37 @@ namespace FlightData
             0.0, 0.0, 1.0, 0.0,
             0.0, 0.0, 0.0, 1.0
         };
+        
+        Log::Info("Calculating flight path...");
         for (size_t idx = 1; idx < data.size(); ++idx)
         {
-            if (idx % 100 == 0) Log::Info("{}", (double)idx);
+            vb_n_ = vb_np1_;
 
-            // calculate acceleration
-            Vec3<double> vb = Vec3<double>(data[idx-1].v_x,     data[idx-1].v_y,     data[idx-1].v_z);
+            // calculate acceleration (ab and ob comes from logfile)
             Vec3<double> ab = Vec3<double>(data[idx-1].a_x,     data[idx-1].a_y,     data[idx-1].a_z);
             Vec3<double> ob = Vec3<double>(data[idx-1].omega_x, data[idx-1].omega_y, data[idx-1].omega_z);
-            double dt = data[idx].time - data[idx-1].time;
+            const double dt = data[idx].time - data[idx-1].time;
 
-            Vec3<double> dv_dt_b = ab - ob.Cross(vb);
+            Vec3<double> dv_dt_b = ab - ob.Cross(vb_n_);
 
             Mat4<double> twist_matrix = {
-                  0.0, -ob.z,  ob.y, vb.x,
-                 ob.z,   0.0, -ob.x, vb.y,
-                -ob.y,  ob.x,   0.0, vb.z,
-                  0.0,   0.0,   0.0,  0.0
+                  0.0, -ob.z,  ob.y, vb_n_.x,
+                 ob.z,   0.0, -ob.x, vb_n_.y,
+                -ob.y,  ob.x,   0.0, vb_n_.z,
+                  0.0,   0.0,   0.0,     0.0
             };
 
-            // integrate
-            vb = vb + dv_dt_b * dt;
+            // integration yields velocity and new position + attitude
+            vb_np1_ = vb_n_ + dv_dt_b * dt;
             reference_frame_.Dot(eye_4 + twist_matrix * dt);
 
             // correct the transform
             
             // store flight data
         }
+        Log::Info("Calculating flight path... Done");
+        Log::Info("Final Position:");
+        reference_frame_.PrintPosition();
+        reference_frame_.PrintAttitude();
     }
 }

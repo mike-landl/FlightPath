@@ -21,6 +21,9 @@ namespace FlightData
 
         ReferenceFrame reference_frame_;
         Recorder recorder_;
+        
+        Vec3<double> vb_n_{0,0,0};
+        Vec3<double> vb_np1_{0,0,0};
     };
 
 }
