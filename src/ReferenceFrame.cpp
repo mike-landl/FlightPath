@@ -235,6 +235,11 @@ namespace FlightData
 
     auto ReferenceFrame::Orthonormalize() -> void
     {
+        constexpr double max_error = 1e-15;
+        constexpr double max_error_sq = max_error * max_error;
+        constexpr i32 max_iter = 10;
+        constexpr bool use_fast_approximation = true;
+
         constexpr double ONE_THIRD = 1.0 / 3.0;
         // Get vectors from rotation part of frame
         Vec3<double> c_i = frame_.GetColumn(0);
@@ -248,9 +253,6 @@ namespace FlightData
 
         double error_sq = ONE_THIRD * (d_ij*d_ij + d_jk*d_jk + d_ki*d_ki);
 
-        constexpr double max_error = 1e-15;
-        constexpr double max_error_sq = max_error * max_error;
-        constexpr i32 max_iter = 10;
         for (i32 iter = 0; iter < max_iter; ++iter)
         {
             if (error_sq < max_error_sq) break;
@@ -277,7 +279,7 @@ namespace FlightData
             error_sq = ONE_THIRD * (d_ij*d_ij + d_jk*d_jk + d_ki*d_ki);
 
             // Norm correction (fast approximation) todo: is this needed at every iteration?
-            if constexpr (false)
+            if constexpr (use_fast_approximation)
             {
                 double d_ii = 1.0 - c_i_hh.Dot(c_i_hh);
                 double d_jj = 1.0 - c_j_hh.Dot(c_j_hh);
@@ -423,6 +425,4 @@ namespace FlightData
         REQUIRE(transform.GetOrthogonalError() < 1e-9);
         REQUIRE(transform.GetLengthError() < 1e-6);
     }
-
-
 }
