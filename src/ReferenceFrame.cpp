@@ -111,6 +111,11 @@ namespace FlightData
         frame_ = frame_ * rotation_matrix_;
     }
 
+    auto ReferenceFrame::Dot(const Mat4<double> &other) -> void
+    {
+        frame_ = frame_ * other;
+    }
+
     auto ReferenceFrame::GetPosition() const -> Position
     {
         const double i_14 = frame_(0, 3);
