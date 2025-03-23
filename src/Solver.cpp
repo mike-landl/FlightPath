@@ -69,8 +69,12 @@ namespace FlightData
             // correct the transform
             reference_frame_.Orthonormalize();
 
-            // store flight data
-            
+            // store flight data in recorder
+            recorder_.WriteData(
+                reference_frame_.GetPosition(), 
+                reference_frame_.GetAttitude(),
+                vb_np1_
+            );
         }
         Log::Info("Calculating flight path... Done");
         Log::Info("Final Position:");
