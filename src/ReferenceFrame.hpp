@@ -42,6 +42,8 @@ namespace FlightData
 
         auto Dot(const Mat4<double> &other) -> void;
 
+        auto Orthogonalize() -> void;
+
     private:
         auto GetEarth2GeodeticMatrix(const Position position) const -> Mat4<double>;
         auto GetGeodetic2EarthMatrix(const Position position) const -> Mat4<double>;
