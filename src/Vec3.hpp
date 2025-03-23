@@ -12,8 +12,8 @@ namespace FlightData
         auto inline operator + (const Vec3 &other) const -> Vec3;
         auto inline operator - (const Vec3 &other) const -> Vec3;
         auto inline operator * (const REAL scalar) const -> Vec3;
-        auto inline Dot(const Vec3 &other) -> REAL;
-        auto inline Cross(const Vec3 &other) -> Vec3;
+        auto inline Dot(const Vec3 &other) const -> REAL;
+        auto inline Cross(const Vec3 &other) const -> Vec3;
     };
 
 template <typename REAL>
@@ -53,7 +53,7 @@ template <typename REAL>
     }
 
     template <typename REAL>
-    auto inline Vec3<REAL>::Dot(const Vec3<REAL> &other) -> REAL
+    auto inline Vec3<REAL>::Dot(const Vec3<REAL> &other) const -> REAL
     {
         const auto a1 = this->x; const auto b1 = other.x;
         const auto a2 = this->y; const auto b2 = other.y;
@@ -63,7 +63,7 @@ template <typename REAL>
     }
 
     template <typename REAL>
-    auto inline Vec3<REAL>::Cross(const Vec3<REAL> &other) -> Vec3<REAL>
+    auto inline Vec3<REAL>::Cross(const Vec3<REAL> &other) const -> Vec3<REAL>
     {
         const auto a1 = this->x; const auto b1 = other.x;
         const auto a2 = this->y; const auto b2 = other.y;
