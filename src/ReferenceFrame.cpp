@@ -28,7 +28,15 @@ namespace FlightData
         , translation_matrix_{IDENTITY_MAT4}
     {
         SetPosition(Position{.longitude=0.0_deg, .latitude=0.0_deg, .altitude=300.0_m});
-    };
+    }
+
+    ReferenceFrame::ReferenceFrame(const Mat4<double> frame)
+        : frame_{frame}
+        , rotation_matrix_{IDENTITY_MAT4}
+        , translation_matrix_{IDENTITY_MAT4}
+    {
+    
+    }
 
     ReferenceFrame::ReferenceFrame(const Position position)
         : frame_{IDENTITY_MAT4}
@@ -225,61 +233,103 @@ namespace FlightData
         );
     }
 
-    auto ReferenceFrame::Orthogonalize() -> void
+    auto ReferenceFrame::Orthonormalize() -> void
     {
+        constexpr double ONE_THIRD = 1.0 / 3.0;
         // Get vectors from rotation part of frame
-        Vec3<double> c_i{frame_(0, 0), frame_(1, 0), frame_(2, 0)};
-        Vec3<double> c_j{frame_(0, 1), frame_(1, 1), frame_(2, 1)};
-        Vec3<double> c_k{frame_(0, 2), frame_(1, 2), frame_(2, 2)};
+        Vec3<double> c_i = frame_.GetColumn(0);
+        Vec3<double> c_j = frame_.GetColumn(1);
+        Vec3<double> c_k = frame_.GetColumn(2);
 
         // calculate initial deviation from orthogonality
         double d_ij = c_i.Dot(c_j);
         double d_jk = c_j.Dot(c_k);
         double d_ki = c_k.Dot(c_i);
 
-        double error_sq = d_ij*d_ij + d_jk*d_jk + d_ki*d_ki;
+        double error_sq = ONE_THIRD * (d_ij*d_ij + d_jk*d_jk + d_ki*d_ki);
 
         constexpr double max_error = 1e-15;
+        constexpr double max_error_sq = max_error * max_error;
         constexpr i32 max_iter = 10;
         for (i32 iter = 0; iter < max_iter; ++iter)
         {
-            if (error_sq < max_error * max_error) break;
+            if (error_sq < max_error_sq) break;
 
             // ortho correction of i,j pair
             d_ij = c_i.Dot(c_j);
             Vec3<double> c_i_hat = c_i - 0.5 * d_ij * c_j;
             Vec3<double> c_j_hat = c_j - 0.5 * d_ij * c_i;
 
-            // Ortho correction of j,k pair
+            // ortho correction of j,k pair
             d_jk = c_j_hat.Dot(c_k);
             Vec3<double> c_j_hh  = c_j_hat - 0.5 * d_jk * c_k;
             Vec3<double> c_k_hat = c_k     - 0.5 * d_jk * c_j_hat;
 
-            // Ortho correction of k,i pair
+            // ortho correction of k,i pair
             d_ki = c_k_hat.Dot(c_i_hat);
             Vec3<double> c_k_hh = c_k_hat - 0.5 * d_ki * c_i_hat;
             Vec3<double> c_i_hh = c_i_hat - 0.5 * d_ki * c_k_hat;
 
-            // Calculate final derivation from orthogonality
+            // recalculate orthogonal error
             d_ij = c_i_hh.Dot(c_j_hh);
             d_jk = c_j_hh.Dot(c_k_hh);
             d_ki = c_k_hh.Dot(c_i_hh);
-            error_sq = d_ij*d_ij + d_jk*d_jk + d_ki*d_ki;
+            error_sq = ONE_THIRD * (d_ij*d_ij + d_jk*d_jk + d_ki*d_ki);
 
-            // Norm correction (fast approximation)
-            double d_ii = 1.0 - c_i_hh.Dot(c_i_hh);
-            double d_jj = 1.0 - c_j_hh.Dot(c_j_hh);
-            double d_kk = 1.0 - c_k_hh.Dot(c_k_hh);
+            // Norm correction (fast approximation) todo: is this needed at every iteration?
+            if constexpr (false)
+            {
+                double d_ii = 1.0 - c_i_hh.Dot(c_i_hh);
+                double d_jj = 1.0 - c_j_hh.Dot(c_j_hh);
+                double d_kk = 1.0 - c_k_hh.Dot(c_k_hh);
 
-            c_i = c_i_hh * (1.0 + 0.5 * d_ii);
-            c_j = c_j_hh * (1.0 + 0.5 * d_jj);
-            c_k = c_k_hh * (1.0 + 0.5 * d_kk);
+                c_i = c_i_hh * (1.0 + 0.5 * d_ii);
+                c_j = c_j_hh * (1.0 + 0.5 * d_jj);
+                c_k = c_k_hh * (1.0 + 0.5 * d_kk);
+            }
+            else
+            {
+                c_i = c_i_hh.Normalized();
+                c_j = c_j_hh.Normalized();
+                c_k = c_k_hh.Normalized();
+            }
         }
 
         // Write back to frame
-        frame_(0, 0) = c_i.x; frame_(0, 1) = c_j.x; frame_(0, 2) = c_k.x;
-        frame_(1, 0) = c_i.y; frame_(1, 1) = c_j.y; frame_(1, 2) = c_k.y;
-        frame_(2, 0) = c_i.z; frame_(2, 1) = c_j.z; frame_(2, 2) = c_k.z;
+        frame_.SetColumn(0, c_i);
+        frame_.SetColumn(1, c_j);
+        frame_.SetColumn(2, c_k);
+    }
+
+    auto ReferenceFrame::GetOrthogonalError() -> double
+    {
+        constexpr double ONE_THIRD = 1.0/3.0;
+        // Get vectors from rotation part of frame
+        Vec3<double> c_i = frame_.GetColumn(0);
+        Vec3<double> c_j = frame_.GetColumn(1);
+        Vec3<double> c_k = frame_.GetColumn(2);
+
+        // calculate initial deviation from orthogonality
+        double d_ij = c_i.Dot(c_j);
+        double d_jk = c_j.Dot(c_k);
+        double d_ki = c_k.Dot(c_i);
+
+        return std::sqrt(ONE_THIRD * (d_ij*d_ij + d_jk*d_jk + d_ki*d_ki));
+    }
+
+    auto ReferenceFrame::GetLengthError() -> double
+    {
+        constexpr double ONE_THIRD = 1.0/3.0;
+        // Get vectors from rotation part of frame
+        Vec3<double> c_i{frame_(0, 0), frame_(1, 0), frame_(2, 0)};
+        Vec3<double> c_j{frame_(0, 1), frame_(1, 1), frame_(2, 1)};
+        Vec3<double> c_k{frame_(0, 2), frame_(1, 2), frame_(2, 2)};
+
+        double d_ii_sq = std::abs(1.0 - c_i.LengthSquared());
+        double d_jj_sq = std::abs(1.0 - c_j.LengthSquared());
+        double d_kk_sq = std::abs(1.0 - c_k.LengthSquared());
+
+        return std::sqrt(ONE_THIRD * (d_ii_sq + d_jj_sq + d_kk_sq)); // root-mean-square
     }
 
     static auto CheckDouble(const double value, const double expected, const double factor) -> void
@@ -356,6 +406,20 @@ namespace FlightData
 
         //ref_frame.PrintPosition();
         //ref_frame.PrintAttitude();
+    }
+
+    TEST_CASE("[ReferenceFrame] Orthonormalization", "[ReferenceFrame]")
+    {
+        ReferenceFrame transform(Mat4<double>{
+            1.00,  0.10, 0.00, 0.0,
+            0.00,  0.90, 0.20, 0.0,
+            0.10, -0.10, 0.95, 0.0,
+            0.00,  0.00, 0.00, 1.0
+        });
+
+        Log::Info("Error: {} {}", transform.GetOrthogonalError(), transform.GetLengthError());
+        transform.Orthonormalize();
+        Log::Info("Error: {} {}", transform.GetOrthogonalError(), transform.GetLengthError());
     }
 
 
