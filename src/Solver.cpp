@@ -44,14 +44,14 @@ namespace FlightData
         };
         
         Log::Info("Calculating flight path...");
-        for (size_t idx = 1; idx < data.size(); ++idx)
+        for (size_t idx = 0; idx < data.size() - 1; ++idx)
         {
             vb_n_ = vb_np1_;
 
             // calculate acceleration (ab and ob comes from logfile)
-            const Vec3<double> ab = Vec3<double>(data[idx-1].a_x,     data[idx-1].a_y,     data[idx-1].a_z);
-            const Vec3<double> ob = Vec3<double>(data[idx-1].omega_x, data[idx-1].omega_y, data[idx-1].omega_z);
-            const double dt = data[idx].time - data[idx-1].time;
+            const Vec3<double> ab = Vec3<double>(data[idx].a_x,     data[idx].a_y,     data[idx].a_z);
+            const Vec3<double> ob = Vec3<double>(data[idx].omega_x, data[idx].omega_y, data[idx].omega_z);
+            const double dt = data[idx+1].time - data[idx].time;
 
             const Vec3<double> dv_dt_b = ab - ob.Cross(vb_n_);
 
