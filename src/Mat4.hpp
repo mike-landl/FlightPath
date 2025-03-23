@@ -5,6 +5,8 @@
 #include <format>
 
 #include "Error.hpp"
+#include "Types.hpp"
+#include "Vec3.hpp"
 
 namespace FlightData
 {
@@ -23,32 +25,35 @@ namespace FlightData
 
         ~Mat4() = default;
 
-        void SetMatrix(std::initializer_list<REAL> values)
+        auto SetMatrix(std::initializer_list<REAL> values) -> void
         {
             std::copy(values.begin(), values.end(), data_.begin());
         }
+
+        auto inline SetColumn(const i32 col, const Vec3<REAL> &v)       -> void;
+        auto inline GetColumn(const i32 col                     ) const -> Vec3<REAL>;
 
     /* Operator overloading */
 
               REAL& operator()(size_t row, size_t col)       { return data_[row * cols_ + col]; }
         const REAL& operator()(size_t row, size_t col) const { return data_[row * cols_ + col]; }
 
-        auto operator + (const Mat4<REAL>& other) const -> Mat4<REAL>;
-        auto operator - (const Mat4<REAL>& other) const -> Mat4<REAL>;
+        auto inline operator + (const Mat4<REAL>& other) const -> Mat4<REAL>;
+        auto inline operator - (const Mat4<REAL>& other) const -> Mat4<REAL>;
 
-        auto operator * (const Mat4<REAL>& B) const -> Mat4<REAL>; // Matrix Matrix Product        
-        auto operator * (const REAL scalar)   const -> Mat4<REAL>; // Matrix Scalar Product
+        auto inline operator * (const Mat4<REAL>& B) const -> Mat4<REAL>; // Matrix Matrix Product        
+        auto inline operator * (const REAL scalar)   const -> Mat4<REAL>; // Matrix Scalar Product
         
         auto DebugPrint(std::string label) -> void;
         auto DebugPrint() const -> void;
 
         // getters for private members
-        auto RawPtr()       ->       REAL* { return data_.data(); }
-        auto RawPtr() const -> const REAL* { return data_.data(); }
+        auto inline RawPtr()       ->       REAL* { return data_.data(); }
+        auto inline RawPtr() const -> const REAL* { return data_.data(); }
 
-        auto rows()     const -> size_t { return rows_; }
-        auto cols()     const -> size_t { return cols_; }
-        auto elements() const -> size_t { return elements_; }
+        auto inline rows()     const -> size_t { return rows_; }
+        auto inline cols()     const -> size_t { return cols_; }
+        auto inline elements() const -> size_t { return elements_; }
 
     private:
         std::array<REAL, 16> data_;
@@ -121,7 +126,7 @@ namespace FlightData
     }
 
     template <typename REAL>
-    auto Mat4<REAL>::operator*(const Mat4<REAL>& B) const -> Mat4<REAL>
+    auto Mat4<REAL>::operator * (const Mat4<REAL>& B) const -> Mat4<REAL>
     {
         Mat4<REAL> C;
 
@@ -142,14 +147,32 @@ namespace FlightData
     }
 
     template <typename REAL>
-    void Mat4<REAL>::DebugPrint(std::string label)
+    auto Mat4<REAL>::SetColumn(const i32 col, const Vec3<REAL> &v) -> void
+    {
+        (*this)(0, col) = v.x;
+        (*this)(1, col) = v.y;
+        (*this)(2, col) = v.z;
+    }
+
+    template <typename REAL>
+    auto Mat4<REAL>::GetColumn(const i32 col) const -> Vec3<REAL>
+    {
+        return Vec3<REAL>{
+            .x = (*this)(1, col), 
+            .y = (*this)(2, col), 
+            .z = (*this)(3, col)
+        };
+    }
+
+    template <typename REAL>
+    auto Mat4<REAL>::DebugPrint(std::string label) -> void
     {
         std::println(label);
         DebugPrint();
-    };
+    }
 
     template <typename REAL>
-    void Mat4<REAL>::DebugPrint() const
+    auto Mat4<REAL>::DebugPrint() const -> void
     {
         for (size_t row = 0; row < rows_; ++row)
         {
