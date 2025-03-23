@@ -416,10 +416,12 @@ namespace FlightData
             0.10, -0.10, 0.95, 0.0,
             0.00,  0.00, 0.00, 1.0
         });
-
-        Log::Info("Error: {} {}", transform.GetOrthogonalError(), transform.GetLengthError());
+        //Log::Info("{} {}", transform.GetOrthogonalError(), transform.GetLengthError());
         transform.Orthonormalize();
-        Log::Info("Error: {} {}", transform.GetOrthogonalError(), transform.GetLengthError());
+        //Log::Info("{} {}", transform.GetOrthogonalError(), transform.GetLengthError());
+        
+        REQUIRE(transform.GetOrthogonalError() < 1e-9);
+        REQUIRE(transform.GetLengthError() < 1e-6);
     }
 
 
