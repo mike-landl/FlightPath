@@ -1,5 +1,7 @@
 build
+vendor
 .cache
 .vscode
 .vs
-vendor
+
+*.kml
