@@ -48,7 +48,7 @@ namespace FlightData
         auto GetGeodetic2BodyfixedMatrix(const Position position) const -> Mat4<double>;
 
     private:
-        static constexpr double earth_radius_ = 6366707.0_m;
+        static constexpr double earth_radius_ = 6'366'707.0_m;
         Mat4<double> frame_;
 
         Mat4<double> rotation_matrix_;
