@@ -5,7 +5,7 @@
 
 namespace FlightData
 {
-    TEST_CASE("GEMM", "[matrix]")
+    TEST_CASE("[matrix] Matrix Matrix Multiplication - 2x General", "[matrix]")
     {
         // Setup test data
         auto A = Matrix<double, MatrixLayout::RowMajor>(3, 2);
@@ -40,7 +40,7 @@ namespace FlightData
         }
     }
 
-    TEST_CASE("Matrix Matrix Multiplication - 2x Quadratic", "[matrix]")
+    TEST_CASE("[matrix] Matrix Matrix Multiplication - 2x Quadratic", "[matrix]")
     {
         // Setup test data
         auto A = Matrix<double, MatrixLayout::RowMajor>(4, 4);
@@ -79,7 +79,7 @@ namespace FlightData
         }
     }
 
-    TEST_CASE("Matrix Matrix Multiplication - 1x Identity", "[matrix]")
+    TEST_CASE("[matrix] Matrix Matrix Multiplication - 1x Identity", "[matrix]")
     {
         // Setup test data
         auto A = Matrix<double, MatrixLayout::RowMajor>(4, 4);
