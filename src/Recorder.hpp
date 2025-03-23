@@ -38,6 +38,8 @@ namespace FlightData
         auto GetData() const -> const std::vector<Entry>& { return input_data_; }
         auto WriteData(const Position &position, const Attitude &attitude, const Vec3<double> &velocity) -> void;
 
+        auto DumpKML() const -> void;
+
     private:
 
     private:

@@ -80,5 +80,9 @@ namespace FlightData
         Log::Info("Final Position:");
         reference_frame_.PrintPosition();
         reference_frame_.PrintAttitude();
+        
+        Log::Info("Exporting KML file...");
+        recorder_.DumpKML();
+        Log::Info("Exporting KML file... Done");
     }
 }
