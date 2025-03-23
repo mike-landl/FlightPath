@@ -2,12 +2,14 @@
 
 #include <fstream>
 #include <sstream>
+#include <ranges>
 
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 
 #include "Error.hpp"
 #include "Units.hpp"
+#include "KML.hpp"
 
 namespace FlightData
 {
@@ -68,19 +70,53 @@ namespace FlightData
         // start with a copy of the input data at n and overwrite fields with our calculation
         Entry entry = input_data_[output_data_.size()];
         
-        entry.longitude    = rad2deg(position.longitude);
-        entry.latitude     = rad2deg(position.latitude);
+        entry.longitude    = position.longitude;
+        entry.latitude     = position.latitude;
         entry.altitude     = position.altitude;
         
-        entry.true_heading = rad2deg(attitude.heading);
-        entry.pitch        = rad2deg(attitude.pitch);
-        entry.roll         = rad2deg(attitude.roll);
+        entry.true_heading = attitude.heading;
+        entry.pitch        = attitude.pitch;
+        entry.roll         = attitude.roll;
         
         entry.v_x          = velocity.x;
         entry.v_y          = velocity.y;
         entry.v_z          = velocity.z;
         
         output_data_.push_back(entry);
+    }
+
+    auto Recorder::DumpKML() const -> void
+    {
+        const std::string path = std::string("../../../data/output.kml");
+		std::ofstream file(path);
+		
+		Ensure(file.is_open(), "Recorder: Could not open file {}", path);
+
+        file << KML::Header;
+
+        file << KML::OpenOriginalDataset;
+        for (auto &entry : input_data_ | std::views::stride(100))
+        {
+            file << std::format("                {:12.9f}, {:12.9f}, {:6.1f}\n"
+                , rad2deg(entry.longitude)
+                , rad2deg(entry.latitude)
+                , entry.altitude
+            );
+        }
+        file << KML::CloseDataset;
+
+        file << KML::OpenReconstructedDataset;
+        for (auto &entry : output_data_ | std::views::stride(100))
+        {
+            file << std::format("                {:12.9f}, {:12.9f}, {:6.1f}\n"
+                , rad2deg(entry.longitude)
+                , rad2deg(entry.latitude)
+                , entry.altitude
+            );
+        }
+        file << KML::CloseDataset;
+
+        file << KML::Footer;
     }
 
     static auto CheckDouble(const double value, const double expected) -> void
