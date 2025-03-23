@@ -85,9 +85,8 @@ namespace FlightData
         output_data_.push_back(entry);
     }
 
-    auto Recorder::DumpKML() const -> void
+    auto Recorder::DumpKML(const std::string &path) const -> void
     {
-        const std::string path = std::string("../../../data/output.kml");
 		std::ofstream file(path);
 		
 		Ensure(file.is_open(), "Recorder: Could not open file {}", path);

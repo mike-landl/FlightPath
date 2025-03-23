@@ -82,7 +82,7 @@ namespace FlightData
         reference_frame_.PrintAttitude();
         
         Log::Info("Exporting KML file...");
-        recorder_.DumpKML();
+        recorder_.DumpKML("../../../data/2017-01-17_Graz-Gleichenberg.kml");
         Log::Info("Exporting KML file... Done");
     }
 }
