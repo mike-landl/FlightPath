@@ -158,9 +158,9 @@ namespace FlightData
     auto Mat4<REAL>::GetColumn(const i32 col) const -> Vec3<REAL>
     {
         return Vec3<REAL>{
-            .x = (*this)(1, col), 
-            .y = (*this)(2, col), 
-            .z = (*this)(3, col)
+            .x = (*this)(0, col), 
+            .y = (*this)(1, col), 
+            .z = (*this)(2, col)
         };
     }
 
