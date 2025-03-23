@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cmath>
+
 namespace FlightData
 {
     template <typename REAL>
@@ -14,6 +16,10 @@ namespace FlightData
         auto inline operator * (const REAL scalar) const -> Vec3;
         auto inline Dot(const Vec3 &other) const -> REAL;
         auto inline Cross(const Vec3 &other) const -> Vec3;
+        auto inline Length() const -> REAL;
+        auto inline LengthSquared() const -> REAL;
+        auto inline Normalize() -> void;
+        auto inline Normalized() const -> Vec3;
     };
 
 template <typename REAL>
@@ -74,5 +80,31 @@ template <typename REAL>
             .y = a3*b1 - a1*b3,
             .z = a1*b2 - a2*b1
         };
+    }
+
+    template <typename REAL>
+    auto inline Vec3<REAL>::Length() const -> REAL
+    {
+        return std::sqrt(this->Dot((*this)));
+    }
+
+    template <typename REAL>
+    auto inline Vec3<REAL>::LengthSquared() const -> REAL
+    {
+        return this->Dot((*this));
+    }
+
+    template <typename REAL>
+    auto inline Vec3<REAL>::Normalize() -> void
+    {
+        const REAL inverse_length = 1.0 / this->Length();
+        (*this) = (*this) * inverse_length;
+    }
+
+    template <typename REAL>
+    auto inline Vec3<REAL>::Normalized() const -> Vec3<REAL>
+    {
+        const REAL inverse_length = 1.0 / this->Length();
+        return (*this) * inverse_length;
     }
 }
