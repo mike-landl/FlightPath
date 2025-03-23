@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Mat4.hpp"
+#include "Vec3.hpp"
 #include "ReferenceFrame.hpp"
 #include "Recorder.hpp"
 
