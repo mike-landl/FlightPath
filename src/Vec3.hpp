@@ -47,6 +47,12 @@ template <typename REAL>
     }
 
     template <typename REAL>
+    auto inline operator * (const double scalar, const Vec3<REAL>& v) -> Vec3<REAL>
+    {
+        return v * scalar;
+    }
+
+    template <typename REAL>
     auto inline Vec3<REAL>::Dot(const Vec3<REAL> &other) -> REAL
     {
         const auto a1 = this->x; const auto b1 = other.x;
