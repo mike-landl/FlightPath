@@ -203,7 +203,7 @@ namespace FlightData
     
     auto ReferenceFrame::PrintPosition(const Position position) const -> void
     {
-        Log::Info("Longitude {:.2f}\370, Latitude {:.2f}\370, Altitude {:.2f} m", 
+        Log::Info("Longitude {:.6f}\370, Latitude {:.6f}\370, Altitude {:.2f} m", 
             rad2deg(position.longitude), 
             rad2deg(position.latitude), 
             static_cast<double>(position.altitude) // cast to a non const temporary... there might be a better way to handle this
