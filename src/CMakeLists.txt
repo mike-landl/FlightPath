@@ -9,7 +9,6 @@ add_executable(FlightData
     Solver.cpp
     Units.cpp
     Vec3.cpp
-    VelocityState.cpp
 )
 
 target_include_directories(FlightData PUBLIC ${PROJECT_SOURCE_DIR})
