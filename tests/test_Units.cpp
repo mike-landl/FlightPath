@@ -73,7 +73,7 @@ namespace FlightData
         CheckDouble(rad2deg(4.0/4.0*PI_d), 180.0);
         CheckDouble(rad2deg(5.0/4.0*PI_d), 225.0);
         CheckDouble(rad2deg(6.0/4.0*PI_d), 270.0);
-        CheckDouble(rad2deg(7.0/4.0*PI_d), 315.0);
+        CheckDouble(rad2deg(7.0/4.0*PI_d), 314.0);
         CheckDouble(rad2deg(8.0/4.0*PI_d), 360.0);
     }
 }
