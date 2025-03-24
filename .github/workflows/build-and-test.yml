@@ -1,0 +1,24 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Configure (CI)
+      run: cmake --preset ci
+
+    - name: Build (CI)
+      run: cmake --build --preset ci --target RunTests
+
+    - name: Run Tests Directly
+      run: .\build\ci\tests\Debug\RunTests.exe

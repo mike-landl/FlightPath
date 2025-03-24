@@ -43,16 +43,10 @@ namespace FlightData::Log
         ERROR
     };
 
-    template <Level L, class ... Args>
-    struct print
-    {
-    
-    };
-
     template <Level level, class ... Args>
-    struct print<level, const char *, Args ...>
+    struct Print
     {
-        print(const char *msg, Args && ...args, std::source_location loc = std::source_location::current())
+        Print(std::format_string<Args ...> msg, Args && ...args, std::source_location loc = std::source_location::current())
         {
             using namespace AnsiColor;
 
@@ -73,21 +67,21 @@ namespace FlightData::Log
             if constexpr (level==Level::INFO)
             {
                 // [LEVEL] MESSAGE (I'm not interestd where the message comes from if the log level is info)
-                std::println("{} {}", c, std::vformat(msg, std::make_format_args(args ...)));
+                std::println("{} {}", c, std::format(msg, std::forward<Args>(args) ...));
             }
             else
             {
                 // [LEVEL] FILE:LINE MESSAGE
-                std::println("{} {}:{} {}", c, file, loc.line(), std::vformat(msg, std::make_format_args(args ...)));
+                std::println("{} {}:{} {}", c, file, loc.line(), std::format(msg, std::forward<Args>(args) ...));
             }
         }
     };
 
-    template <Level level, class ... args>
-    print(args ...) -> print<level, args ...>;
+    template <Level level, class ... Args>
+    Print(std::format_string<Args ...>, Args &&...) -> Print<level, Args ...>;
 
-    template <class ... args> using Debug = print<Level::DEBUG, args ...>;
-    template <class ... args> using Info  = print<Level::INFO,  args ...>;
-    template <class ... args> using Warn  = print<Level::WARN,  args ...>;
-    template <class ... args> using Error = print<Level::ERROR, args ...>;
+    template <class ... Args> using Debug = Print<Level::DEBUG, Args ...>;
+    template <class ... Args> using Info  = Print<Level::INFO,  Args ...>;
+    template <class ... Args> using Warn  = Print<Level::WARN,  Args ...>;
+    template <class ... Args> using Error = Print<Level::ERROR, Args ...>;
 }
