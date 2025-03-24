@@ -12,3 +12,4 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_subdirectory(vendor/Catch2-3.8.0)
 
 add_subdirectory(src)
+add_subdirectory(tests)
