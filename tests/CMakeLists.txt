@@ -11,7 +11,7 @@ add_executable(RunTests
 
 target_link_libraries(RunTests
     PRIVATE FlightDataLib
-    PRIVATE Catch2::Catch2WithMain
+    PRIVATE Catch2::Catch2
 )
 
 # Add the src folder so your tests can find production headers like Mat4.hpp and Vec3.hpp
