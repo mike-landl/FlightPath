@@ -28,6 +28,17 @@
                 "CMAKE_CXX_COMPILER": "cl",
                 "CMAKE_BUILD_TYPE": "Release"
             }
+        },
+        {
+            "name": "ci",
+            "displayName": "CI Preset (Release, VS 2022)",
+            "generator": "Visual Studio 17 2022",
+            "architecture": {
+                "value": "x64"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
         }
     ]
 }
