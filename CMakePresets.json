@@ -7,7 +7,7 @@
     },
     "configurePresets": [
         {
-            "name": "debug",
+            "name": "debug-msvc",
             "description": "Debug build",
             "generator": "Ninja",
             "binaryDir": "build/debug",
@@ -18,13 +18,35 @@
             }
         },
         {
-            "name": "release",
+            "name": "release-msvc",
             "description": "Release build",
             "generator": "Ninja",
             "binaryDir": "build/release",
             "cacheVariables": {
                 "CMAKE_C_COMPILER": "cl",
                 "CMAKE_CXX_COMPILER": "cl",
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "debug-clang",
+            "description": "Debug build",
+            "generator": "Ninja",
+            "binaryDir": "build/debug",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "release-clang",
+            "description": "Release build",
+            "generator": "Ninja",
+            "binaryDir": "build/release",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++",
                 "CMAKE_BUILD_TYPE": "Release"
             }
         },

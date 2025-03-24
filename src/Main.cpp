@@ -1,5 +1,4 @@
 #include <iostream>
-#include <print>
 #include <filesystem>
 
 #include "Log.hpp"
@@ -17,11 +16,11 @@ auto main() -> int
     }
     catch (const FlightData::Exception &err)
     {
-        std::println(std::cerr, "{}", err);
+        std::cerr << std::format("{}", err) << std::endl;
     }
     catch (...)
     {
-        std::println(std::cerr, "unkown exception");
+        std::cerr << "unkown exception" << std::endl;
     }
     return EXIT_SUCCESS;
 }

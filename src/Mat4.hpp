@@ -167,7 +167,7 @@ namespace FlightData
     template <typename REAL>
     auto Mat4<REAL>::DebugPrint(std::string label) -> void
     {
-        std::println(label);
+        std::cout << label << "\n" << std::endl;
         DebugPrint();
     }
 
