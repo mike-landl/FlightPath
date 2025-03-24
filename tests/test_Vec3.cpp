@@ -3,9 +3,6 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 
-#include "Types.hpp"
-#include "Log.hpp"
-
 namespace FlightData
 {
     static auto CheckDouble(const double value, const double expected) -> void
