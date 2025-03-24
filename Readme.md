@@ -1,16 +1,7 @@
-# Flight simulator in the making
+[![Build and Test](https://github.com/mike-landl/FlightSim/actions/workflows/build-and-test.yml/badge.svg?branch=main)](https://github.com/mike-landl/FlightSim/actions/workflows/build-and-test.yml)
+# Flight Data
 
 ## About The Project
-
-## Getting Started
-
-#### Installation
-
-#### Usage
-
-### Windows
-
-#### Usage
 
 ## License
 
