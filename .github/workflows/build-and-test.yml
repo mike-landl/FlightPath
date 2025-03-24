@@ -18,7 +18,7 @@ jobs:
       run: cmake --preset ci
 
     - name: Build (CI)
-      run: cmake --build --preset ci
+      run: cmake --build --preset ci --target RunTests
 
-    - name: Test
-      run: cmake --build --preset ci --target test
+    - name: Run Tests Directly
+      run: .\build\ci\tests\Debug\RunTests.exe
