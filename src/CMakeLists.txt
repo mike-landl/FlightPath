@@ -1,19 +1,28 @@
 
-add_executable(FlightData
+add_library(FlightDataLib
     Exception.cpp
-    Main.cpp
-    Mat4.cpp
     Recorder.cpp
     ReferenceFrame.cpp
     Solver.cpp
-    Units.cpp
-    Vec3.cpp
 )
 
-target_include_directories(FlightData PUBLIC ${PROJECT_SOURCE_DIR})
-target_compile_features(FlightData PUBLIC cxx_std_23)
-target_link_libraries(FlightData PUBLIC Catch2::Catch2)
+target_include_directories(FlightDataLib
+    PUBLIC ${PROJECT_SOURCE_DIR}
+)
+
+target_compile_features(FlightDataLib
+    PUBLIC cxx_std_23
+)
+
 if (MSVC)
-    target_compile_options(FlightData PUBLIC /W4 /WX)
-    target_compile_definitions(FlightData PUBLIC -DNOMINMAX)
+    target_compile_options(FlightDataLib PUBLIC /W4 /WX)
+    target_compile_definitions(FlightDataLib PUBLIC -DNOMINMAX PUBLIC PROJECT_ROOT_PATH="${CMAKE_CURRENT_SOURCE_DIR}")
 endif()
+
+add_executable(FlightData
+    main.cpp
+)
+
+target_link_libraries(FlightData
+    PRIVATE FlightDataLib
+)
