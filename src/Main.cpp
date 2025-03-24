@@ -1,5 +1,6 @@
 #include <iostream>
 #include <print>
+#include <filesystem>
 
 #include "Log.hpp"
 #include "Error.hpp"
@@ -7,6 +8,8 @@
 
 auto main() -> int
 {
+    std::filesystem::current_path(PROJECT_ROOT_PATH);
+
     try
     {
         FlightData::Solver solver;

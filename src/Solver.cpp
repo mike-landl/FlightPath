@@ -6,7 +6,7 @@ namespace FlightData
     Solver::Solver()
     {
         Log::Info("Reading flight data file...");
-        recorder_.ReadFile("../../../data/2017-01-17_Graz-Gleichenberg.txt");
+        recorder_.ReadFile("../data/2017-01-17_Graz-Gleichenberg.txt");
         const auto& data = recorder_.GetData();
         Log::Info("Reading flight data file... Done {} entries.", data.size());
         
@@ -82,7 +82,7 @@ namespace FlightData
         reference_frame_.PrintAttitude();
         
         Log::Info("Exporting KML file...");
-        recorder_.DumpKML("../../../data/2017-01-17_Graz-Gleichenberg.kml");
+        recorder_.DumpKML("../data/2017-01-17_Graz-Gleichenberg.kml");
         Log::Info("Exporting KML file... Done");
     }
 }
