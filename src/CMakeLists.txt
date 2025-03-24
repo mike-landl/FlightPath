@@ -16,7 +16,7 @@ target_compile_features(FlightDataLib
 
 if (MSVC)
     target_compile_options(FlightDataLib PUBLIC /W4 /WX)
-    target_compile_definitions(FlightDataLib PUBLIC -DNOMINMAX)
+    target_compile_definitions(FlightDataLib PUBLIC -DNOMINMAX PUBLIC PROJECT_ROOT_PATH="${CMAKE_CURRENT_SOURCE_DIR}")
 endif()
 
 add_executable(FlightData

@@ -2,9 +2,12 @@
 #include <catch2/catch_session.hpp>
 
 #include <vector>
+#include <filesystem>
 
 int main([[maybe_unused]] int argc, char* argv[])
 {
+    std::filesystem::current_path(PROJECT_ROOT_PATH);
+
     std::vector<const char*> new_argv{
         argv[0],
         "--reporter", "console",
