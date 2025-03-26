@@ -2,7 +2,7 @@
 
 namespace FlightData
 {
-    Exception::Exception(const std::string &what, std::uint32_t skip)
+    Exception::Exception(const std::string &what)
         : std::runtime_error(what)
     {
     }
