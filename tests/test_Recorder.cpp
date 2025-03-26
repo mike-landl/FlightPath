@@ -20,7 +20,7 @@ namespace FlightData
     {
         Recorder recorder;
 
-        recorder.ReadFile("../data/UnitTest.txt");
+        recorder.ReadFile("./data/UnitTest.txt");
         auto &data = recorder.GetData();
         REQUIRE(data.size() == 2);
 
