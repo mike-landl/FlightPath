@@ -14,23 +14,13 @@ target_link_libraries(RunTests
     PRIVATE Catch2::Catch2
 )
 
-target_include_directories(RunTests 
-    PRIVATE ${PROJECT_SOURCE_DIR}/src
-)
+# Add the src folder so your tests can find production headers like Mat4.hpp and Vec3.hpp
+target_include_directories(RunTests PRIVATE ${PROJECT_SOURCE_DIR}/src)
 
-target_compile_definitions(RunTests
-    PRIVATE PROJECT_ROOT_PATH="${CMAKE_CURRENT_SOURCE_DIR}"
-)
-
-target_compile_features(RunTests 
-    PUBLIC cxx_std_23
-)
-
+target_compile_features(RunTests PUBLIC cxx_std_23)
 if (MSVC)
-    target_compile_options(
-        RunTests PUBLIC /W4 /WX
-    )
+    target_compile_options(RunTests PUBLIC /W4 /WX)
 endif()
 
-# register tests with ctest - does this work?
+# register tests with ctest
 add_test(NAME RunTests COMMAND RunTests)
