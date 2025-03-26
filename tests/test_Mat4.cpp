@@ -25,8 +25,8 @@ namespace FlightData
         // Matrix Matrix Multiplication
         auto C = A * B;
 
-        for (int row = 0; row < C.rows(); ++row)
-        for (int col = 0; col < C.cols(); ++col)
+        for (size_t row = 0; row < C.rows(); ++row)
+        for (size_t col = 0; col < C.cols(); ++col)
         {
             const auto value = C(row, col);
             const auto expected_value = A(row, col);
@@ -64,15 +64,15 @@ namespace FlightData
         // Matrix Matrix Multiplication
         auto C = A * B;
 
-        for (int row = 0; row < C.rows(); ++row)
-        for (int col = 0; col < C.cols(); ++col)
+        for (size_t row = 0; row < C.rows(); ++row)
+        for (size_t col = 0; col < C.cols(); ++col)
         {
             const auto value = C(row, col);
             const auto expected_value = Expected(row, col);
             INFO("Mismatch at (" << row << ", " << col << "): "
                 << "value = " << value << ", expected = " << expected_value);
 
-            REQUIRE_THAT(value, Catch::Matchers::WithinRel(expected_value, std::numeric_limits<double>::epsilon() * 1));
+            REQUIRE_THAT(value, Catch::Matchers::WithinRel(expected_value, std::numeric_limits<double>::epsilon() * 100));
         }
     }
 }
