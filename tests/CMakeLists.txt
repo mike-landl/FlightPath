@@ -14,13 +14,24 @@ target_link_libraries(RunTests
     PRIVATE Catch2::Catch2
 )
 
-# Add the src folder so your tests can find production headers like Mat4.hpp and Vec3.hpp
-target_include_directories(RunTests PRIVATE ${PROJECT_SOURCE_DIR}/src)
+target_include_directories(RunTests 
+    PRIVATE ${PROJECT_SOURCE_DIR}/src
+    )
 
-target_compile_features(RunTests PUBLIC cxx_std_23)
-if (MSVC)
-    target_compile_options(RunTests PUBLIC /W4 /WX)
+target_compile_definitions(RunTests
+    PRIVATE PROJECT_ROOT_PATH="${PROJECT_SOURCE_DIR}"
+)
+
+# Add compiler warnings for clang and msvc and interpret warnings as errors
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    target_compile_options(FlightDataLib 
+        PRIVATE -Wall -Wextra -Wpedantic -Werror
+    )
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    target_compile_options(FlightDataLib 
+        PRIVATE /W4 /WX
+    )
 endif()
 
-# register tests with ctest
+# register tests with ctest -- todo: fix-me
 add_test(NAME RunTests COMMAND RunTests)
