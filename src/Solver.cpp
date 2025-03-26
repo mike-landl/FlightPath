@@ -1,3 +1,5 @@
+#include <format>
+
 #include "Solver.hpp"
 #include "Log.hpp"
 
@@ -8,7 +10,7 @@ namespace FlightData
         Log::Info("Reading flight data file...");
         recorder_.ReadFile("../data/2017-01-17_Graz-Gleichenberg.txt");
         const auto& data = recorder_.GetData();
-        Log::Info("Reading flight data file... Done {} entries.", data.size());
+        Log::Info(std::format("Reading flight data file... Done {} entries.", data.size()));
         
         const auto &entry = data[0];
         reference_frame_.SetPosition(

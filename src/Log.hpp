@@ -1,9 +1,9 @@
 #pragma once
 
-#include <source_location>
-#include <print>
+#include <iostream>
 #include <format>
 #include <string_view>
+#include <source_location>
 
 namespace AnsiColor
 {
@@ -35,6 +35,8 @@ namespace AnsiColor
 
 namespace FlightData::Log
 {
+    using namespace AnsiColor;
+
     enum class Level
     {
         DEBUG,
@@ -43,45 +45,28 @@ namespace FlightData::Log
         ERROR
     };
 
-    template <Level level, class ... Args>
-    struct Print
+
+    inline auto Debug(std::string_view message, const std::source_location& location = std::source_location::current()) -> void
     {
-        Print(std::format_string<Args ...> msg, Args && ...args, std::source_location loc = std::source_location::current())
-        {
-            using namespace AnsiColor;
+        std::string prefix = ColoredString<Color::BrightBlue>("[D]");
+        std::cout << std::format("{} {}:{} {}", prefix, location.file_name(), location.line(), message) << "\n";
+    }
 
-            std::string c = "?";
-                 if constexpr (level==Level::DEBUG) { c = ColoredString<Color::BrightBlue  >("[D]"); }
-            else if constexpr (level==Level::INFO ) { c = ColoredString<Color::BrightGreen >("[I]"); }
-            else if constexpr (level==Level::WARN ) { c = ColoredString<Color::BrightYellow>("[W]"); }
-            else if constexpr (level==Level::ERROR) { c = ColoredString<Color::BrightRed   >("[E]"); }
+    inline auto Info(std::string_view message, const std::source_location& location = std::source_location::current()) -> void
+    {
+        std::string prefix = AnsiColor::ColoredString<AnsiColor::Color::BrightGreen>("[I]");
+        std::cout << std::format("{} {}", prefix, message) << "\n";
+    }
 
-            // only use file name (without path)
-            std::string_view file = loc.file_name();
-            size_t pos = file.find_last_of("/\\");
-            if (pos != std::string_view::npos)
-            {
-                file.remove_prefix(pos + 1);
-            }
-            
-            if constexpr (level==Level::INFO)
-            {
-                // [LEVEL] MESSAGE (I'm not interestd where the message comes from if the log level is info)
-                std::println("{} {}", c, std::format(msg, std::forward<Args>(args) ...));
-            }
-            else
-            {
-                // [LEVEL] FILE:LINE MESSAGE
-                std::println("{} {}:{} {}", c, file, loc.line(), std::format(msg, std::forward<Args>(args) ...));
-            }
-        }
-    };
+    inline auto Warn(std::string_view message, const std::source_location& location = std::source_location::current()) -> void
+    {
+        std::string prefix = ColoredString<Color::BrightYellow>("[W]");
+        std::cout << std::format("{} {}:{} {}", prefix, location.file_name(), location.line(), message) << "\n";
+    }
 
-    template <Level level, class ... Args>
-    Print(std::format_string<Args ...>, Args &&...) -> Print<level, Args ...>;
-
-    template <class ... Args> using Debug = Print<Level::DEBUG, Args ...>;
-    template <class ... Args> using Info  = Print<Level::INFO,  Args ...>;
-    template <class ... Args> using Warn  = Print<Level::WARN,  Args ...>;
-    template <class ... Args> using Error = Print<Level::ERROR, Args ...>;
+    inline auto Error(std::string_view message, const std::source_location& location = std::source_location::current()) -> void
+    {
+        std::string prefix = ColoredString<Color::BrightRed>("[E]");
+        std::cout << std::format("{} {}:{} {}", prefix, location.file_name(), location.line(), message) << "\n";
+    }
 }
