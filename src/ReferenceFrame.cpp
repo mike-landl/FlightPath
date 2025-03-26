@@ -214,20 +214,20 @@ namespace FlightData
     
     auto ReferenceFrame::PrintPosition(const Position position) const -> void
     {
-        Log::Info("Longitude {:.6f}\370, Latitude {:.6f}\370, Altitude {:.2f} m", 
+        Log::Info(std::format("Longitude {:.6f}\370, Latitude {:.6f}\370, Altitude {:.2f} m", 
             rad2deg(position.longitude), 
             rad2deg(position.latitude), 
                     position.altitude
-        );
+        ));
     }
 
     auto ReferenceFrame::PrintAttitude(const Attitude attitude) const -> void
     {
-        Log::Info("Heading {:.2f}\370, Pitch {:.2f}\370, Roll {:.2f}\370",
+        Log::Info(std::format("Heading {:.2f}\370, Pitch {:.2f}\370, Roll {:.2f}\370",
             rad2deg(attitude.heading),
             rad2deg(attitude.pitch),
             rad2deg(attitude.roll)
-        );
+        ));
     }
 
     auto ReferenceFrame::Orthonormalize() -> void

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <format>
 #include <string_view>
+#include <source_location>
 
 namespace AnsiColor
 {
@@ -34,6 +35,8 @@ namespace AnsiColor
 
 namespace FlightData::Log
 {
+    using namespace AnsiColor;
+
     enum class Level
     {
         DEBUG,
@@ -42,35 +45,28 @@ namespace FlightData::Log
         ERROR
     };
 
-    template <class ... Args>
-    struct Print
-    {
-        Print(Level level, std::format_string<Args ...> msg, Args && ...args)
-        {
-            using namespace AnsiColor;
-            
-            std::string c = "?";
-                 if (level == Level::DEBUG) { c = ColoredString<Color::BrightBlue  >("[D]"); }
-            else if (level == Level::INFO ) { c = ColoredString<Color::BrightGreen >("[I]"); }
-            else if (level == Level::WARN ) { c = ColoredString<Color::BrightYellow>("[W]"); }
-            else if (level == Level::ERROR) { c = ColoredString<Color::BrightRed   >("[E]"); }
-            
-            if (level == Level::INFO)
-            {
-                // [LEVEL] MESSAGE (I'm not interestd where the message comes from if the log level is info)
-                std::cout << std::format("{} {}", c, std::format(msg, std::forward<Args>(args) ...)) << "\n";
-            }
-            else
-            {
-                // [LEVEL] FILE:LINE MESSAGE
-                std::cout << std::format("{} {}:{} {}", c, __FILE__, __LINE__, std::format(msg, std::forward<Args>(args) ...)) << "\n";
-            }
-        }
-    };
 
-    template <class ... Args>
-    auto Info(std::format_string<Args ...> msg, Args && ...args) -> void
+    inline auto Debug(std::string_view message, const std::source_location& location = std::source_location::current()) -> void
     {
-        Print<Args...>(Level::INFO, msg, std::forward<Args>(args)...);
+        std::string prefix = ColoredString<Color::BrightBlue>("[D]");
+        std::cout << std::format("{} {}:{} {}", prefix, location.file_name(), location.line(), message) << "\n";
+    }
+
+    inline auto Info(std::string_view message, const std::source_location& location = std::source_location::current()) -> void
+    {
+        std::string prefix = AnsiColor::ColoredString<AnsiColor::Color::BrightGreen>("[I]");
+        std::cout << std::format("{} {}", prefix, message) << "\n";
+    }
+
+    inline auto Warn(std::string_view message, const std::source_location& location = std::source_location::current()) -> void
+    {
+        std::string prefix = ColoredString<Color::BrightYellow>("[W]");
+        std::cout << std::format("{} {}:{} {}", prefix, location.file_name(), location.line(), message) << "\n";
+    }
+
+    inline auto Error(std::string_view message, const std::source_location& location = std::source_location::current()) -> void
+    {
+        std::string prefix = ColoredString<Color::BrightRed>("[E]");
+        std::cout << std::format("{} {}:{} {}", prefix, location.file_name(), location.line(), message) << "\n";
     }
 }
