@@ -52,7 +52,7 @@ namespace FlightData::Log
         std::cout << std::format("{} {}:{} {}", prefix, location.file_name(), location.line(), message) << "\n";
     }
 
-    inline auto Info(std::string_view message, const std::source_location& location = std::source_location::current()) -> void
+    inline auto Info(std::string_view message) -> void
     {
         std::string prefix = AnsiColor::ColoredString<AnsiColor::Color::BrightGreen>("[I]");
         std::cout << std::format("{} {}", prefix, message) << "\n";

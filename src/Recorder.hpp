@@ -22,9 +22,9 @@ namespace FlightData
         double omega_x;      //  9.3    deg/s  Body fixed  Measured
         double omega_y;      //  9.3    deg/s  Body fixed  Measured
         double omega_z;      //  9.3    deg/s  Body fixed  Measured
-        double a_x;          //  9.5    m/s²   Body fixed  Measured
-        double a_y;          //  9.5    m/s²   Body fixed  Measured
-        double a_z;          //  9.5    m/s²   Body fixed  Measured
+        double a_x;          //  9.5    m/s2   Body fixed  Measured
+        double a_y;          //  9.5    m/s2   Body fixed  Measured
+        double a_z;          //  9.5    m/s2   Body fixed  Measured
     };
 
     class Recorder
