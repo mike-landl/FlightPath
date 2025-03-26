@@ -11,7 +11,7 @@ add_executable(RunTests
 
 target_link_libraries(RunTests
     PRIVATE FlightDataLib
-    PRIVATE Catch2::Catch2
+    PRIVATE Catch2::Catch2WithMain
 )
 
 target_include_directories(RunTests 
@@ -33,5 +33,8 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     )
 endif()
 
-# register tests with ctest -- todo: fix-me
+list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
+include(CTest)
+include(Catch)
+catch_discover_tests(RunTests)
 add_test(NAME RunTests COMMAND RunTests)
