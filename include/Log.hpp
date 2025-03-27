@@ -82,7 +82,15 @@ namespace FlightData::Log
         }
         else
         {
-            std::cout << std::format("{} {}:{} {}", prefix, location.file_name(), location.line(), message) << "\n";
+            // only use file name (without path)
+            std::string_view file = location.file_name();
+            size_t pos = file.find_last_of("/\\");
+            if (pos != std::string_view::npos)
+            {
+                file.remove_prefix(pos + 1);
+            }
+
+            std::cout << std::format("{} {}:{} {}", prefix, file, location.line(), message) << "\n";
         }
     }
 
