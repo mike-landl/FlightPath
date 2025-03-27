@@ -47,9 +47,9 @@ struct std::formatter<FlightData::Exception>
     }
 
     /**
-     * @brief Formats the FlightData::Exception object.
-     * @param obj The FlightData::Exception instance to format.
-     * @param ctx The format context to write to.
+     * @brief  Formats the FlightData::Exception object.
+     * @param  obj The FlightData::Exception instance to format.
+     * @param  ctx The format context to write to.
      * @return An iterator to the end of the output.
      */
     auto format(const FlightData::Exception &obj, std::format_context &ctx) const

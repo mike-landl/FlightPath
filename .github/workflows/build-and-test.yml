@@ -14,8 +14,12 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v4
 
+    - name: Set up CMake cache key
+      id: cmake-cache
+      run: echo "key=fcache-${{ hashFiles('**/CMakeLists.txt') }}" >> $env:GITHUB_OUTPUT
+
     - name: Configure (CI)
-      run: cmake --preset ci
+      run: cmake --preset ci -DFETCHCONTENT_BASE_DIR="C:/Users/runneradmin/AppData/Local/fetchcontent"
 
     - name: Build (CI)
       run: cmake --build --preset ci --target RunTests
