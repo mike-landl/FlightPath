@@ -214,20 +214,12 @@ namespace FlightData
     
     auto ReferenceFrame::PrintPosition(const Position position) const -> void
     {
-        Log::Info(std::format("Longitude {:.6f}° Latitude {:.6f}°, Altitude {:.2f} m", 
-            rad2deg(position.longitude), 
-            rad2deg(position.latitude), 
-                    position.altitude
-        ));
+        Log::Info(std::format("{}", position));
     }
 
     auto ReferenceFrame::PrintAttitude(const Attitude attitude) const -> void
     {
-        Log::Info(std::format("Heading {:.2f}°, Pitch {:.2f}°, Roll {:.2f}°",
-            rad2deg(attitude.heading),
-            rad2deg(attitude.pitch),
-            rad2deg(attitude.roll)
-        ));
+        Log::Info(std::format("{}", attitude));
     }
 
     auto ReferenceFrame::Orthonormalize() -> void
@@ -320,9 +312,9 @@ namespace FlightData
     {
         constexpr double ONE_THIRD = 1.0/3.0;
         // Get vectors from rotation part of frame
-        Vec3<double> c_i{frame_(0, 0), frame_(1, 0), frame_(2, 0)};
-        Vec3<double> c_j{frame_(0, 1), frame_(1, 1), frame_(2, 1)};
-        Vec3<double> c_k{frame_(0, 2), frame_(1, 2), frame_(2, 2)};
+        Vec3<double> c_i = frame_.GetColumn(0);
+        Vec3<double> c_j = frame_.GetColumn(1);
+        Vec3<double> c_k = frame_.GetColumn(2);
 
         double d_ii_sq = std::abs(1.0 - c_i.LengthSquared());
         double d_jj_sq = std::abs(1.0 - c_j.LengthSquared());

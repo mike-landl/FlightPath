@@ -15,7 +15,7 @@ target_link_libraries(RunTests
 )
 
 target_include_directories(RunTests 
-    PRIVATE ${PROJECT_SOURCE_DIR}/src
+    PRIVATE ${PROJECT_SOURCE_DIR}/include
     )
 
 target_compile_definitions(RunTests
