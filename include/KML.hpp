@@ -1,3 +1,4 @@
+#pragma once
 
 namespace FlightData {
 namespace KML {
@@ -5,13 +6,13 @@ namespace KML {
 static const char* Header = R"(<?xml version='1.0' encoding='UTF-8'?>
 <kml xmlns='http://www.opengis.net/kml/2.2'>
 <Document>
-<Style id="yellowLineGreenPoly">
+<Style id="cyanLineGreenPoly">
     <LineStyle>
         <color>7f00ffff</color>
         <width>2</width>
     </LineStyle>
     <PolyStyle>
-    <color>7f00ff00</color>
+        <color>7f00ff00</color>
     </PolyStyle>
 </Style>
 <Style id="purpleLineGreenPoly">
@@ -30,10 +31,10 @@ static const char* Footer = R"(</Document>
 )";
 
 static const char* OpenOriginalDataset = R"(<Placemark>
-    <name>Original Flight Simulation</name>
+    <name>Original Flight Path</name>
     <visibility>1</visibility>
-    <description>Original Flight Data</description>
-    <styleUrl>#yellowLineGreenPoly</styleUrl>
+    <description>Original Flight Path</description>
+    <styleUrl>#cyanLineGreenPoly</styleUrl>
     <LineString>
         <extrude>1</extrude>
         <altitudeMode>absolute</altitudeMode>
@@ -41,9 +42,9 @@ static const char* OpenOriginalDataset = R"(<Placemark>
 )";
 
 static const char* OpenReconstructedDataset = R"(<Placemark>
-    <name>Reconstructed Flight Simulation</name>
+    <name>Reconstructed Flight Path</name>
     <visibility>1</visibility>
-    <description>Reconstructed Flight Data</description>
+    <description>Reconstructed Flight Path</description>
     <styleUrl>#purpleLineGreenPoly</styleUrl>
     <LineString>
         <extrude>1</extrude>

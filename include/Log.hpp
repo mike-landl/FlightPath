@@ -7,6 +7,7 @@
 
 namespace AnsiColor
 {
+    // @brief Enum class representing ANSI color types.
     enum class Color
     {
         Reset,
@@ -16,8 +17,13 @@ namespace AnsiColor
         BrightRed
     };
 
+    /** 
+     * @brief Converts a `Color` enum to its corresponding ANSI escape code.
+     * @tparam color The color to convert.
+     * @return A string view containing the ANSI escape sequence for the given color.
+     */
     template <Color color>
-    inline constexpr std::string_view ToAnsiCode()
+    inline constexpr auto ToAnsiCode() -> std::string_view
     {
         if      constexpr (color == Color::Reset)        return "\x1B[0m";
         else if constexpr (color == Color::BrightBlue)   return "\x1B[94m";
@@ -26,8 +32,14 @@ namespace AnsiColor
         else if constexpr (color == Color::BrightRed)    return "\x1B[91m";
     }
 
+    /**
+     * @brief Wraps a string with ANSI color codes for the specified color.
+     * @tparam color The color to apply.
+     * @param  str   The input string to colorize.
+     * @return A colored string using ANSI escape sequences.
+     */
     template <Color color>
-    inline std::string ColoredString(std::string_view str)
+    inline auto ColoredString(std::string_view str) -> std::string
     {
         return std::format("{}{}{}", ToAnsiCode<color>(), str, ToAnsiCode<Color::Reset>());
     }
@@ -37,6 +49,7 @@ namespace FlightData::Log
 {
     using namespace AnsiColor;
 
+     // @brief Log levels used in the logging system.
     enum class Level
     {
         DEBUG,
