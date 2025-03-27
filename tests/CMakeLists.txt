@@ -2,6 +2,7 @@ enable_testing()
 
 add_executable(RunTests
     test_main.cpp
+    test_Log.cpp
     test_Mat4.cpp
     test_Vec3.cpp
     test_Recorder.cpp
