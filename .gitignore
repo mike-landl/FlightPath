@@ -1,4 +1,6 @@
 build
+doxygen
+vendor
 .cache
 .vscode
 .vs
