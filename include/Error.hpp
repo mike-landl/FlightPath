@@ -9,22 +9,22 @@
 namespace FlightData
 {
     /**
-     * @brief Throws an exception if the predicate is false.
+     * @brief Throws an exception if the required condition is false.
      *
-     * This function checks the given predicate and throws a FlightData::Exception
-     * with a formatted message if the predicate evaluates to false.
+     * This function checks the given requirement and throws a FlightData::Exception
+     * with a formatted message if the requirement evaluates to false.
      *
-     * @tparam Args Variadic template parameters for format arguments.
-     * @param predicate The condition to check.
-     * @param msg The format string used for the exception message.
-     * @param args The arguments to format into the message.
+     * @tparam Args         Variadic template parameters for format arguments of msg.
+     * @param  requirement  The condition to check.
+     * @param  msg          The format string used for the exception message.
+     * @param  args         The arguments to insert into the msg format string.
      *
      * @throws FlightData::Exception if predicate is false.
      */
     template<class ... Args>
-    inline auto Ensure(bool predicate, std::string_view msg, Args && ... args) -> void
+    inline auto Ensure(bool requirement, std::string_view msg, Args && ... args) -> void
     {
-        if(!predicate)
+        if(!requirement)
         {
             throw Exception(std::vformat(msg, std::make_format_args(std::forward<Args>(args) ...)));
         }
