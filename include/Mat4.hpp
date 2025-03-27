@@ -10,12 +10,28 @@
 
 namespace FlightData
 {
+    /**
+     * @brief A 4x4 matrix class for 3D mathematical operations.
+     * 
+     * This class provides basic functionality for manipulating 4x4 matrices,
+     * including addition, subtraction, scalar multiplication, and matrix multiplication.
+     * It supports column operations and provides access to raw data.
+     * 
+     * @tparam REAL Floating-point type (e.g., float or double)
+     */
     template <typename REAL>
     class Mat4
     {
     public:
+        /** @brief Default constructor. Initializes the matrix with uninitialized data. */
         Mat4() = default;
 
+        /**
+         * @brief Construct a matrix from an initializer list.
+         * 
+         * @param values A list of 16 values in row-major order.
+         * @throws FlightData::Exception if the list size is not 16.
+         */
         Mat4(std::initializer_list<REAL> values)
         { 
             Ensure(values.size() == elements_, "Error: Length of initializer list does not match matrix dimensions!");
@@ -23,8 +39,14 @@ namespace FlightData
             std::copy(values.begin(), values.end(), data_.begin());
         };
 
+        /** @brief Default destructor. */
         ~Mat4() = default;
 
+        /**
+         * @brief Sets the matrix values from an initializer list.
+         * 
+         * @param values A list of 16 values in row-major order.
+         */
         auto SetMatrix(std::initializer_list<REAL> values) -> void
         {
             std::copy(values.begin(), values.end(), data_.begin());
@@ -51,9 +73,9 @@ namespace FlightData
         auto inline RawPtr()       ->       REAL* { return data_.data(); }
         auto inline RawPtr() const -> const REAL* { return data_.data(); }
 
-        auto inline rows()     const -> size_t { return rows_; }
-        auto inline cols()     const -> size_t { return cols_; }
-        auto inline elements() const -> size_t { return elements_; }
+        constexpr auto inline rows()     const -> size_t { return rows_; }
+        constexpr auto inline cols()     const -> size_t { return cols_; }
+        constexpr auto inline elements() const -> size_t { return elements_; }
 
     private:
         std::array<REAL, 16> data_;
