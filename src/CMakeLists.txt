@@ -29,6 +29,10 @@ add_executable(FlightData
     Main.cpp
 )
 
+target_include_directories(FlightData
+    PRIVATE ${PROJECT_SOURCE_DIR}/include
+)
+
 target_compile_definitions(FlightData
     PRIVATE PROJECT_ROOT_PATH="${PROJECT_SOURCE_DIR}"
 )
