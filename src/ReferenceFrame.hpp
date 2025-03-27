@@ -1,5 +1,7 @@
 #pragma once
 
+#include <format>
+
 #include "Mat4.hpp"
 #include "Vec3.hpp"
 #include "Units.hpp"
@@ -60,3 +62,41 @@ namespace FlightData
         Mat4<double> translation_matrix_;
     };
 }
+
+template <>
+struct std::formatter<FlightData::Position>
+{
+
+    constexpr auto parse(std::format_parse_context &ctx)
+    {
+        return std::begin(ctx);
+    }
+
+    auto format(const FlightData::Position &position, std::format_context &ctx) const
+    {
+        return std::format_to(ctx.out(), 
+            "Longitude {:.6f} deg Latitude {:.6f} deg Altitude {:.2f} m",
+            rad2deg(position.longitude), rad2deg(position.latitude), position.altitude
+        );
+    }
+
+};
+
+template <>
+struct std::formatter<FlightData::Attitude>
+{
+
+    constexpr auto parse(std::format_parse_context &ctx)
+    {
+        return std::begin(ctx);
+    }
+
+    auto format(const FlightData::Attitude &attitude, std::format_context &ctx) const
+    {
+        return std::format_to(ctx.out(), 
+            "Heading {:.2f} deg, Pitch {:.2f} deg, Roll {:.2f} deg",
+            rad2deg(attitude.heading), rad2deg(attitude.pitch), rad2deg(attitude.roll)
+        );
+    }
+
+};
