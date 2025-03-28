@@ -7,24 +7,25 @@
 
 namespace FlightData
 {
+    /// @brief One line (or entry) in a FlightData Recorder file
     struct Entry
-    {                        // Format  Unit   Reference     Type
-        double time;         //  7.2    s                  Measured
-        double longitude;    // 14.9    deg                Calculated
-        double latitude;     // 13.9    deg                Calculated
-        double altitude;     //  7.1    m                  Calculated
-        double true_heading; //  5.1    deg                Calculated
-        double pitch;        //  5.1    deg                Calculated
-        double roll;         //  6.1    deg                Calculated
-        double v_x;          //  6.1    m/s    Body fixed  Calculated
-        double v_y;          //  6.1    m/s    Body fixed  Calculated
-        double v_z;          //  6.1    m/s    Body fixed  Calculated
-        double omega_x;      //  9.3    deg/s  Body fixed  Measured
-        double omega_y;      //  9.3    deg/s  Body fixed  Measured
-        double omega_z;      //  9.3    deg/s  Body fixed  Measured
-        double a_x;          //  9.5    m/s2   Body fixed  Measured
-        double a_y;          //  9.5    m/s2   Body fixed  Measured
-        double a_z;          //  9.5    m/s2   Body fixed  Measured
+    {
+        double time;         ///< time since start of the simulator format:  7.2f unit: s
+        double longitude;    ///< longitude                         format: 14.9f unit: deg
+        double latitude;     ///< latitude                          format: 13.9f unit: deg
+        double altitude;     ///< altitude above sea level          format:  7.1f unit: m
+        double true_heading; ///< heading (true north)              format:  5.1f unit: deg
+        double pitch;        ///< pitch angle                       format:  5.1f, unit: deg
+        double roll;         ///< roll angle                        format:  6.1f, unit: deg
+        double v_x;          ///< linear velocity                   format:  6.1f, unit: m/s, type: Body fixed
+        double v_y;          ///< linear velocity                   format:  6.1f, unit: m/s, type: Body fixed
+        double v_z;          ///< linear velocity                   format:  6.1f, unit: m/s, type: Body fixed
+        double omega_x;      ///< rotational velocity               format:  9.3f, unit: deg/s, type: Body fixed
+        double omega_y;      ///< rotational velocity               format:  9.3f, unit: deg/s, type: Body fixed
+        double omega_z;      ///< rotational velocity               format:  9.3f, unit: deg/s, type: Body fixed
+        double a_x;          ///< linear acceleration               format:  9.5f, unit: m/s2,  type: Body fixed
+        double a_y;          ///< linear acceleration               format:  9.5f, unit: m/s2,  type: Body fixed
+        double a_z;          ///< linear acceleration               format:  9.5f, unit: m/s2,  type: Body fixed
     };
 
     class Recorder

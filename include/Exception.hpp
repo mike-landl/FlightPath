@@ -28,7 +28,7 @@ namespace FlightData
 }
 
 /**
- * @brief Specialization of std::formatter for FlightData::Exception.
+ * @brief Formatter specialization for FlightData::Exception.
  *
  * Enables the use of std::format with FlightData::Exception, formatting
  * the exception using its what() message.
@@ -37,9 +37,10 @@ template <>
 struct std::formatter<FlightData::Exception>
 {
     /**
-     * @brief Parses the format specifier (unused in this case).
-     * @param ctx The format parse context.
-     * @return An iterator pointing to the end of the parsed format specifier.
+     * @brief  Parses the format specifier (unused in this case).
+     * 
+     * @param  ctx The format parse context.
+     * @return     An iterator pointing to the end of the parsed format specifier.
      */
     constexpr auto parse(std::format_parse_context &ctx)
     {
@@ -48,9 +49,10 @@ struct std::formatter<FlightData::Exception>
 
     /**
      * @brief  Formats the FlightData::Exception object.
+     * 
      * @param  obj The FlightData::Exception instance to format.
      * @param  ctx The format context to write to.
-     * @return An iterator to the end of the output.
+     * @return     An iterator to the end of the output.
      */
     auto format(const FlightData::Exception &obj, std::format_context &ctx) const
     {
