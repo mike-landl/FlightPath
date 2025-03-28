@@ -76,7 +76,7 @@ struct std::formatter<FlightData::Position>
     {
         return std::format_to(ctx.out(), 
             "Longitude {:.6f} deg Latitude {:.6f} deg Altitude {:.2f} m",
-            rad2deg(position.longitude), rad2deg(position.latitude), position.altitude
+            rad2deg<double>(position.longitude), rad2deg<double>(position.latitude), position.altitude
         );
     }
 
@@ -95,7 +95,7 @@ struct std::formatter<FlightData::Attitude>
     {
         return std::format_to(ctx.out(), 
             "Heading {:.2f} deg, Pitch {:.2f} deg, Roll {:.2f} deg",
-            rad2deg(attitude.heading), rad2deg(attitude.pitch), rad2deg(attitude.roll)
+            rad2deg<double>(attitude.heading), rad2deg<double>(attitude.pitch), rad2deg<double>(attitude.roll)
         );
     }
 
