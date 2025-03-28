@@ -57,8 +57,8 @@ namespace FlightData
 
     /* Operator overloading */
 
-              REAL& operator()(size_t row, size_t col)       { return data_[row * cols_ + col]; }
-        const REAL& operator()(size_t row, size_t col) const { return data_[row * cols_ + col]; }
+        auto inline operator()(size_t row, size_t col)       ->       REAL& { return data_[row * cols_ + col]; }
+        auto inline operator()(size_t row, size_t col) const -> const REAL& { return data_[row * cols_ + col]; }
 
         auto inline operator + (const Mat4<REAL>& other) const -> Mat4<REAL>;
         auto inline operator - (const Mat4<REAL>& other) const -> Mat4<REAL>;

@@ -4,12 +4,19 @@
 
 namespace FlightData
 {
+    /**
+     * @struct Vec3
+     * @brief A lightweight 3D vector struct for basic vector operations.
+     *
+     * @tparam REAL The real type (i.e. float or double) used for storage and operations.
+     */
     template <typename REAL>
     struct Vec3
     {
-        REAL x;
-        REAL y;
-        REAL z;
+        REAL x; ///< The x-component of the vector.
+        REAL y; ///< The y-component of the vector.
+        REAL z; ///< The z-component of the vector.
+
 
         auto inline operator + (const Vec3 &other) const -> Vec3;
         auto inline operator - (const Vec3 &other) const -> Vec3;
@@ -22,7 +29,7 @@ namespace FlightData
         auto inline Normalized() const -> Vec3;
     };
 
-template <typename REAL>
+    template <typename REAL>
     auto inline Vec3<REAL>::operator + (const Vec3 &other) const -> Vec3<REAL>
     {
         return Vec3<REAL>{

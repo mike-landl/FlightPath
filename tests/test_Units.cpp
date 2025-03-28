@@ -46,9 +46,9 @@ namespace FlightData
 
     TEST_CASE("[Units] meter to feet conversion", "[Units]")
     {
-        CheckDouble(m2ft(-0.001426464),    -0.00468);
-        CheckDouble(m2ft( 0.3048     ),     1.0    );
-        CheckDouble(m2ft(13919.6064  ), 45668.0    );
+        CheckDouble(m2ft<double>(-0.001426464),    -0.00468);
+        CheckDouble(m2ft<double>( 0.3048     ),     1.0    );
+        CheckDouble(m2ft<double>(13919.6064  ), 45668.0    );
     }
 
     TEST_CASE("[Units] degree literal", "[Units]")
@@ -66,14 +66,14 @@ namespace FlightData
 
     TEST_CASE("[Units] radian to degrees conversion", "[Units]")
     {
-        CheckDouble(rad2deg(0.0/4.0*PI_d),   0.0);
-        CheckDouble(rad2deg(1.0/4.0*PI_d),  45.0);
-        CheckDouble(rad2deg(2.0/4.0*PI_d),  90.0);
-        CheckDouble(rad2deg(3.0/4.0*PI_d), 135.0);
-        CheckDouble(rad2deg(4.0/4.0*PI_d), 180.0);
-        CheckDouble(rad2deg(5.0/4.0*PI_d), 225.0);
-        CheckDouble(rad2deg(6.0/4.0*PI_d), 270.0);
-        CheckDouble(rad2deg(7.0/4.0*PI_d), 315.0);
-        CheckDouble(rad2deg(8.0/4.0*PI_d), 360.0);
+        CheckDouble(rad2deg<double>(0.0/4.0*PI_d),   0.0);
+        CheckDouble(rad2deg<double>(1.0/4.0*PI_d),  45.0);
+        CheckDouble(rad2deg<double>(2.0/4.0*PI_d),  90.0);
+        CheckDouble(rad2deg<double>(3.0/4.0*PI_d), 135.0);
+        CheckDouble(rad2deg<double>(4.0/4.0*PI_d), 180.0);
+        CheckDouble(rad2deg<double>(5.0/4.0*PI_d), 225.0);
+        CheckDouble(rad2deg<double>(6.0/4.0*PI_d), 270.0);
+        CheckDouble(rad2deg<double>(7.0/4.0*PI_d), 315.0);
+        CheckDouble(rad2deg<double>(8.0/4.0*PI_d), 360.0);
     }
 }

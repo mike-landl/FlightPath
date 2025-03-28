@@ -3,7 +3,7 @@ add_library(FlightDataLib
     Exception.cpp
     Recorder.cpp
     ReferenceFrame.cpp
-    Solver.cpp
+    Application.cpp
 )
 
 target_include_directories(FlightDataLib

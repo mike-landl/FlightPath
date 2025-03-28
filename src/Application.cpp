@@ -1,11 +1,11 @@
 #include <format>
 
-#include "Solver.hpp"
+#include "Application.hpp"
 #include "Log.hpp"
 
 namespace FlightData
 {
-    Solver::Solver()
+    Application::Application()
     {
         Log::Info("Reading flight data file...");
         recorder_.ReadFile("./data/2017-01-17_Graz-Gleichenberg.txt");
@@ -35,7 +35,7 @@ namespace FlightData
         vb_np1_ = Vec3(entry.v_x, entry.v_y, entry.v_z);
     }
 
-    auto Solver::Run() -> void
+    auto Application::Run() -> void
     {
         const auto& data = recorder_.GetData();
         const Mat4<double> eye_4{
