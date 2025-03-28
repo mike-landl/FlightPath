@@ -32,16 +32,16 @@ namespace FlightData
             >> entry.a_y       
             >> entry.a_z)
         {
-            entry.longitude    = deg2rad(entry.longitude);
-            entry.latitude     = deg2rad(entry.latitude);
+            entry.longitude    = deg2rad<double>(entry.longitude);
+            entry.latitude     = deg2rad<double>(entry.latitude);
 
-            entry.true_heading = deg2rad(entry.true_heading);
-            entry.pitch        = deg2rad(entry.pitch);
-            entry.roll         = deg2rad(entry.roll);
+            entry.true_heading = deg2rad<double>(entry.true_heading);
+            entry.pitch        = deg2rad<double>(entry.pitch);
+            entry.roll         = deg2rad<double>(entry.roll);
 
-            entry.omega_x      = deg2rad(entry.omega_x);
-            entry.omega_y      = deg2rad(entry.omega_y);
-            entry.omega_z      = deg2rad(entry.omega_z);
+            entry.omega_x      = deg2rad<double>(entry.omega_x);
+            entry.omega_y      = deg2rad<double>(entry.omega_y);
+            entry.omega_z      = deg2rad<double>(entry.omega_z);
         }
         return input_stream;
     }
@@ -95,8 +95,8 @@ namespace FlightData
         {
             file << "                " 
                  << std::format("{:12.9f}, {:12.9f}, {:6.1f}\n",
-                    rad2deg(entry.longitude),
-                    rad2deg(entry.latitude),
+                    rad2deg<double>(entry.longitude),
+                    rad2deg<double>(entry.latitude),
                     entry.altitude);
         }
         file << KML::CloseDataset;
@@ -106,8 +106,8 @@ namespace FlightData
         {
             file << "                " 
                  << std::format("{:12.9f}, {:12.9f}, {:6.1f}\n", 
-                    rad2deg(entry.longitude),
-                    rad2deg(entry.latitude),
+                    rad2deg<double>(entry.longitude),
+                    rad2deg<double>(entry.latitude),
                     entry.altitude);
         }
         file << KML::CloseDataset;
