@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Units.hpp"
+
 namespace FlightData
 {
     /**
