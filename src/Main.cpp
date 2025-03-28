@@ -3,7 +3,7 @@
 
 #include "Log.hpp"
 #include "Error.hpp"
-#include "Solver.hpp"
+#include "Application.hpp"
 
 auto main() -> int
 {
@@ -11,8 +11,8 @@ auto main() -> int
 
     try
     {
-        FlightData::Solver solver;
-        solver.Run();
+        FlightData::Application app;
+        app.Run();
     }
     catch (const FlightData::Exception &err)
     {

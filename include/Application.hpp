@@ -7,11 +7,11 @@
 
 namespace FlightData
 {
-    class Solver
+    class Application
     {
     public:
-        Solver();
-        ~Solver() = default;
+        Application();
+        ~Application() = default;
 
         auto Run() -> void;
 
