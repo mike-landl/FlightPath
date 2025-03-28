@@ -37,7 +37,7 @@ TEST_CASE("[Log] Debug works", "[Log]")
 {
     // lambda without captures or parameters for passing anonymous inline function
     auto console_output = CaptureOutput([](){FlightData::Log::Debug("Debug");});
-    REQUIRE(console_output == "\x1B[94m[D]\x1B[0m test_Log.cpp:25 Debug\n");
+    REQUIRE(console_output == "\x1B[94m[D]\x1B[0m test_Log.cpp:39 Debug\n");
 }
 
 TEST_CASE("[Log] Info works", "[Log]")
@@ -49,11 +49,11 @@ TEST_CASE("[Log] Info works", "[Log]")
 TEST_CASE("[Log] Warn works", "[Log]")
 {
     auto console_output = CaptureOutput([](){FlightData::Log::Warn("Warn");});
-    REQUIRE(console_output == "\x1B[93m[W]\x1B[0m test_Log.cpp:37 Warn\n");
+    REQUIRE(console_output == "\x1B[93m[W]\x1B[0m test_Log.cpp:51 Warn\n");
 }
 
 TEST_CASE("[Log] Error works", "[Log]")
 {
     auto console_output = CaptureOutput([](){FlightData::Log::Error("Error");});
-    REQUIRE(console_output == "\x1B[91m[E]\x1B[0m test_Log.cpp:43 Error\n");
+    REQUIRE(console_output == "\x1B[91m[E]\x1B[0m test_Log.cpp:57 Error\n");
 }
