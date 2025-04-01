@@ -45,9 +45,9 @@ struct std::formatter<FlightData::Position>
     /**
      * @brief  Formats the FlightData::Position object.
      * 
-     * @param  obj The FlightData::Position instance to format.
-     * @param  ctx The format context to write to.
-     * @return     An iterator to the end of the output.
+     * @param  position The FlightData::Position instance to format.
+     * @param  ctx      The format context to write to.
+     * @return          An iterator to the end of the output.
      */
     auto format(const FlightData::Position &position, std::format_context &ctx) const
     {
