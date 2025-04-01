@@ -42,9 +42,9 @@ struct std::formatter<FlightData::Attitude>
     /**
      * @brief  Formats the FlightData::Attidude object.
      * 
-     * @param  obj The FlightData::Attidude instance to format.
-     * @param  ctx The format context to write to.
-     * @return     An iterator to the end of the output.
+     * @param  attitude The FlightData::Attidude instance to format.
+     * @param  ctx      The format context to write to.
+     * @return          An iterator to the end of the output.
      */
     auto format(const FlightData::Attitude &attitude, std::format_context &ctx) const
     {
