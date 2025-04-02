@@ -1,5 +1,7 @@
 [![Build](https://github.com/mike-landl/FlightData/actions/workflows/build.yml/badge.svg)](https://github.com/mike-landl/FlightData/actions/workflows/build.yml)
 [![Tests](https://github.com/mike-landl/FlightData/actions/workflows/tests.yml/badge.svg)](https://github.com/mike-landl/FlightData/actions/workflows/tests.yml)
+[![C++23 Standard](https://img.shields.io/badge/Standard-C++23-yellow.svg](https://isocpp.org/std/the-standard)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # Flight Data
 
 ## About The Project
@@ -10,6 +12,11 @@ The output is a **`.kml` file** (stored in the `data/` folder) that can be opene
 
 For example:
 ![Example](Example.PNG)
+
+## Notes
+- This repository serves as a demonstration of how I write and structure my C++ code.
+- The codebase uses **C++23**, taking advantage of modern language features where it makes sense.
+- It also makes use of **trailing return types**, mostly as an experiment to explore their style and usability.
 
 ## Features
 - 🧪 Unit tests using Catch2 and CTest  
