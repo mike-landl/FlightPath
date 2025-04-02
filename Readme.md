@@ -41,7 +41,7 @@ Includes unit tests and GitHub Actions CI integration.
 6. output is stored in the data folder and can be imported in google earth
 
 #### Manually run unit tests
-1. clone and configure repository (see [here](####Flight Data Reconstruction))
+1. clone and configure repository (see [here](#flight-data-reconstruction))
 2. build tests with cmake
     ```sh
     cmake --build --preset release-clang --target RunTests
