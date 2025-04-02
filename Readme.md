@@ -4,7 +4,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # Flight Data
 
-## About The Project
 This project is a C++ port of the final assignment from the *Flight Simulation* lecture at Graz University of Technology.
 It processes a datalogger file from a flight simulator and tries to reconstruct the flight path using only data from the onboard **inertial measurement unit (IMU)**, including body-fixed linear acceleration and angular velocity.
 
