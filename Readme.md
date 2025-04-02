@@ -19,10 +19,10 @@ For example:
 - It also makes use of **trailing return types**, mostly as an experiment to explore their style and usability.
 
 ## Features
-- 🧪 Unit tests using Catch2 and CTest  
-- ⚙️ Cross-platform support (Linux & Windows)  
-- 🚀 GitHub Actions CI integration  
-- 🌍 `.kml` output for Google Earth visualization  
+- Unit tests using Catch2 and CTest  
+- Cross-platform support (Linux & Windows)  
+- GitHub Actions CI integration  
+- `.kml` output for Google Earth visualization  
 
 
 ## Table of Contents
