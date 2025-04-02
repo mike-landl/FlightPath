@@ -1,0 +1,37 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up CMake cache key
+        id: cmake-cache
+        run: echo "key=fcache-tests-${{ hashFiles('**/CMakeLists.txt') }}" >> $GITHUB_OUTPUT
+
+      - name: Cache FetchContent dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/fetchcontent
+            build_deps
+          key: ${{ steps.cmake-cache.outputs.key }}
+
+      - name: Configure
+        run: cmake --preset release-clang -DFETCHCONTENT_BASE_DIR="$HOME/.cache/fetchcontent"
+
+      - name: Build
+        run: cmake --build --preset release-clang --target RunTests --parallel 4
+
+      - name: Run Tests
+        working-directory: build/release/tests
+        run: ctest

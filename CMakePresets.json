@@ -49,30 +49,18 @@
                 "CMAKE_CXX_COMPILER": "clang++",
                 "CMAKE_BUILD_TYPE": "Release"
             }
-        },
-        {
-            "name": "ci",
-            "displayName": "CI Preset (Release, VS 2022)",
-            "generator": "Visual Studio 17 2022",
-            "binaryDir": "${sourceDir}/build/ci",
-            "architecture": {
-                "value": "x64"
-            },
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
-            }
         }
     ],
     "buildPresets": [
         {
-            "name": "ci",
-            "configurePreset": "ci"
+            "name": "release-clang",
+            "configurePreset": "release-clang"
         }
     ],
     "testPresets": [
         {
-            "name": "ci",
-            "configurePreset": "ci"
+            "name": "release-clang",
+            "configurePreset": "release-clang"
         }
     ]
 }
