@@ -25,11 +25,11 @@ target_compile_definitions(RunTests
 
 # Add compiler warnings for clang and msvc and interpret warnings as errors
 if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    target_compile_options(FlightDataLib 
+    target_compile_options(RunTests 
         PRIVATE -Wall -Wextra -Wpedantic -Werror
     )
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(FlightDataLib 
+    target_compile_options(RunTests 
         PRIVATE /W4 /WX
     )
 endif()
