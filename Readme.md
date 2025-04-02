@@ -10,40 +10,63 @@ The output is a **.kml file**, located in the data folder, compatible with Googl
 For example:
 ![Example](Example.PNG?raw=true "Example")
 
+## Features
 Includes unit tests and GitHub Actions CI integration.
 
 ## Usage
 
-### Windows
-1. clone the repository
-    ```sh
-    git clone https://github.com/mike-landl/FlightData.git
-    ```
-2. open the folder with visual studio (requires enabled cmake support)
-3. build from within visual studio
-
 ### Linux
+
+#### Flight Data Reconstruction
 1. clone the repository
     ```sh
     git clone https://github.com/mike-landl/FlightData.git
     ```
-2. check out the feature branch 'linux'
+2. change directory
     ```sh
-    git checkout feature/linux
+    cd FlightData
     ```
 3. configure cmake
     ```sh
     cmake --preset release-clang
     ```
-4. build with ninja
+4. build with cmake
     ```sh
-    cd build/release
-    ninja
+    cmake --build --preset release-clang --target FlightData
     ```
 5. run the binary
     ```sh
-    ./Flightdata
+    ./build/release/src/FlightData
     ```
+6. output is stored in the data folder and can be imported in google earth
+
+#### Manually run unit tests
+1. clone and configure repository (see [here](####Flight Data Reconstruction))
+2. build tests with cmake
+    ```sh
+    cmake --build --preset release-clang --target RunTests
+    ```
+3. change directory
+    ```sh
+    cd build/release/src/tests
+    ```
+4. run tests
+    ```sh
+    ctest
+    ```
+
+### Windows
+#### Flight Data Reconstruction
+1. clone the repository
+    ```sh
+    git clone https://github.com/mike-landl/FlightData.git
+    ```
+2. open the folder with visual studio (requires enabled cmake support)
+3. build and run from within visual studio
+4. output is stored in the data folder and can be imported in google earth
+
+#### Manually run unit tests
+You can build and run the tests by selecting the target RunTests within visual studio.
 
 ## License
 
