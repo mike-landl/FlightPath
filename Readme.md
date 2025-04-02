@@ -3,70 +3,84 @@
 # Flight Data
 
 ## About The Project
-This project is a C++ port of the final project of the lecture flight-simulation at Graz University of Technology.
-It reads a **datalogger file** from the flight simulator and attempts to **reconstruct the flight path using only accelerometer data**.
+This project is a C++ port of the final assignment from the *Flight Simulation* lecture at Graz University of Technology.
+It processes a datalogger file from a flight simulator and tries to reconstruct the flight path using only data from the onboard **inertial measurement unit (IMU)**, including body-fixed linear acceleration and angular velocity.
 
-The output is a **.kml file**, located in the data folder, compatible with Google Earth, allowing you to visualize the reconstructed flight path alongside the original flight path.
+The output is a **`.kml` file** (stored in the `data/` folder) that can be opened in **Google Earth** to visualize the reconstructed flight path alongside the original.
+
 For example:
-![Example](Example.PNG?raw=true "Example")
+![Example](Example.PNG)
 
 ## Features
-Includes unit tests and GitHub Actions CI integration.
+- 🧪 Unit tests using Catch2 and CTest  
+- ⚙️ Cross-platform support (Linux & Windows)  
+- 🚀 GitHub Actions CI integration  
+- 🌍 `.kml` output for Google Earth visualization  
+
+
+## Table of Contents
+- [Usage](#usage)
+  - [Linux](#linux)
+    - [Flight Data Reconstruction](#flight-data-reconstruction)
+    - [Run Unit Tests](#run-unit-tests)
+  - [Windows](#windows)
+    - [Flight Data Reconstruction (Windows)](#flight-data-reconstruction-windows)
+    - [Run Unit Tests (Windows)](#run-unit-tests-windows)
+- [License](#license)
+
+---
 
 ## Usage
 
 ### Linux
 
 #### Flight Data Reconstruction
-1. clone the repository
+1. Clone the repository:
     ```sh
     git clone https://github.com/mike-landl/FlightData.git
-    ```
-2. change directory
-    ```sh
     cd FlightData
     ```
-3. configure cmake
+2. Configure CMake:
     ```sh
     cmake --preset release-clang
     ```
-4. build with cmake
+3. Build the project:
     ```sh
     cmake --build --preset release-clang --target FlightData
     ```
-5. run the binary
+4. Run the binary:
     ```sh
     ./build/release/src/FlightData
     ```
-6. output is stored in the data folder and can be imported in google earth
+5. The .kml output will be available in the data/ folder and can be imported into Google Earth.
 
 #### Manually run unit tests
-1. clone and configure repository (see [here](#flight-data-reconstruction))
-2. build tests with cmake
+1. Ensure the project is configured (see [here](#flight-data-reconstruction))
+2. Build the test target:
     ```sh
     cmake --build --preset release-clang --target RunTests
     ```
-3. change directory
+3. Navigate to the test output directory:
     ```sh
     cd build/release/src/tests
     ```
-4. run tests
+4. Run the tests:
     ```sh
     ctest
     ```
 
 ### Windows
-#### Flight Data Reconstruction
-1. clone the repository
+#### Flight Data Reconstruction (Windows)
+1. Clone the repository:
     ```sh
     git clone https://github.com/mike-landl/FlightData.git
     ```
-2. open the folder with visual studio (requires enabled cmake support)
-3. build and run from within visual studio
-4. output is stored in the data folder and can be imported in google earth
+2. Open the folder with Visual Studio (ensure CMake support is enabled).
+3. Build and run from within Visual Studio.
+4. Output is stored in the data/ folder and can be opened with Google Earth.
 
-#### Manually run unit tests
-You can build and run the tests by selecting the target RunTests within visual studio.
+#### Run Unit Tests (Windows)
+Select the RunTests target in Visual Studio and run it.
 
 ## License
 
