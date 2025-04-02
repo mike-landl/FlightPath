@@ -1,4 +1,5 @@
-[![Build and Test](https://github.com/mike-landl/FlightSim/actions/workflows/build-and-test.yml/badge.svg?branch=main)](https://github.com/mike-landl/FlightSim/actions/workflows/build-and-test.yml)
+[![Build](https://github.com/mike-landl/FlightData/actions/workflows/build.yml/badge.svg)](https://github.com/mike-landl/FlightData/actions/workflows/build.yml)
+[![Tests](https://github.com/mike-landl/FlightData/actions/workflows/tests.yml/badge.svg)](https://github.com/mike-landl/FlightData/actions/workflows/tests.yml)
 # Flight Data
 
 ## About The Project

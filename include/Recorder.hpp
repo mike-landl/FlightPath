@@ -28,23 +28,49 @@ namespace FlightData
         double a_z;          ///< linear acceleration               format:  9.5f, unit: m/s2,  type: Body fixed
     };
 
+    /**
+     * @class Recorder
+     * @brief Handles reading flight data from file, modifying it, and exporting results.
+     */
     class Recorder
     {
     public: 
-         Recorder() = default;
+        /// @brief Default constructor
+        Recorder() = default;
+
+        /// @brief Default destructor
         ~Recorder() = default;
 
+        /**
+         * @brief Reads flight data from a specified file.
+         * @param path Path to the input file.
+         */
         auto ReadFile(const std::string &path) -> void;
 
+        /**
+         * @brief Returns the input dataset read from the file.
+         * @return A const reference to the vector of input entries.
+         */
         auto GetData() const -> const std::vector<Entry>& { return input_data_; }
+
+        /**
+         * @brief Writes processed flight data based on current position, attitude, and velocity.
+         * @param position Current position in geodetic coordinates.
+         * @param attitude Current orientation in Euler angles.
+         * @param velocity Current velocity vector in m/s.
+         */
         auto WriteData(const Position &position, const Attitude &attitude, const Vec3<double> &velocity) -> void;
 
+        /**
+         * @brief Exports both original and reconstructed data into a KML file for visualization.
+         * @param path Path to the output KML file.
+         */
         auto DumpKML(const std::string &path) const -> void;
 
     private:
 
     private:
-        std::vector<Entry>  input_data_;
-        std::vector<Entry> output_data_;
+        std::vector<Entry>  input_data_; ///< Original input data from file.
+        std::vector<Entry> output_data_; ///< Modified/reconstructed flight data.
     };
 }

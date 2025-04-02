@@ -17,15 +17,62 @@ namespace FlightData
         REAL y; ///< The y-component of the vector.
         REAL z; ///< The z-component of the vector.
 
-
+        /**
+         * @brief Adds two vectors component-wise.
+         * @param other The vector to add.
+         * @return The resulting vector after addition.
+         */
         auto inline operator + (const Vec3 &other) const -> Vec3;
+
+        /**
+         * @brief Subtracts another vector from this vector component-wise.
+         * @param other The vector to subtract.
+         * @return The resulting vector after subtraction.
+         */
         auto inline operator - (const Vec3 &other) const -> Vec3;
+
+        /**
+         * @brief Multiplies this vector by a scalar.
+         * @param scalar The scalar value to multiply by.
+         * @return The resulting scaled vector.
+         */
         auto inline operator * (const REAL scalar) const -> Vec3;
+
+        /**
+         * @brief Computes the dot product of this vector and another.
+         * @param other The other vector.
+         * @return The dot product (a scalar).
+         */
         auto inline Dot(const Vec3 &other) const -> REAL;
+
+        /**
+         * @brief Computes the cross product of this vector and another.
+         * @param other The other vector.
+         * @return The resulting vector perpendicular to both.
+         */
         auto inline Cross(const Vec3 &other) const -> Vec3;
+
+        /**
+         * @brief Computes the Euclidean length (magnitude) of the vector.
+         * @return The length as a scalar.
+         */
         auto inline Length() const -> REAL;
+
+        /**
+         * @brief Computes the squared length of the vector.
+         * @return The squared length (avoids square root for performance).
+         */
         auto inline LengthSquared() const -> REAL;
+
+        /**
+         * @brief Normalizes the vector in-place to unit length.
+         */
         auto inline Normalize() -> void;
+
+        /**
+         * @brief Returns a normalized (unit length) copy of the vector.
+         * @return A normalized vector.
+         */
         auto inline Normalized() const -> Vec3;
     };
 
