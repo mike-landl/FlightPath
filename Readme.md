@@ -1,6 +1,5 @@
-[![Build and Test](https://github.com/mike-landl/FlightSim/actions/workflows/build-and-test.yml/badge.svg?branch=main)](https://github.com/mike-landl/FlightSim/actions/workflows/build-and-test.yml)
-[![Build Status](https://github.com/mike-landl/FlightSim/actions/workflows/build-and-test.yml/badge.svg?branch=main&event=push&job=build)](https://github.com/mike-landl/FlightSim/actions/workflows/build-and-test.yml?query=branch%3Amain+event%3Apush+job%3Abuild)
-[![Test Status](https://github.com/mike-landl/FlightSim/actions/workflows/actions/workflows/build-and-test.yml/badge.svg?branch=main&event=push&job=test)](https://github.com/mike-landl/FlightSim/actions/workflows/build-and-test.yml?query=branch%3Amain+event%3Apush+job%3Atest)
+[![Build](https://github.com/mike-landl/FlightData/actions/workflows/build.yml/badge.svg)](https://github.com/mike-landl/FlightData/actions/workflows/build.yml)
+[![Tests](https://github.com/mike-landl/FlightData/actions/workflows/tests.yml/badge.svg)](https://github.com/mike-landl/FlightData/actions/workflows/tests.yml)
 # Flight Data
 
 ## About The Project
