@@ -20,7 +20,8 @@ For example:
 
 ## Features
 - Unit tests using Catch2 and CTest  
-- Cross-platform support (Linux & Windows)  
+- Cross-platform support (Linux & Windows)
+- Docker support for dependency management
 - GitHub Actions CI integration  
 - `.kml` output for Google Earth visualization  
 
@@ -30,6 +31,7 @@ For example:
   - [Linux](#linux)
     - [Flight Data Reconstruction](#flight-data-reconstruction)
     - [Run Unit Tests](#run-unit-tests)
+    - [Docker Support](#docker-support)
   - [Windows](#windows)
     - [Flight Data Reconstruction (Windows)](#flight-data-reconstruction-windows)
     - [Run Unit Tests (Windows)](#run-unit-tests-windows)
