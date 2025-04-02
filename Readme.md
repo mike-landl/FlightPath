@@ -63,7 +63,7 @@ For example:
     ```
 5. The .kml output will be available in the data/ folder and can be imported into Google Earth.
 
-#### Manually run unit tests
+#### Run Unit Tests
 1. Ensure the project is configured (see [here](#flight-data-reconstruction))
 2. Build the test target:
     ```sh
@@ -77,7 +77,7 @@ For example:
     ```sh
     ctest
     ```
-    
+
 ### Docker Support
 
 This project includes a Docker setup for consistent builds and easy dependency management.
