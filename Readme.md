@@ -75,6 +75,55 @@ For example:
     ```sh
     ctest
     ```
+    
+### Docker Support
+
+This project includes a Docker setup for consistent builds and easy dependency management.
+
+#### Prerequisites
+
+Make sure Docker and Docker Compose are installed on your system.
+
+- [Docker installation guide](https://docs.docker.com/engine/install/)
+
+- Docker Compose:
+
+```sh
+mkdir -p ~/.docker/cli-plugins/
+curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+chmod +x ~/.docker/cli-plugins/docker-compose
+```
+
+Add your user to the Docker group to avoid needing `sudo`:
+
+```sh
+sudo usermod -aG docker $USER
+newgrp docker
+```
+
+#### Build & Run
+
+1. Navigate to the `docker/` directory:
+   ```sh
+   cd docker
+   ```
+
+2. Start the Docker container:
+   ```sh
+   docker compose up --detach
+   ```
+
+3. Access the development container:
+   ```sh
+   docker compose exec flight_path_docker
+   ```
+
+4. Inside the container, you can run the standard build and test commands as if you were on your local system.
+
+5. When finished, shut down the container:
+   ```sh
+   docker compose down
+   ```
 
 ### Windows
 #### Flight Data Reconstruction (Windows)
