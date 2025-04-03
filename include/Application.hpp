@@ -5,7 +5,7 @@
 #include "ReferenceFrame.hpp"
 #include "Recorder.hpp"
 
-namespace FlightData
+namespace FlightPath
 {
     /**
      * @class Application

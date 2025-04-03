@@ -1,11 +1,11 @@
-[![Build](https://github.com/mike-landl/FlightData/actions/workflows/build.yml/badge.svg)](https://github.com/mike-landl/FlightData/actions/workflows/build.yml)
-[![Tests](https://github.com/mike-landl/FlightData/actions/workflows/tests.yml/badge.svg)](https://github.com/mike-landl/FlightData/actions/workflows/tests.yml)
+[![Build](https://github.com/mike-landl/FlightPath/actions/workflows/build.yml/badge.svg)](https://github.com/mike-landl/FlightPath/actions/workflows/build.yml)
+[![Tests](https://github.com/mike-landl/FlightPath/actions/workflows/tests.yml/badge.svg)](https://github.com/mike-landl/FlightPath/actions/workflows/tests.yml)
 [![C++23 Standard](https://img.shields.io/badge/Standard-C++23-yellow.svg)](https://isocpp.org/std/the-standard)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-# Flight Data
+# Flight Path
 
-This project is a C++ port of the final assignment from the *Flight Simulation* lecture at Graz University of Technology.
-It processes a datalogger file from a flight simulator and tries to reconstruct the flight path using only data from the onboard **inertial measurement unit (IMU)**, including body-fixed linear acceleration and angular velocity.
+This project processes a datalogger file from a flight simulator and reconstructs the flight path using only data from the onboard **inertial measurement unit (IMU)**.
+including body-fixed linear acceleration and angular velocity.
 
 The output is a **`.kml` file** (stored in the `data/` folder) that can be opened in **Google Earth** to visualize the reconstructed flight path alongside the original.
 
@@ -13,26 +13,38 @@ For example:
 ![Example](Example.PNG)
 
 ## Notes
-- This repository serves as a demonstration of how I write and structure my C++ code.
+- This repository serves as a demonstration of how I write and structure my C++ code and is not feature complete.
 - The codebase uses **C++23**, taking advantage of modern language features where it makes sense.
-- It also makes use of **trailing return types**, mostly as an experiment to explore their style and usability.
+- It also makes use of **trailing return types**, just because I wanted to try them out.
 
 ## Features
-- Unit tests using Catch2 and CTest  
-- Cross-platform support (Linux & Windows)
-- Docker support for dependency management
-- GitHub Actions CI integration  
-- `.kml` output for Google Earth visualization  
+- ✅ Unit Testing\
+Uses Catch2 and CTest for comprehensive test coverage.
+
+- 🖥️ Cross-Platform Support\
+Compatible with both Linux and Windows environments.
+
+- 🐳 Docker Support\
+Dockerized environment for consistent dependency management and easier setup.
+
+- 🔄 Continuous Integration\
+Integrated with GitHub Actions for automatic testing and build verification.
+
+- 📚 Full Documentation\
+Generated with Doxygen. Available for download under the Releases section or can be compiled locally.
+
+- 🌍 Google Earth Integration\
+Outputs .kml files for visualization in Google Earth.
 
 
 ## Table of Contents
 - [Usage](#usage)
   - [Linux](#linux)
-    - [Flight Data Reconstruction](#flight-data-reconstruction)
+    - [Flight Path Reconstruction](#flight-path-reconstruction)
     - [Run Unit Tests](#run-unit-tests)
     - [Docker Support](#docker-support)
   - [Windows](#windows)
-    - [Flight Data Reconstruction (Windows)](#flight-data-reconstruction-windows)
+    - [Flight Path Reconstruction (Windows)](#flight-path-reconstruction-windows)
     - [Run Unit Tests (Windows)](#run-unit-tests-windows)
 - [License](#license)
 
@@ -42,11 +54,11 @@ For example:
 
 ### Linux
 
-#### Flight Data Reconstruction
+#### Flight Path Reconstruction
 1. Clone the repository:
     ```sh
-    git clone https://github.com/mike-landl/FlightData.git
-    cd FlightData
+    git clone https://github.com/mike-landl/FlightPath.git
+    cd FlightPath
     ```
 2. Configure CMake:
     ```sh
@@ -54,16 +66,16 @@ For example:
     ```
 3. Build the project:
     ```sh
-    cmake --build --preset release-clang --target FlightData
+    cmake --build --preset release-clang --target FlightPath
     ```
 4. Run the binary:
     ```sh
-    ./build/release/src/FlightData
+    ./build/release/src/FlightPath
     ```
 5. The .kml output will be available in the data/ folder and can be imported into Google Earth.
 
 #### Run Unit Tests
-1. Ensure the project is configured (see [here](#flight-data-reconstruction))
+1. Ensure the project is configured (see [here](#flight-path-reconstruction))
 2. Build the test target:
     ```sh
     cmake --build --preset release-clang --target RunTests
@@ -127,10 +139,10 @@ newgrp docker
    ```
 
 ### Windows
-#### Flight Data Reconstruction (Windows)
+#### Flight Path Reconstruction (Windows)
 1. Clone the repository:
     ```sh
-    git clone https://github.com/mike-landl/FlightData.git
+    git clone https://github.com/mike-landl/FlightPath.git
     ```
 2. Open the folder with Visual Studio (ensure CMake support is enabled).
 3. Build and run from within Visual Studio.

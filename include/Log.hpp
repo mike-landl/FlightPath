@@ -48,7 +48,7 @@ namespace AnsiColor
     }
 }
 
-namespace FlightData::Log
+namespace FlightPath::Log
 {
     using namespace AnsiColor;
 

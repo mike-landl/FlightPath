@@ -8,7 +8,7 @@
 #include "Units.hpp"
 #include "KML.hpp"
 
-namespace FlightData
+namespace FlightPath
 {
     // overload stream operator for input file stream
     // reads a line and converts units to SI unit

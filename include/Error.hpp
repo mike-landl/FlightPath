@@ -6,12 +6,12 @@
 
 #include "Exception.hpp"
 
-namespace FlightData
+namespace FlightPath
 {
     /**
      * @brief Throws an exception if the required condition is false.
      *
-     * This function checks the given requirement and throws a FlightData::Exception
+     * This function checks the given requirement and throws a FlightPath::Exception
      * with a formatted message if the requirement evaluates to false.
      *
      * @tparam Args         Variadic template parameters for format arguments of msg.
@@ -19,7 +19,7 @@ namespace FlightData
      * @param  msg          The format string used for the exception message.
      * @param  args         The arguments to insert into the msg format string.
      *
-     * @throws FlightData::Exception if predicate is false.
+     * @throws FlightPath::Exception if predicate is false.
      */
     template<class ... Args>
     inline auto Ensure(bool requirement, std::string_view msg, Args && ... args) -> void

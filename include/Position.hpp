@@ -2,7 +2,7 @@
 
 #include "Units.hpp"
 
-namespace FlightData
+namespace FlightPath
 {
     /**
      * @struct Position
@@ -19,9 +19,9 @@ namespace FlightData
 }
 
 /**
- * @brief Formatter specialization for FlightData::Position.
+ * @brief Formatter specialization for FlightPath::Position.
  *
- * This specialization allows FlightData::Position to be used with std::format.
+ * This specialization allows FlightPath::Position to be used with std::format.
  * It converts the longitude and latitude values from radians to degrees, and formats
  * the position in a human-readable string that includes:
  * - Longitude in degrees (6 decimal places)
@@ -29,7 +29,7 @@ namespace FlightData
  * - Altitude  in meters  (2 decimal places)
  */
 template <>
-struct std::formatter<FlightData::Position>
+struct std::formatter<FlightPath::Position>
 {
     /**
      * @brief  Parses the format specifier (unused in this case).
@@ -43,13 +43,13 @@ struct std::formatter<FlightData::Position>
     }
 
     /**
-     * @brief  Formats the FlightData::Position object.
+     * @brief  Formats the FlightPath::Position object.
      * 
-     * @param  position The FlightData::Position instance to format.
+     * @param  position The FlightPath::Position instance to format.
      * @param  ctx      The format context to write to.
      * @return          An iterator to the end of the output.
      */
-    auto format(const FlightData::Position &position, std::format_context &ctx) const
+    auto format(const FlightPath::Position &position, std::format_context &ctx) const
     {
         return std::format_to(ctx.out(), 
             "Longitude {:.6f} deg Latitude {:.6f} deg Altitude {:.2f} m",

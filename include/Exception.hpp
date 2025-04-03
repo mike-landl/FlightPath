@@ -6,20 +6,20 @@
 
 #include <format>
 
-namespace FlightData
+namespace FlightPath
 {
     /**
      * @class Exception
      * @brief Custom exception class for flight data-related errors.
      *
      * This class extends std::runtime_error to provide specific error handling
-     * within the FlightData namespace.
+     * within the FlightPath namespace.
      */
     class Exception : public std::runtime_error
     {
     public:
         /**
-         * @brief Constructs a new FlightData::Exception object.
+         * @brief Constructs a new FlightPath::Exception object.
          * @param what A description of the error.
          */
         Exception(const std::string &what);
@@ -28,13 +28,13 @@ namespace FlightData
 }
 
 /**
- * @brief Formatter specialization for FlightData::Exception.
+ * @brief Formatter specialization for FlightPath::Exception.
  *
- * Enables the use of std::format with FlightData::Exception, formatting
+ * Enables the use of std::format with FlightPath::Exception, formatting
  * the exception using its what() message.
  */
 template <>
-struct std::formatter<FlightData::Exception>
+struct std::formatter<FlightPath::Exception>
 {
     /**
      * @brief  Parses the format specifier (unused in this case).
@@ -48,13 +48,13 @@ struct std::formatter<FlightData::Exception>
     }
 
     /**
-     * @brief  Formats the FlightData::Exception object.
+     * @brief  Formats the FlightPath::Exception object.
      * 
-     * @param  obj The FlightData::Exception instance to format.
+     * @param  obj The FlightPath::Exception instance to format.
      * @param  ctx The format context to write to.
      * @return     An iterator to the end of the output.
      */
-    auto format(const FlightData::Exception &obj, std::format_context &ctx) const
+    auto format(const FlightPath::Exception &obj, std::format_context &ctx) const
     {
         return std::format_to(ctx.out(), "{}", obj.what());
     }

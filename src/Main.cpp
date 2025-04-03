@@ -11,10 +11,10 @@ auto main() -> int
 
     try
     {
-        FlightData::Application app;
+        FlightPath::Application app;
         app.Run();
     }
-    catch (const FlightData::Exception &err)
+    catch (const FlightPath::Exception &err)
     {
         std::cerr << std::format("{}", err) << std::endl;
     }

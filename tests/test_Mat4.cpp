@@ -3,7 +3,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 
-namespace FlightData
+namespace FlightPath
 {
     TEST_CASE("[Mat4] Matrix Matrix Multiplication - 1x Identity", "[Mat4]")
     {
