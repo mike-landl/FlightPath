@@ -1,0 +1,53 @@
+name: Release Source Code and Documentation
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger only on version tags like v1.0.0
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Doxygen
+        run: sudo apt-get install doxygen graphviz -y
+
+      - name: Generate Doxygen docs
+        run: doxygen Doxyfile
+
+      - name: Zip HTML output
+        run: |
+          cd html
+          zip -r ../doxygen-docs.zip .
+          cd ..
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: "Release ${{ github.ref_name }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Doxygen HTML zip to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: doxygen-docs.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Zip source code
+        run: |
+          zip -r source-code.zip ./data ./docker ./include ./src ./tests
+          find . -maxdepth 1 -type f -exec zip source-code.zip {} +
+
+      - name: Upload source code to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: source-code.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
