@@ -1,4 +1,4 @@
-name: Release Source Code and Documentation
+name: Release
 
 on:
   push:
@@ -36,7 +36,7 @@ jobs:
 
       - name: Zip HTML output
         run: |
-          cd html
+          cd doxygen/html
           zip -r ../doxygen-docs.zip .
           cd ..
 
