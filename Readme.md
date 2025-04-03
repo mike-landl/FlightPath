@@ -87,7 +87,7 @@ Outputs .kml files for visualization in Google Earth.
     ```
 3. Navigate to the test output directory:
     ```sh
-    cd build/release/src/tests
+    cd build/release/tests
     ```
 4. Run the tests:
     ```sh
