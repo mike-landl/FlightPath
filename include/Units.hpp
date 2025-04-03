@@ -109,7 +109,7 @@ constexpr T km2m(const long double value)
  * @brief Converts a length from meters to feet
  *
  * @tparam T     The numeric type (i.e. float or double) to cast the converted value to.
- * @param  value The length in meters.
+ * @param  meter The length in meters.
  * @return       The length in feet, cast to the specified type \p T.
  */
 template <typename T>
@@ -122,9 +122,9 @@ constexpr T m2ft(const long double meter)
 /**
  * @brief Converts a length from feet to meters
  *
- * @tparam T     The numeric type (i.e. float or double) to cast the converted value to.
- * @param  value The length in feet.
- * @return       The length in meeters, cast to the specified type \p T.
+ * @tparam T    The numeric type (i.e. float or double) to cast the converted value to.
+ * @param  feet The length in feet.
+ * @return      The length in meeters, cast to the specified type \p T.
  */
 template <typename T>
 constexpr T ft2m(const long double feet)

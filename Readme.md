@@ -2,7 +2,6 @@
 [![Tests](https://github.com/mike-landl/FlightPath/actions/workflows/tests.yml/badge.svg)](https://github.com/mike-landl/FlightPath/actions/workflows/tests.yml)
 [![C++23 Standard](https://img.shields.io/badge/Standard-C++23-yellow.svg)](https://isocpp.org/std/the-standard)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-# Flight Path
 
 This project processes a datalogger file from a flight simulator and reconstructs the flight path using only data from the onboard **inertial measurement unit (IMU)**.
 including body-fixed linear acceleration and angular velocity.
