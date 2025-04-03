@@ -36,24 +36,24 @@ static auto CaptureOutput(const std::function<void()>& log_function) -> std::str
 TEST_CASE("[Log] Debug works", "[Log]")
 {
     // lambda without captures or parameters for passing anonymous inline function
-    auto console_output = CaptureOutput([](){FlightData::Log::Debug("Debug");});
+    auto console_output = CaptureOutput([](){FlightPath::Log::Debug("Debug");});
     REQUIRE(console_output == "\x1B[94m[D]\x1B[0m test_Log.cpp:39 Debug\n");
 }
 
 TEST_CASE("[Log] Info works", "[Log]")
 {
-    auto console_output = CaptureOutput([](){FlightData::Log::Info("Info");});
+    auto console_output = CaptureOutput([](){FlightPath::Log::Info("Info");});
     REQUIRE(console_output == "\x1B[92m[I]\x1B[0m Info\n");
 }
 
 TEST_CASE("[Log] Warn works", "[Log]")
 {
-    auto console_output = CaptureOutput([](){FlightData::Log::Warn("Warn");});
+    auto console_output = CaptureOutput([](){FlightPath::Log::Warn("Warn");});
     REQUIRE(console_output == "\x1B[93m[W]\x1B[0m test_Log.cpp:51 Warn\n");
 }
 
 TEST_CASE("[Log] Error works", "[Log]")
 {
-    auto console_output = CaptureOutput([](){FlightData::Log::Error("Error");});
+    auto console_output = CaptureOutput([](){FlightPath::Log::Error("Error");});
     REQUIRE(console_output == "\x1B[91m[E]\x1B[0m test_Log.cpp:57 Error\n");
 }

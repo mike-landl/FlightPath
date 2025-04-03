@@ -1,6 +1,6 @@
 #pragma once
 
-namespace FlightData {
+namespace FlightPath {
 namespace KML {
 
 static const char* Header = R"(<?xml version='1.0' encoding='UTF-8'?>

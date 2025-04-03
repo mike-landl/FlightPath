@@ -5,9 +5,9 @@
 
 #include "ReferenceFrame.hpp"
 
-namespace FlightData
+namespace FlightPath
 {
-    /// @brief One line (or entry) in a FlightData Recorder file
+    /// @brief One line (or entry) in a FlightPath Recorder file
     struct Entry
     {
         double time;         ///< time since start of the simulator format:  7.2f unit: s

@@ -2,7 +2,7 @@
 
 #include "Units.hpp"
 
-namespace FlightData
+namespace FlightPath
 {
     /**
      * @struct Attitude
@@ -19,14 +19,14 @@ namespace FlightData
 }
 
 /**
- * @brief Formatter specialization for FlightData::Attitude.
+ * @brief Formatter specialization for FlightPath::Attitude.
  *
- * This specialization enables the use of std::format with FlightData::Attitude.
+ * This specialization enables the use of std::format with FlightPath::Attitude.
  * It converts heading, pitch, and roll values from radians to degrees, and formats
  * the attitude as a readable string with each angle shown to two decimal places.
  */
 template <>
-struct std::formatter<FlightData::Attitude>
+struct std::formatter<FlightPath::Attitude>
 {
     /**
      * @brief  Parses the format specifier (unused in this case).
@@ -40,13 +40,13 @@ struct std::formatter<FlightData::Attitude>
     }
 
     /**
-     * @brief  Formats the FlightData::Attidude object.
+     * @brief  Formats the FlightPath::Attidude object.
      * 
-     * @param  attitude The FlightData::Attidude instance to format.
+     * @param  attitude The FlightPath::Attidude instance to format.
      * @param  ctx      The format context to write to.
      * @return          An iterator to the end of the output.
      */
-    auto format(const FlightData::Attitude &attitude, std::format_context &ctx) const
+    auto format(const FlightPath::Attitude &attitude, std::format_context &ctx) const
     {
         return std::format_to(ctx.out(), 
             "Heading {:.2f} deg, Pitch {:.2f} deg, Roll {:.2f} deg",

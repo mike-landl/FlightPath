@@ -8,7 +8,7 @@
 #include "Types.hpp"
 #include "Vec3.hpp"
 
-namespace FlightData
+namespace FlightPath
 {
     /**
      * @brief A 4x4 matrix class for 3D mathematical operations.
@@ -30,7 +30,7 @@ namespace FlightData
          * @brief Construct a matrix from an initializer list.
          * 
          * @param values A list of 16 values in row-major order.
-         * @throws FlightData::Exception if the list size is not 16.
+         * @throws FlightPath::Exception if the list size is not 16.
          */
         Mat4(std::initializer_list<REAL> values)
         { 
