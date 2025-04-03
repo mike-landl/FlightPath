@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.19)
 
 project(
     FlightPath
-    VERSION "0.1.5"
+    VERSION "0.1.6"
     DESCRIPTION "Reconstructs a Fight Path based on IMU data."
     LANGUAGES C CXX
 )
