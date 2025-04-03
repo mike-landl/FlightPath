@@ -54,15 +54,3 @@ jobs:
           files: doxygen/doxygen-docs.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
-
-      - name: Zip source code
-        run: |
-          zip -r source-code.zip ./data ./docker ./include ./src ./tests
-          find . -maxdepth 1 -type f -exec zip source-code.zip {} +
-
-      - name: Upload source code to release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: source-code.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
