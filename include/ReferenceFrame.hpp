@@ -8,7 +8,7 @@
 #include "Vec3.hpp"
 #include "Units.hpp"
 
-namespace FlightData
+namespace FlightPath
 {
     /**
      * @class ReferenceFrame

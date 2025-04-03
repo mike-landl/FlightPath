@@ -1,7 +1,7 @@
 enable_testing()
 
 add_executable(RunTests
-    test_main.cpp
+    test_Main.cpp
     test_Log.cpp
     test_Mat4.cpp
     test_Vec3.cpp
@@ -10,8 +10,9 @@ add_executable(RunTests
     test_Units.cpp
 )
 
+# Link with main project and catch2
 target_link_libraries(RunTests
-    PRIVATE FlightDataLib
+    PRIVATE FlightPathLib
     PRIVATE Catch2::Catch2WithMain
 )
 
@@ -34,6 +35,7 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     )
 endif()
 
+# Make ctest discover the tests
 list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
 include(CTest)
 include(Catch)

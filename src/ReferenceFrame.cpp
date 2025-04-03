@@ -9,7 +9,7 @@
 
 namespace
 {
-    static const FlightData::Mat4<double> IDENTITY_MAT4{
+    static const FlightPath::Mat4<double> IDENTITY_MAT4{
         1.0, 0.0, 0.0, 0.0,
         0.0, 1.0, 0.0, 0.0,
         0.0, 0.0, 1.0, 0.0,
@@ -17,7 +17,7 @@ namespace
     };
 }
 
-namespace FlightData
+namespace FlightPath
 {
     ReferenceFrame::ReferenceFrame() 
         : frame_{IDENTITY_MAT4}

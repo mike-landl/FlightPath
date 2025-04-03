@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-namespace FlightData
+namespace FlightPath
 {
     /**
      * @struct Vec3

@@ -3,7 +3,7 @@
 #include "Application.hpp"
 #include "Log.hpp"
 
-namespace FlightData
+namespace FlightPath
 {
     Application::Application()
     {

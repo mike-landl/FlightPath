@@ -1,6 +1,6 @@
 #include "Exception.hpp"
 
-namespace FlightData
+namespace FlightPath
 {
     Exception::Exception(const std::string &what)
         : std::runtime_error(what)
