@@ -1,9 +1,10 @@
+# Flight Path
+
 [![Build](https://github.com/mike-landl/FlightPath/actions/workflows/build.yml/badge.svg)](https://github.com/mike-landl/FlightPath/actions/workflows/build.yml)
 [![Tests](https://github.com/mike-landl/FlightPath/actions/workflows/tests.yml/badge.svg)](https://github.com/mike-landl/FlightPath/actions/workflows/tests.yml)
 [![C++23 Standard](https://img.shields.io/badge/Standard-C++23-yellow.svg)](https://isocpp.org/std/the-standard)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-# Flight Path
 This project processes a datalogger file from a flight simulator and reconstructs the flight path using only data from the onboard **inertial measurement unit (IMU)**.
 (i.e. body-fixed linear acceleration and angular velocity)
 
@@ -38,14 +39,18 @@ Outputs .kml files for visualization in Google Earth.
 
 
 ## Table of Contents
+- [Overview](#flight-path)
+- [Notes](#notes)
+- [Features](#features)
 - [Usage](#usage)
   - [Linux](#linux)
-    - [Flight Path Reconstruction](#flight-path-reconstruction)
-    - [Run Unit Tests](#run-unit-tests)
-    - [Docker Support](#docker-support)
+    - [Reconstruction](#flight-path-reconstruction)
+    - [Unit Tests](#run-unit-tests)
+    - [Docker](#docker-support)
+    - [Documentation](#build-the-documentation)
   - [Windows](#windows)
-    - [Flight Path Reconstruction (Windows)](#flight-path-reconstruction-windows)
-    - [Run Unit Tests (Windows)](#run-unit-tests-windows)
+    - [Reconstruction](#flight-path-reconstruction-windows)
+    - [Unit Tests](#run-unit-tests-windows)
 - [License](#license)
 
 ---
@@ -60,7 +65,7 @@ Outputs .kml files for visualization in Google Earth.
     git clone https://github.com/mike-landl/FlightPath.git
     cd FlightPath
     ```
-2. Configure CMake:
+2. Configure the project with CMake
     ```sh
     cmake --preset release-clang
     ```
@@ -131,12 +136,45 @@ newgrp docker
    docker compose exec flight_path_docker
    ```
 
-4. Inside the container, you can run the standard build and test commands as if you were on your local system.
+4. Inside the container, you can run the standard build and test commands as if you were on your local (host) system.
 
 5. When finished, shut down the container:
    ```sh
    docker compose down
    ```
+
+### Build the Documentation
+You can build the documentation locally if you prefer.
+
+#### Prerequisites
+Make sure you have **Doxygen** and **Graphviz** installed:
+```sh
+    sudo apt-get install doxygen graphviz -y
+```
+
+#### Build Instructions
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/mike-landl/FlightPath.git
+    cd FlightPath
+    ```
+
+2. Configure the project with CMake
+    This step downloads doxygen-awesome-css and generates the Doxyfile from the template (Doxyfile.in):
+    ```sh
+    cmake --preset release-clang
+    ```
+
+3. Generate the documentation using Doxygen:
+    ```sh
+    doxygen Doxyfile
+    ```
+
+4. View the documentation
+    Open the generated index.html file in your browser. For example using firefox:
+    ```sh
+    firefox doxygen/html/index.html
+    ```
 
 ### Windows
 #### Flight Path Reconstruction (Windows)
