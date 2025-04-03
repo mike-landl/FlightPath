@@ -8,16 +8,22 @@
 #include "Exception.hpp"
 #include "Types.hpp"
 
+/**
+ * @namespace AnsiColor
+ * @brief Contains utilities for applying ANSI color codes to strings.
+ */
 namespace AnsiColor
 {
-    // @brief Enum class representing ANSI color types.
+    /**
+     * @brief Enum class representing ANSI color types.
+     */
     enum class Color
     {
-        Reset,
-        BrightBlue,
-        BrightGreen,
-        BrightYellow,
-        BrightRed
+        Reset,          ///< Reset to default color.
+        BrightBlue,     ///< Bright blue color.
+        BrightGreen,    ///< Bright green color.
+        BrightYellow,   ///< Bright yellow color.
+        BrightRed       ///< Bright red color.
     };
 
     /** 
@@ -48,19 +54,32 @@ namespace AnsiColor
     }
 }
 
+/**
+ * @namespace FlightPath::Log
+ * @brief Provides a simple logging system with support for colored log levels and source location info.
+ */
 namespace FlightPath::Log
 {
     using namespace AnsiColor;
 
-     // @brief Log levels used in the logging system.
+    /**
+     * @brief Log levels used in the logging system.
+     */
     enum class Level
     {
-        DEBUG,
-        INFO,
-        WARN,
-        ERROR
+        DEBUG,  ///< Debug level, typically used for development details.
+        INFO,   ///< Informational messages.
+        WARN,   ///< Warnings about potentially problematic situations.
+        ERROR   ///< Error messages indicating failures.
     };
 
+    /**
+     * @brief Returns a colored prefix string for the specified log level.
+     * 
+     * @tparam L The log level.
+     * @return A colored prefix string (e.g., "[D]" for DEBUG).
+     * @throws Exception If an unsupported log level is specified.
+     */
     template<Level L>
     inline auto constexpr GetColoredPrefix() -> std::string
     {
@@ -71,6 +90,13 @@ namespace FlightPath::Log
         else { throw Exception(std::format("No colored prefix for Log::Level {} implemented.", static_cast<i32>(L))); }
     }
 
+    /**
+     * @brief Logs a message to standard output with a prefix and optional source location.
+     * 
+     * @tparam L The log level.
+     * @param message The message to log.
+     * @param location The source location of the log call (defaults to caller location).
+     */
     template <Level L>
     inline auto LogMessage(std::string_view message, const std::source_location& location = std::source_location::current())
     {
@@ -94,21 +120,45 @@ namespace FlightPath::Log
         }
     }
 
+    /**
+     * @brief Logs a DEBUG-level message with optional source location.
+     * 
+     * @param message The debug message.
+     * @param location The source location of the log call (defaults to caller location).
+     */
     inline auto Debug(std::string_view message, const std::source_location& location = std::source_location::current()) -> void
     {
         LogMessage<Level::DEBUG>(message, location);
     }
 
+    /**
+     * @brief Logs an INFO-level message.
+     * 
+     * @param message The informational message.
+     * @param location The source location of the log call (defaults to caller location).
+     */
     inline auto Info(std::string_view message, const std::source_location& location = std::source_location::current()) -> void
     {
         LogMessage<Level::INFO>(message, location);
     }
 
+    /**
+     * @brief Logs a WARN-level message with optional source location.
+     * 
+     * @param message The warning message.
+     * @param location The source location of the log call (defaults to caller location).
+     */
     inline auto Warn(std::string_view message, const std::source_location& location = std::source_location::current()) -> void
     {
         LogMessage<Level::WARN>(message, location);
     }
 
+    /**
+     * @brief Logs an ERROR-level message with optional source location.
+     * 
+     * @param message The error message.
+     * @param location The source location of the log call (defaults to caller location).
+     */
     inline auto Error(std::string_view message, const std::source_location& location = std::source_location::current()) -> void
     {
         LogMessage<Level::ERROR>(message, location);
