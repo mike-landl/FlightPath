@@ -5,6 +5,10 @@
 #include "ReferenceFrame.hpp"
 #include "Recorder.hpp"
 
+/**
+ * @namespace FlightPath
+ * @brief Main namespace for this project
+ */
 namespace FlightPath
 {
     /**
