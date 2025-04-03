@@ -131,9 +131,9 @@ newgrp docker
    docker compose up --detach
    ```
 
-3. Access the development container:
+3. Access the development container with bash:
    ```sh
-   docker compose exec flight_path_docker
+   docker compose exec flight_path_docker bash
    ```
 
 4. Inside the container, you can run the standard build and test commands as if you were on your local (host) system.

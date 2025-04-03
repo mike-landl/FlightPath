@@ -5,7 +5,6 @@ services:
       dockerfile: docker/Dockerfile
     working_dir: /code/FlightPath # Set the working dir to where the code lives
     tty: true # Enable interactive terminal (useful for shell access)
-    command: bash # Start container with Bourne-again shell
     # Only add folders and files we want to have access to inside the container
     volumes:
       - ../include:/code/FlightPath/include
@@ -14,3 +13,4 @@ services:
       - ../data:/code/FlightPath/data
       - ../CMakeLists.txt:/code/FlightPath/CMakeLists.txt
       - ../CMakePresets.json:/code/FlightPath/CMakePresets.json
+      - ../Doxyfile.in:/code/FlightPath/Doxyfile.in
