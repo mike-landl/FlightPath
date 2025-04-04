@@ -27,8 +27,8 @@ jobs:
           key: ${{ steps.cmake-cache.outputs.key }}
 
       - name: Configure
-        run: cmake --preset release-clang -DFETCHCONTENT_BASE_DIR="$HOME/.cache/fetchcontent"
+        run: cmake --preset release-app -DFETCHCONTENT_BASE_DIR="$HOME/.cache/fetchcontent"
 
       - name: Build
-        run: cmake --build --preset release-clang --target FlightPath --parallel 4
+        run: cmake --build --preset build-app --target FlightPath
 
