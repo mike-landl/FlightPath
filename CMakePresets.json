@@ -1,66 +1,116 @@
 {
-    "version": 3,
+    "version": 8,
     "cmakeMinimumRequired": {
         "major": 3,
-        "minor": 19,
+        "minor": 24,
         "patch": 0
     },
-    "configurePresets": [
-        {
-            "name": "debug-msvc",
-            "description": "Debug build",
-            "generator": "Ninja",
-            "binaryDir": "build/debug",
-            "cacheVariables": {
-                "CMAKE_C_COMPILER": "cl",
-                "CMAKE_CXX_COMPILER": "cl",
-                "CMAKE_BUILD_TYPE": "Debug"
-            }
-        },
-        {
-            "name": "release-msvc",
-            "description": "Release build",
-            "generator": "Ninja",
-            "binaryDir": "build/release",
-            "cacheVariables": {
-                "CMAKE_C_COMPILER": "cl",
-                "CMAKE_CXX_COMPILER": "cl",
-                "CMAKE_BUILD_TYPE": "Release"
-            }
-        },
-        {
-            "name": "debug-clang",
-            "description": "Debug build",
-            "generator": "Ninja",
-            "binaryDir": "build/debug",
-            "cacheVariables": {
-                "CMAKE_C_COMPILER": "clang",
-                "CMAKE_CXX_COMPILER": "clang++",
-                "CMAKE_BUILD_TYPE": "Debug"
-            }
-        },
-        {
-            "name": "release-clang",
-            "description": "Release build",
-            "generator": "Ninja",
-            "binaryDir": "build/release",
-            "cacheVariables": {
-                "CMAKE_C_COMPILER": "clang",
-                "CMAKE_CXX_COMPILER": "clang++",
-                "CMAKE_BUILD_TYPE": "Release"
-            }
+    "configurePresets": [{
+        "name": "debug-msvc",
+        "description": "MSVC Debug build (tests/docs optional)",
+        "generator": "Ninja",
+        "binaryDir": "build/msvc-debug",
+        "cacheVariables": {
+            "CMAKE_C_COMPILER": "cl",
+            "CMAKE_CXX_COMPILER": "cl",
+            "CMAKE_BUILD_TYPE": "Debug",
+            "ENABLE_TESTS": "OFF",
+            "ENABLE_DOCS": "OFF"
         }
-    ],
-    "buildPresets": [
-        {
-            "name": "release-clang",
-            "configurePreset": "release-clang"
+    },{
+        "name": "release-msvc",
+        "description": "MSVC Release build (tests/docs optional)",
+        "generator": "Ninja",
+        "binaryDir": "build/msvc-release",
+        "cacheVariables": {
+            "CMAKE_C_COMPILER": "cl",
+            "CMAKE_CXX_COMPILER": "cl",
+            "CMAKE_BUILD_TYPE": "Release",
+            "ENABLE_TESTS": "OFF",
+            "ENABLE_DOCS": "OFF"
         }
-    ],
-    "testPresets": [
-        {
-            "name": "release-clang",
-            "configurePreset": "release-clang"
-        }
-    ]
+    },{
+        "name": "release-msvc-tests",
+        "description": "MSVC Release build with tests",
+        "generator": "Ninja",
+        "binaryDir": "build/msvc-release-tests",
+        "cacheVariables": {
+            "CMAKE_C_COMPILER": "cl",
+            "CMAKE_CXX_COMPILER": "cl",
+            "CMAKE_BUILD_TYPE": "Release",
+            "ENABLE_TESTS": "ON",
+            "ENABLE_DOCS": "OFF"
+            }
+    },{
+        "name": "release-msvc-docs",
+        "description": "MSVC Release build for docs only",
+        "generator": "Ninja",
+        "binaryDir": "build/msvc-release-docs",
+        "cacheVariables": {
+            "CMAKE_C_COMPILER": "cl",
+            "CMAKE_CXX_COMPILER": "cl",
+            "CMAKE_BUILD_TYPE": "Release",
+            "ENABLE_TESTS": "OFF",
+            "ENABLE_DOCS": "ON"
+            }
+    },{
+        "name": "release-app",
+        "description": "Release build (app only, clang)",
+        "generator": "Ninja",
+        "binaryDir": "build/release-app",
+        "cacheVariables": {
+            "CMAKE_C_COMPILER": "clang",
+            "CMAKE_CXX_COMPILER": "clang++",
+            "CMAKE_BUILD_TYPE": "Release",
+            "ENABLE_TESTS": "OFF",
+            "ENABLE_DOCS": "OFF"
+            }
+    },{
+        "name": "tests-coverage",
+        "description": "Debug build with tests and coverage (clang)",
+        "generator": "Ninja",
+        "binaryDir": "build/tests-coverage",
+        "cacheVariables": {
+            "CMAKE_C_COMPILER": "clang",
+            "CMAKE_CXX_COMPILER": "clang++",
+            "CMAKE_BUILD_TYPE": "Debug",
+            "ENABLE_TESTS": "ON",
+            "ENABLE_DOCS": "OFF",
+            "CMAKE_CXX_FLAGS": "-fprofile-instr-generate -fcoverage-mapping"
+            }
+    },{
+        "name": "release-docs",
+        "description": "Release build for docs only (clang)",
+        "generator": "Ninja",
+        "binaryDir": "build/release-docs",
+        "cacheVariables": {
+            "CMAKE_C_COMPILER": "clang",
+            "CMAKE_CXX_COMPILER": "clang++",
+            "CMAKE_BUILD_TYPE": "Release",
+            "ENABLE_TESTS": "OFF",
+            "ENABLE_DOCS": "ON"
+            }
+    }],
+    "buildPresets": [{
+        "name": "build-msvc-debug",
+        "configurePreset": "debug-msvc"
+    },{
+        "name": "build-msvc-release",
+        "configurePreset": "release-msvc"
+    },{
+        "name": "build-msvc-release-tests",
+        "configurePreset": "release-msvc-tests"
+    },{
+        "name": "build-msvc-release-docs",
+        "configurePreset": "release-msvc-docs"
+    },{
+        "name": "build-app",
+        "configurePreset": "release-app"
+    },{
+        "name": "build-tests-coverage",
+        "configurePreset": "tests-coverage"
+    },{
+        "name": "build-docs",
+        "configurePreset": "release-docs"
+    }]
 }
