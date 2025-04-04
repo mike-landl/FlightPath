@@ -21,9 +21,7 @@ jobs:
       - name: Cache FetchContent dependencies
         uses: actions/cache@v4
         with:
-          path: |
-            ~/.cache/fetchcontent
-            build_deps
+          path: ~/.cache/fetchcontent
           key: ${{ steps.cmake-cache.outputs.key }}
 
       - name: Configure
@@ -33,5 +31,5 @@ jobs:
         run: cmake --build --preset build-tests-coverage --target RunTests
 
       - name: Run Tests
-        working-directory: build/tests-coverage
+        working-directory: build/tests-coverage/tests
         run: ctest
