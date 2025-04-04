@@ -2,6 +2,7 @@
 
 [![Build](https://github.com/mike-landl/FlightPath/actions/workflows/build.yml/badge.svg)](https://github.com/mike-landl/FlightPath/actions/workflows/build.yml)
 [![Tests](https://github.com/mike-landl/FlightPath/actions/workflows/tests.yml/badge.svg)](https://github.com/mike-landl/FlightPath/actions/workflows/tests.yml)
+[![codecov](https://codecov.io/gh/mike-landl/FlightPath/graph/badge.svg?token=VZGEK5J99D)](https://codecov.io/gh/mike-landl/FlightPath)
 [![C++23 Standard](https://img.shields.io/badge/Standard-C++23-yellow.svg)](https://isocpp.org/std/the-standard)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
