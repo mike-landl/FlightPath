@@ -14,6 +14,9 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Install llvm
+        run: sudo apt-get install llvm
+
       - name: Set up CMake cache key
         id: cmake-cache
         run: echo "key=fcache-tests-${{ hashFiles('**/CMakeLists.txt') }}" >> $GITHUB_OUTPUT
@@ -42,3 +45,15 @@ jobs:
       - name: Run Tests
         working-directory: build/tests-coverage/tests
         run: ctest
+
+      - name: Prepare Coverage Report
+        working-directory: build/tests-coverage/tests
+        run: |
+          llvm-profdata merge -sparse default.profraw -o coverage.profdata
+          llvm-cov export RunTests --instr-profile=coverage.profdata --format=lcov > coverage.lcov
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: build/tests-coverage/tests/coverage.lcov
