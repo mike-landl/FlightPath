@@ -17,30 +17,17 @@ jobs:
       - name: Install llvm
         run: sudo apt-get install llvm
 
-      - name: Set up CMake cache key
-        id: cmake-cache
-        run: echo "key=fcache-tests-${{ hashFiles('**/CMakeLists.txt') }}" >> $GITHUB_OUTPUT
-
-      - name: Restore FetchContent cache
-        uses: actions/cache/restore@v4
+      - name: Cache fetched dependencies
+        uses: actions/cache@v4
         with:
-          path: ~/.cache/fetchcontent
-          key: ${{ steps.cmake-cache.outputs.key }}
-          restore-keys: |
-            fcache-tests-
+          path: ~/.cache/fetchcontent/
+          key: ${{ runner.os }}-build-deps-${{ hashFiles('CMakeLists.txt') }}
 
       - name: Configure
         run: cmake --preset tests-coverage -DFETCHCONTENT_BASE_DIR="$HOME/.cache/fetchcontent"
 
       - name: Build
         run: cmake --build --preset build-tests-coverage --target RunTests
-
-      - name: Save FetchContent cache
-        uses: actions/cache/save@v4
-        if: always()
-        with:
-          path: ~/.cache/fetchcontent
-          key: ${{ steps.cmake-cache.outputs.key }}
 
       - name: Run Tests
         working-directory: build/tests-coverage/tests
@@ -50,10 +37,9 @@ jobs:
         working-directory: build/tests-coverage/tests
         run: |
           llvm-profdata merge -sparse default.profraw -o coverage.profdata
-          llvm-cov export RunTests --instr-profile=coverage.profdata --format=lcov > coverage.lcov
+          llvm-cov export RunTests --instr-profile=coverage.profdata --format=lcov --ignore-filename-regex='(tests|_deps)' > coverage.lcov
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: build/tests-coverage/tests/coverage.lcov
