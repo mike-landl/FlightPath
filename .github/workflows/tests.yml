@@ -18,17 +18,26 @@ jobs:
         id: cmake-cache
         run: echo "key=fcache-tests-${{ hashFiles('**/CMakeLists.txt') }}" >> $GITHUB_OUTPUT
 
-      - name: Cache FetchContent dependencies
-        uses: actions/cache@v4
+      - name: Restore FetchContent cache
+        uses: actions/cache/restore@v4
         with:
           path: ~/.cache/fetchcontent
           key: ${{ steps.cmake-cache.outputs.key }}
+          restore-keys: |
+            fcache-tests-
 
       - name: Configure
         run: cmake --preset tests-coverage -DFETCHCONTENT_BASE_DIR="$HOME/.cache/fetchcontent"
 
       - name: Build
         run: cmake --build --preset build-tests-coverage --target RunTests
+
+      - name: Save FetchContent cache
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: ~/.cache/fetchcontent
+          key: ${{ steps.cmake-cache.outputs.key }}
 
       - name: Run Tests
         working-directory: build/tests-coverage/tests
