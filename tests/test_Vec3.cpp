@@ -1,26 +1,15 @@
 #include "Vec3.hpp"
+#include "TestFloatHelper.hpp"
 
 #include <catch2/catch_test_macros.hpp>
-#include <catch2/matchers/catch_matchers_floating_point.hpp>
 
 namespace FlightPath
 {
-    static auto CheckDouble(const double value, const double expected) -> void
-    {
-        REQUIRE_THAT(
-            value,
-            Catch::Matchers::WithinRel(
-                expected,
-                std::numeric_limits<double>::epsilon()
-            )
-        );
-    }
-
     static auto CheckVec3(const Vec3<double> &actual, const Vec3<double> &expected) -> void
     {
-        CheckDouble(actual.x, expected.x);
-        CheckDouble(actual.y, expected.y);
-        CheckDouble(actual.z, expected.z);
+        CheckReal<double>(actual.x, expected.x);
+        CheckReal<double>(actual.y, expected.y);
+        CheckReal<double>(actual.z, expected.z);
     }
 
     TEST_CASE("[Vec3] add", "[Vec3]")
@@ -59,7 +48,7 @@ namespace FlightPath
 
         auto c = a.Dot(b);
 
-        CheckDouble(c, 8.0);
+        CheckReal<double>(c, 8.0);
     }
 
     TEST_CASE("[Vec3] cross product", "[Vec3]")
@@ -76,12 +65,12 @@ namespace FlightPath
     {
         {
             Vec3<double> a{.x=2.0, .y=0.0, .z=0.0};
-            CheckDouble(a.Length(), 2.0);
+            CheckReal<double>(a.Length(), 2.0);
         }
 
         {
             Vec3<double> a{.x=1.0, .y=1.0, .z=1.0};
-            CheckDouble(a.Length(), std::sqrt(3.0));
+            CheckReal<double>(a.Length(), std::sqrt(3.0));
         }
     }
 
@@ -96,7 +85,7 @@ namespace FlightPath
         {
             Vec3<double> a{.x=2.0, .y=1.0, .z=1.0};
             a.Normalize();
-            CheckDouble(a.Length(), 1.0);
+            CheckReal<double>(a.Length(), 1.0);
         }
     }
 
@@ -111,7 +100,7 @@ namespace FlightPath
         {
             Vec3<double> a{.x=2.0, .y=1.0, .z=1.0};
             a.Normalize();
-            CheckDouble(a.Length(), 1.0);
+            CheckReal<double>(a.Length(), 1.0);
         }
     }
 
@@ -126,7 +115,7 @@ namespace FlightPath
         {
             Vec3<double> a{.x=2.0, .y=1.0, .z=1.0};
             auto b = a.Normalized();
-            CheckDouble(b.Length(), 1.0);
+            CheckReal<double>(b.Length(), 1.0);
         }
     }
 }
