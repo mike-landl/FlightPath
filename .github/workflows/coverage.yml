@@ -1,10 +1,8 @@
-name: Tests
+name: Coverage
 
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ develop ]
 
 jobs:
   test:
@@ -26,3 +24,14 @@ jobs:
       - name: Run Tests
         working-directory: build/tests-coverage/tests
         run: ctest
+
+      - name: Prepare Coverage Report
+        working-directory: build/tests-coverage/tests
+        run: |
+          llvm-profdata merge -sparse default.profraw -o coverage.profdata
+          llvm-cov export RunTests --instr-profile=coverage.profdata --format=lcov --ignore-filename-regex='(tests|_deps)' > coverage.lcov
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
