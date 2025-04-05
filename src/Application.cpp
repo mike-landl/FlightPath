@@ -12,6 +12,7 @@ namespace FlightPath
         const auto& data = recorder_.GetData();
         Log::Info(std::format("Reading flight data file... Done {} entries.", data.size()));
         
+        Log::Info("Initializing reference frame...");
         const auto &entry = data[0];
         reference_frame_.SetPosition(
             Position{
@@ -20,7 +21,6 @@ namespace FlightPath
                 .altitude  = entry.altitude}
         );
 
-        Log::Info("Initializing reference frame...");
         reference_frame_.SetAttitude(
             Attitude{
                 .heading = entry.true_heading, 
