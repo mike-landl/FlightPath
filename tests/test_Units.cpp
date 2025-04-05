@@ -16,6 +16,17 @@ namespace FlightPath
         );
     }
 
+    static auto CheckFloat(const float value, const float expected) -> void
+    {
+        REQUIRE_THAT(
+            value,
+            Catch::Matchers::WithinRel(
+                expected,
+                std::numeric_limits<float>::epsilon()
+            )
+        );
+    }
+
     TEST_CASE("[Units] km literal", "[Units]")
     {
         CheckDouble(-0.88973_km, -889.73);
@@ -49,6 +60,34 @@ namespace FlightPath
         CheckDouble(m2ft<double>(-0.001426464),    -0.00468);
         CheckDouble(m2ft<double>( 0.3048     ),     1.0    );
         CheckDouble(m2ft<double>(13919.6064  ), 45668.0    );
+    }
+
+    TEST_CASE("[Units] km float literal", "[Units]")
+    {
+        CheckFloat(-0.88973_km_f, -889.73);
+        CheckFloat( 1.0_km_f,     1000.0 );
+        CheckFloat( 2.45589_km_f, 2455.89);
+    }
+
+    TEST_CASE("[Units] m float literal", "[Units]")
+    {
+        CheckFloat(   -0.54690_m_f,    -0.54690);
+        CheckFloat(    1.0_m_f,         1.0    );
+        CheckFloat(46657.0_m_f,     46657.0    );
+    }
+
+    TEST_CASE("[Units] mm float literal", "[Units]")
+    {
+        CheckFloat(   -0.00468_mm_f, -0.00000468);
+        CheckFloat(    1.0_mm_f,      0.001     );
+        CheckFloat(45668.0_mm_f,     45.668     );
+    }
+
+    TEST_CASE("[Units] feet float literal", "[Units]")
+    {
+        CheckFloat(   -0.00468_ft_f, -0.001426464);
+        CheckFloat(    1.0_ft_f,      0.3048     );
+        CheckFloat(45668.0_ft_f,     13919.6064  );
     }
 
     TEST_CASE("[Units] degree literal", "[Units]")
