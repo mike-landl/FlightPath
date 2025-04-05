@@ -15,9 +15,13 @@ enable_testing()
 
 add_executable(RunTests
     test_Main.cpp
+    test_Attitude.cpp
+    test_Error.cpp
+    test_Exception.cpp
     test_Log.cpp
     test_Mat4.cpp
     test_Vec3.cpp
+    test_Position.cpp
     test_Recorder.cpp
     test_ReferenceFrame.cpp
     test_Units.cpp
