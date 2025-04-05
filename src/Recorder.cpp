@@ -14,7 +14,7 @@ namespace FlightPath
     // reads a line and converts units to SI unit
     static std::istream& operator>>(std::istream &input_stream, Entry &entry)
     {
-		if (input_stream 
+        if (input_stream 
             >> entry.time
             >> entry.longitude
             >> entry.latitude   
@@ -48,15 +48,15 @@ namespace FlightPath
 
     auto Recorder::ReadFile(const std::string &path) -> void
     {
-		std::ifstream file(path);
-		
-		Ensure(file.is_open(), "Recorder: Could not open file {}", path);
+        std::ifstream file(path);
+        
+        Ensure(file.is_open(), "Recorder: Could not open file {}", path);
 
         Entry entry{};
-		while (file >> entry)
-		{
-			input_data_.push_back(entry);
-		}
+        while (file >> entry)
+        {
+            input_data_.push_back(entry);
+        }
         
         // copy first line of input to output
         output_data_.push_back(input_data_[0]);
@@ -84,9 +84,9 @@ namespace FlightPath
 
     auto Recorder::DumpKML(const std::string &path) const -> void
     {
-		std::ofstream file(path);
-		
-		Ensure(file.is_open(), "Recorder: Could not open file {}", path);
+        std::ofstream file(path);
+        
+        Ensure(file.is_open(), "Recorder: Could not open file {}", path);
 
         file << KML::Header;
 
