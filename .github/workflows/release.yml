@@ -30,7 +30,7 @@ jobs:
         run: sudo apt-get install doxygen graphviz -y
 
       - name: Generate Doxygen docs
-        run: doxygen Doxyfile
+        run: doxygen doxygen/Doxyfile
 
       - name: Zip HTML output
         run: |

@@ -1,5 +1,6 @@
 build
-doxygen
+doxygen/html
+doxygen/latex
 vendor
 .cache
 .vscode
