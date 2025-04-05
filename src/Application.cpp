@@ -8,7 +8,7 @@ namespace FlightPath
     Application::Application()
     {
         Log::Info("Reading flight data file...");
-        recorder_.ReadFile("./data/2017-01-17_Graz-Gleichenberg.txt");
+        recorder_.ReadFile("./data/Graz-Gleichenberg.txt");
         const auto& data = recorder_.GetData();
         Log::Info(std::format("Reading flight data file... Done {} entries.", data.size()));
         
@@ -84,7 +84,7 @@ namespace FlightPath
         reference_frame_.PrintAttitude();
         
         Log::Info("Exporting KML file...");
-        recorder_.DumpKML("./data/2017-01-17_Graz-Gleichenberg.kml");
+        recorder_.DumpKML("./data/Graz-Gleichenberg.kml");
         Log::Info("Exporting KML file... Done");
     }
 }
