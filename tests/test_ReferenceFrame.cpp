@@ -1,21 +1,11 @@
 #include "ReferenceFrame.hpp"
+#include "TestFloatHelper.hpp"
 
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 
 namespace FlightPath
 {
-    static auto CheckDouble(const double value, const double expected, const double factor) -> void
-    {
-        REQUIRE_THAT(
-            value,
-            Catch::Matchers::WithinRel(
-                expected,
-                factor * std::numeric_limits<double>::epsilon()
-            )
-        );
-    }
-
     TEST_CASE("[ReferenceFrame] Set Get Position Roundtrip", "[ReferenceFrame]")
     {
         Position initial_position{
@@ -27,9 +17,9 @@ namespace FlightPath
         ReferenceFrame ref_frame(initial_position);
 
         Position position = ref_frame.GetPosition();
-        CheckDouble(position.longitude, initial_position.longitude, 1);
-        CheckDouble(position.latitude,  initial_position.latitude , 1);
-        CheckDouble(position.altitude,  initial_position.altitude , 1000);
+        CheckReal<double>(position.longitude, initial_position.longitude, 1);
+        CheckReal<double>(position.latitude,  initial_position.latitude , 1);
+        CheckReal<double>(position.altitude,  initial_position.altitude , 1000);
 
         //ref_frame.PrintPosition();
         //ref_frame.PrintAttitude();
@@ -47,9 +37,9 @@ namespace FlightPath
         Attitude attitude = ref_frame.GetAttitude();
         //ref_frame.PrintAttitude(attitude);
 
-        CheckDouble(attitude.heading, heading, 1);
-        CheckDouble(attitude.pitch,   pitch,   1);
-        CheckDouble(attitude.roll,    roll,    1);
+        CheckReal<double>(attitude.heading, heading, 1);
+        CheckReal<double>(attitude.pitch,   pitch,   1);
+        CheckReal<double>(attitude.roll,    roll,    1);
     }
 
     TEST_CASE("[ReferenceFrame] Attitude does not influence position", "[ReferenceFrame]")
@@ -73,9 +63,9 @@ namespace FlightPath
         ref_frame.RotateX(roll);
 
         Position position = ref_frame.GetPosition();
-        CheckDouble(position.longitude, initial_position.longitude, 1);
-        CheckDouble(position.latitude,  initial_position.latitude , 1);
-        CheckDouble(position.altitude,  initial_position.altitude , 1000);
+        CheckReal<double>(position.longitude, initial_position.longitude, 1);
+        CheckReal<double>(position.latitude,  initial_position.latitude , 1);
+        CheckReal<double>(position.altitude,  initial_position.altitude , 1000);
 
         //ref_frame.PrintPosition();
         //ref_frame.PrintAttitude();
