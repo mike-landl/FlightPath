@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install llvm
-        run: sudo apt-get install llvm Catch2
+        run: sudo apt-get install llvm catch2
 
       - name: Configure
         run: cmake --preset tests-coverage
