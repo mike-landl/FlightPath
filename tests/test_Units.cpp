@@ -1,5 +1,5 @@
 #include "Units.hpp"
-#include "TestFloatHelper.hpp"
+#include "TestHelper.hpp"
 
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
@@ -80,6 +80,19 @@ namespace FlightPath
         CheckReal<double>(270.0_deg, 6.0/4.0*PI_d);
         CheckReal<double>(315.0_deg, 7.0/4.0*PI_d);
         CheckReal<double>(360.0_deg, 8.0/4.0*PI_d);
+    }
+
+    TEST_CASE("[Units] degree float literal", "[Units]")
+    {
+        CheckReal<float>(  0.0_deg_f, 0.0/4.0*PI_f);
+        CheckReal<float>( 45.0_deg_f, 1.0/4.0*PI_f);
+        CheckReal<float>( 90.0_deg_f, 2.0/4.0*PI_f);
+        CheckReal<float>(135.0_deg_f, 3.0/4.0*PI_f);
+        CheckReal<float>(180.0_deg_f, 4.0/4.0*PI_f);
+        CheckReal<float>(225.0_deg_f, 5.0/4.0*PI_f);
+        CheckReal<float>(270.0_deg_f, 6.0/4.0*PI_f);
+        CheckReal<float>(315.0_deg_f, 7.0/4.0*PI_f);
+        CheckReal<float>(360.0_deg_f, 8.0/4.0*PI_f);
     }
 
     TEST_CASE("[Units] radian to degrees conversion", "[Units]")
