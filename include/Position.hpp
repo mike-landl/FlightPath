@@ -1,5 +1,7 @@
 #pragma once
 
+#include <format>
+
 #include "Units.hpp"
 
 namespace FlightPath
