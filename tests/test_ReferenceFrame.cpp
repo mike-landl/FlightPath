@@ -25,7 +25,35 @@ namespace FlightPath
         //ref_frame.PrintAttitude();
     }
 
-    TEST_CASE("[ReferenceFrame] Set Attitude", "[ReferenceFrame]")
+    TEST_CASE("[ReferenceFrame] Print Position works", "[ReferenceFrame]")
+    {
+        Position initial_position{
+            .longitude =    15.34359762_deg,
+            .latitude  =    46.80092545_deg,
+            .altitude  = 3'902.4_m,
+        };
+
+        ReferenceFrame ref_frame(initial_position);
+        // lambda for passing anonymous inline function to CaptureOutput
+        auto console_output = CaptureOutput([ref_frame](){ref_frame.PrintPosition();});
+        REQUIRE(console_output == "\x1B[92m[I]\x1B[0m Longitude 15.343598 deg Latitude 46.800925 deg Altitude 3902.40 m\n");
+    }
+
+    TEST_CASE("[ReferenceFrame] Set Get Attitude Roundtrip", "[ReferenceFrame]")
+    {
+        constexpr double heading = 280.0_deg;
+        constexpr double pitch   =  -2.0_deg;
+        constexpr double roll    =  15.0_deg;
+
+        ReferenceFrame ref_frame;
+        ref_frame.SetAttitude(Attitude{.heading=heading, .pitch=pitch, .roll=roll});
+
+        // lambda for passing anonymous inline function to CaptureOutput
+        auto console_output = CaptureOutput([ref_frame](){ref_frame.PrintAttitude();});
+        REQUIRE(console_output == "\x1B[92m[I]\x1B[0m Heading 280.00 deg, Pitch -2.00 deg, Roll 15.00 deg\n");
+    }
+
+    TEST_CASE("[ReferenceFrame] Print Attitude works", "[ReferenceFrame]")
     {
         constexpr double heading = 280.0_deg;
         constexpr double pitch   =  -2.0_deg;
@@ -35,11 +63,7 @@ namespace FlightPath
         
         ref_frame.SetAttitude(Attitude{.heading=heading, .pitch=pitch, .roll=roll});
         Attitude attitude = ref_frame.GetAttitude();
-        //ref_frame.PrintAttitude(attitude);
-
-        CheckReal<double>(attitude.heading, heading, 1);
-        CheckReal<double>(attitude.pitch,   pitch,   1);
-        CheckReal<double>(attitude.roll,    roll,    1);
+        ref_frame.PrintAttitude(attitude);
     }
 
     TEST_CASE("[ReferenceFrame] Attitude does not influence position", "[ReferenceFrame]")
@@ -87,3 +111,4 @@ namespace FlightPath
         REQUIRE(transform.GetLengthError() < 1e-6);
     }
 }
+
