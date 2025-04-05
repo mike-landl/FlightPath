@@ -11,6 +11,6 @@ FetchContent_MakeAvailable(doxygen-awesome-css)
 FetchContent_GetProperties(doxygen-awesome-css SOURCE_DIR AWESOME_CSS_DIR)
 
 # Generate the Doxyfile based on Doxyfile.in
-set(DOXYFILE_IN  ${PROJECT_SOURCE_DIR}/doc/Doxyfile.in)
-set(DOXYFILE_OUT ${PROJECT_SOURCE_DIR}/doc/Doxyfile)
+set(DOXYFILE_IN  ${PROJECT_SOURCE_DIR}/doxygen/Doxyfile.in)
+set(DOXYFILE_OUT ${PROJECT_SOURCE_DIR}/doxygen/Doxyfile)
 configure_file(${DOXYFILE_IN} ${DOXYFILE_OUT} @ONLY)
