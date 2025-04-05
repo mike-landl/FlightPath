@@ -1,5 +1,5 @@
 #include "Vec3.hpp"
-#include "TestFloatHelper.hpp"
+#include "TestHelper.hpp"
 
 #include <catch2/catch_test_macros.hpp>
 
