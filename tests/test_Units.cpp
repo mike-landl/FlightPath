@@ -94,4 +94,19 @@ namespace FlightPath
         CheckReal<double>(rad2deg<double>(7.0/4.0*PI_d), 315.0);
         CheckReal<double>(rad2deg<double>(8.0/4.0*PI_d), 360.0);
     }
+
+    TEST_CASE("[Units] templated PI gives correct values", "[Units]")
+    {
+        CheckReal<float>(PI<float>(),   3.1415927f);        //  7 digits
+        CheckReal<double>(PI<double>(), 3.141592653589793); // 15 digits
+        //CheckReal<long double>(PI<long double>(), 3.14l); Catch2 does not provide a overload for long double
+    }
+
+    TEST_CASE("[Units] templated 2 times PI gives correct values", "[Units]")
+    {
+        CheckReal<float>(TWO_PI<float>(),   6.2831853f);        //  7 digits
+        CheckReal<double>(TWO_PI<double>(), 6.283185307179586); // 15 digits
+        //CheckReal<long double>(PI<long double>(), 3.14l); Catch2 does not provide a overload for long double
+    }
+
 }
