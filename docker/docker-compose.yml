@@ -1,5 +1,5 @@
 services:
-  flight_path_docker:
+  flight_path:
     build:
       context: .. # this allows us to have access to the complete repository and not only the docker folder
       dockerfile: docker/Dockerfile
@@ -7,10 +7,11 @@ services:
     tty: true # Enable interactive terminal (useful for shell access)
     # Only add folders and files we want to have access to inside the container
     volumes:
+      - ../coverage:/code/FlightPath/coverage
+      - ../data:/code/FlightPath/data
+      - ../doxygen:/code/FlightPath/doxygen
       - ../include:/code/FlightPath/include
       - ../src:/code/FlightPath/src
       - ../tests:/code/FlightPath/tests
-      - ../data:/code/FlightPath/data
       - ../CMakeLists.txt:/code/FlightPath/CMakeLists.txt
       - ../CMakePresets.json:/code/FlightPath/CMakePresets.json
-      - ../Doxyfile.in:/code/FlightPath/Doxyfile.in
