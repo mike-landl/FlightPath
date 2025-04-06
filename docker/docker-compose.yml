@@ -7,7 +7,7 @@ services:
     tty: true # Enable interactive terminal (useful for shell access)
     # Only add folders and files we want to have access to inside the container
     volumes:
-      - ../coverage:/coverage
+      - ../coverage:/code/FlightPath/coverage
       - ../data:/code/FlightPath/data
       - ../doxygen:/code/FlightPath/doxygen
       - ../include:/code/FlightPath/include
