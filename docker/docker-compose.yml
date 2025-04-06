@@ -1,5 +1,5 @@
 services:
-  flight_path_docker:
+  flight_path:
     build:
       context: .. # this allows us to have access to the complete repository and not only the docker folder
       dockerfile: docker/Dockerfile
