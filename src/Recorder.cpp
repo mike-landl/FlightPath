@@ -93,7 +93,7 @@ namespace FlightPath
         file << KML::OpenOriginalDataset;
         for (auto &entry : input_data_ | std::views::stride(100))
         {
-            file << "                " 
+            file << "            " 
                  << std::format("{:12.9f}, {:12.9f}, {:6.1f}\n",
                     rad2deg<double>(entry.longitude),
                     rad2deg<double>(entry.latitude),
@@ -104,7 +104,7 @@ namespace FlightPath
         file << KML::OpenReconstructedDataset;
         for (auto &entry : output_data_ | std::views::stride(100))
         {
-            file << "                " 
+            file << "            " 
                  << std::format("{:12.9f}, {:12.9f}, {:6.1f}\n", 
                     rad2deg<double>(entry.longitude),
                     rad2deg<double>(entry.latitude),
