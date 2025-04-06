@@ -28,5 +28,5 @@ endif()
 
 # add awesome-doxygen template
 if(ENABLE_DOCS)
-    add_subdirectory()
+    add_subdirectory(doxygen)
 endif()
