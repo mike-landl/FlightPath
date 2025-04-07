@@ -67,6 +67,16 @@ namespace FlightPath
          */
         auto DumpKML(const std::string &path) const -> void;
 
+        /**
+         * @brief Returns the reconstructed (output) flight data after WriteData calls.
+         *
+         * This data represents the processed flight path based on input data combined with 
+         * successive position, attitude, and velocity updates. It always begins with a copy 
+         * of the first input entry (from ReadFile) and grows with each call to WriteData().
+         *
+         * @return A const reference to the vector of reconstructed flight entries.
+         */
+        auto GetOutputData() const -> const std::vector<Entry>& { return output_data_; }
     private:
 
     private:

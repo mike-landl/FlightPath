@@ -14,7 +14,7 @@
             "CMAKE_C_COMPILER": "cl",
             "CMAKE_CXX_COMPILER": "cl",
             "CMAKE_BUILD_TYPE": "Debug",
-            "ENABLE_TESTS": "OFF",
+            "ENABLE_TESTS": "ON",
             "ENABLE_DOCS": "OFF"
         }
     },{
