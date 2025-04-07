@@ -1,0 +1,18 @@
+<map id="include/Error.hpp" name="include/Error.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="61,5,192,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,152,72,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,33,46,51,30,64,17,80,12,94,13,109,25,139,20,141,8,110,7,93,12,77,26,60,43,47,81,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="27,79,125,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="120,33,94,69,90,66,116,29"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="149,79,209,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="137,29,164,66,160,69,133,33"/>
+<area shape="rect" id="Node000005" href="$Exception_8hpp.html" title=" " alt="" coords="233,79,348,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="154,28,253,71,250,76,152,33"/>
+<area shape="poly" id="edge8_Node000005_Node000002" title=" " alt="" coords="251,107,86,153,85,148,249,101"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="146,152,233,177"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="276,106,219,146,216,142,273,102"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="257,152,324,177"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="293,104,293,138,288,138,288,104"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="348,152,407,177"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="306,102,354,141,351,145,303,106"/>
+</map>

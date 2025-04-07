@@ -1,0 +1,54 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger only on version tags like v1.0.0
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up CMake cache key
+        id: cmake-cache
+        run: echo "key=fcache-tests-${{ hashFiles('**/CMakeLists.txt') }}" >> $GITHUB_OUTPUT
+
+      - name: Cache FetchContent dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/fetchcontent
+          key: ${{ steps.cmake-cache.outputs.key }}
+
+      - name: Configure
+        run: cmake --preset release-docs -DFETCHCONTENT_BASE_DIR="$HOME/.cache/fetchcontent"
+
+      - name: Install Doxygen
+        run: sudo apt-get install doxygen graphviz -y
+
+      - name: Generate Doxygen docs
+        run: doxygen doxygen/Doxyfile
+
+      - name: Zip HTML output
+        run: |
+          cd doxygen/html
+          zip -r ../doxygen-docs.zip .
+          cd ..
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: "Release ${{ github.ref_name }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
+
+      - name: Upload Doxygen HTML zip to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: doxygen/doxygen-docs.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}

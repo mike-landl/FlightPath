@@ -1,0 +1,23 @@
+<map id="include/Error.hpp" name="include/Error.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="406,5,537,31"/>
+<area shape="rect" id="Node000002" href="$Mat4_8hpp.html" title=" " alt="" coords="84,79,219,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="407,36,204,81,203,76,406,31"/>
+<area shape="rect" id="Node000005" href="$Main_8cpp.html" title=" " alt="" coords="301,372,405,397"/>
+<area shape="poly" id="edge11_Node000001_Node000005" title=" " alt="" coords="487,42,512,96,521,129,525,163,525,240,521,265,510,288,494,309,474,327,430,355,388,374,385,370,427,351,471,323,490,305,506,286,516,264,519,239,519,163,516,130,507,98,483,44"/>
+<area shape="rect" id="Node000008" href="$Recorder_8cpp.html" title=" " alt="" coords="280,299,409,324"/>
+<area shape="poly" id="edge12_Node000001_Node000008" title=" " alt="" coords="478,44,482,86,481,140,472,198,462,226,448,252,434,269,417,282,381,301,379,296,414,278,431,265,444,249,457,224,467,197,476,140,477,87,473,45"/>
+<area shape="rect" id="Node000003" href="$Application_8hpp.html" title=" " alt="" coords="5,299,180,324"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="93,111,62,128,38,153,30,172,29,192,33,213,41,233,62,270,84,297,80,300,58,273,36,235,28,214,24,192,25,171,33,151,58,124,90,106"/>
+<area shape="rect" id="Node000006" href="$ReferenceFrame_8hpp.html" title=" " alt="" coords="47,152,255,177"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="154,118,154,152,149,152,149,118"/>
+<area shape="rect" id="Node000004" href="$Application_8cpp.html" title=" " alt="" coords="20,372,165,397"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="95,338,95,372,90,372,90,338"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="148,325,311,369,310,374,147,330"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="108,186,82,203,62,227,58,245,63,264,84,297,80,300,58,266,52,245,57,224,78,199,105,181"/>
+<area shape="rect" id="Node000007" href="$Recorder_8hpp.html" title=" " alt="" coords="72,225,231,251"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="154,191,154,225,149,225,149,191"/>
+<area shape="rect" id="Node000009" href="$ReferenceFrame_8cpp.html" title=" " alt="" coords="255,225,434,251"/>
+<area shape="poly" id="edge10_Node000006_Node000009" title=" " alt="" coords="196,179,314,223,312,228,194,184"/>
+<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="135,263,104,300,100,297,131,260"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="196,253,314,296,312,301,194,258"/>
+</map>

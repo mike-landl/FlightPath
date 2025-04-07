@@ -1,0 +1,11 @@
+build
+doxygen/html
+doxygen/latex
+coverage/html
+vendor
+.cache
+.vscode
+.vs
+
+*.kml
+Doxyfile

@@ -1,0 +1,37 @@
+name: Coverage
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install llvm
+        run: sudo apt-get install llvm catch2
+
+      - name: Configure
+        run: cmake --preset tests-coverage
+
+      - name: Build
+        run: cmake --build --preset build-tests-coverage --target RunTests
+
+      - name: Run Tests
+        working-directory: build/tests-coverage/tests
+        run: ctest
+
+      - name: Prepare Coverage Report
+        working-directory: build/tests-coverage/tests
+        run: |
+          llvm-profdata merge -sparse default.profraw -o coverage.profdata
+          llvm-cov export RunTests --instr-profile=coverage.profdata --format=lcov --ignore-filename-regex='(tests|_deps)' > coverage.lcov
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
