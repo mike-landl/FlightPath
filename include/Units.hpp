@@ -27,9 +27,9 @@ constexpr REAL TWO_PI()
 }
 
 // convenience definitions
-constexpr double PI_f = PI<float>();
+constexpr float  PI_f = PI<float>();
 constexpr double PI_d = PI<double>();
-constexpr double TWO_PI_f = TWO_PI<float>();
+constexpr float  TWO_PI_f = TWO_PI<float>();
 constexpr double TWO_PI_d = TWO_PI<double>();
 
 
