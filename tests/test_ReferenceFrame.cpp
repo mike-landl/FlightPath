@@ -63,7 +63,7 @@ namespace FlightPath
         
         ref_frame.SetAttitude(Attitude{.heading=heading, .pitch=pitch, .roll=roll});
         Attitude attitude = ref_frame.GetAttitude();
-        ref_frame.PrintAttitude(attitude);
+        //ref_frame.PrintAttitude(attitude);
     }
 
     TEST_CASE("[ReferenceFrame] Attitude does not influence position", "[ReferenceFrame]")
