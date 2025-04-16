@@ -10,6 +10,8 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 
+#include "Vec3.hpp"
+
 /**
  * @brief Checks whether two floating-point values are approximately equal.
  * 
@@ -34,6 +36,24 @@ inline auto CheckReal(const REAL value, const REAL expected, const REAL ulps = R
             ulps*std::numeric_limits<REAL>::epsilon()
         )
     );
+}
+
+/**
+ * @brief Compares two 3D vectors component-wise using the CheckReal function.
+ *
+ * This function checks if each component (x, y, z) of the actual vector is equal 
+ * to the corresponding component of the expected vector using the CheckReal function.
+ *
+ * @tparam REAL     The floating-point type used for the vector components (e.g., float, double).
+ * @param  actual   The actual vector to be tested.
+ * @param  expected The expected vector to compare against.
+ */
+template <typename REAL>
+inline auto CheckVec3(const FlightPath::Vec3<REAL> &actual, const FlightPath::Vec3<REAL> &expected) -> void
+{
+    CheckReal<REAL>(actual.x, expected.x);
+    CheckReal<REAL>(actual.y, expected.y);
+    CheckReal<REAL>(actual.z, expected.z);
 }
 
 /**
