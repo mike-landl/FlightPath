@@ -38,6 +38,16 @@ inline auto CheckReal(const REAL value, const REAL expected, const REAL ulps = R
     );
 }
 
+/**
+ * @brief Compares two 3D vectors component-wise using the CheckReal function.
+ *
+ * This function checks if each component (x, y, z) of the actual vector is equal 
+ * to the corresponding component of the expected vector using the CheckReal function.
+ *
+ * @tparam REAL     The floating-point type used for the vector components (e.g., float, double).
+ * @param  actual   The actual vector to be tested.
+ * @param  expected The expected vector to compare against.
+ */
 template <typename REAL>
 inline auto CheckVec3(const FlightPath::Vec3<REAL> &actual, const FlightPath::Vec3<REAL> &expected) -> void
 {
