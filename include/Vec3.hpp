@@ -107,7 +107,7 @@ namespace FlightPath
     }
 
     template <typename REAL>
-    auto inline operator * (const double scalar, const Vec3<REAL>& v) -> Vec3<REAL>
+    auto inline operator * (const REAL scalar, const Vec3<REAL>& v) -> Vec3<REAL>
     {
         return v * scalar;
     }
