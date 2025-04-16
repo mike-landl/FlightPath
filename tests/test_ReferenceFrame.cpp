@@ -48,9 +48,10 @@ namespace FlightPath
         ReferenceFrame ref_frame;
         ref_frame.SetAttitude(Attitude{.heading=heading, .pitch=pitch, .roll=roll});
 
-        // lambda for passing anonymous inline function to CaptureOutput
-        auto console_output = CaptureOutput([ref_frame](){ref_frame.PrintAttitude();});
-        REQUIRE(console_output == "\x1B[92m[I]\x1B[0m Heading 280.00 deg, Pitch -2.00 deg, Roll 15.00 deg\n");
+        Attitude attitude = ref_frame.GetAttitude();
+        CheckReal<double>(attitude.heading, heading, 1);
+        CheckReal<double>(attitude.pitch,   pitch,   1);
+        CheckReal<double>(attitude.roll,    roll,    1);
     }
 
     TEST_CASE("[ReferenceFrame] Print Attitude works", "[ReferenceFrame]")
@@ -60,10 +61,11 @@ namespace FlightPath
         constexpr double roll    =  15.0_deg;
 
         ReferenceFrame ref_frame;
-        
         ref_frame.SetAttitude(Attitude{.heading=heading, .pitch=pitch, .roll=roll});
-        Attitude attitude = ref_frame.GetAttitude();
-        //ref_frame.PrintAttitude(attitude);
+
+        // lambda for passing anonymous inline function to CaptureOutput
+        auto console_output = CaptureOutput([ref_frame](){ref_frame.PrintAttitude();});
+        REQUIRE(console_output == "\x1B[92m[I]\x1B[0m Heading 280.00 deg, Pitch -2.00 deg, Roll 15.00 deg\n");
     }
 
     TEST_CASE("[ReferenceFrame] Attitude does not influence position", "[ReferenceFrame]")
