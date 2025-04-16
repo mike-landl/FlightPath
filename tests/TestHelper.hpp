@@ -10,6 +10,8 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 
+#include "Vec3.hpp"
+
 /**
  * @brief Checks whether two floating-point values are approximately equal.
  * 
@@ -34,6 +36,14 @@ inline auto CheckReal(const REAL value, const REAL expected, const REAL ulps = R
             ulps*std::numeric_limits<REAL>::epsilon()
         )
     );
+}
+
+template <typename REAL>
+inline auto CheckVec3(const FlightPath::Vec3<REAL> &actual, const FlightPath::Vec3<REAL> &expected) -> void
+{
+    CheckReal<REAL>(actual.x, expected.x);
+    CheckReal<REAL>(actual.y, expected.y);
+    CheckReal<REAL>(actual.z, expected.z);
 }
 
 /**

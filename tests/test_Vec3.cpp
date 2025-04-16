@@ -5,17 +5,10 @@
 
 namespace FlightPath
 {
-    static auto CheckVec3(const Vec3<double> &actual, const Vec3<double> &expected) -> void
+    TEMPLATE_TEST_CASE("[Vec3] add", "[Vec3]", float, double)
     {
-        CheckReal<double>(actual.x, expected.x);
-        CheckReal<double>(actual.y, expected.y);
-        CheckReal<double>(actual.z, expected.z);
-    }
-
-    TEST_CASE("[Vec3] add", "[Vec3]")
-    {
-        Vec3<double> a{.x=1.0, .y=2.0, .z= 3.0};
-        Vec3<double> b{.x=1.0, .y=5.0, .z=-1.0};
+        Vec3<TestType> a{.x=1.0, .y=2.0, .z= 3.0};
+        Vec3<TestType> b{.x=1.0, .y=5.0, .z=-1.0};
 
         auto c = a + b;
 
