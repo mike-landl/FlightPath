@@ -3,7 +3,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_string.hpp>
 
-TEST_CASE("[Error] Ensure only throws on flase", "[Error]")
+TEST_CASE("[Error] Ensure only throws on false", "[Error]")
 {
     REQUIRE_THROWS(FlightPath::Ensure(false, "Does  throw"));
     REQUIRE_NOTHROW(FlightPath::Ensure(true, "Does not throw"));

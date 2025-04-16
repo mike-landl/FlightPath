@@ -107,7 +107,7 @@ namespace FlightPath
     }
 
     template <typename REAL>
-    auto inline operator * (const double scalar, const Vec3<REAL>& v) -> Vec3<REAL>
+    auto inline operator * (const REAL scalar, const Vec3<REAL>& v) -> Vec3<REAL>
     {
         return v * scalar;
     }
@@ -151,14 +151,14 @@ namespace FlightPath
     template <typename REAL>
     auto inline Vec3<REAL>::Normalize() -> void
     {
-        const REAL inverse_length = 1.0 / this->Length();
+        const REAL inverse_length = REAL(1.0) / this->Length();
         (*this) = (*this) * inverse_length;
     }
 
     template <typename REAL>
     auto inline Vec3<REAL>::Normalized() const -> Vec3<REAL>
     {
-        const REAL inverse_length = 1.0 / this->Length();
+        const REAL inverse_length = REAL(1.0) / this->Length();
         return (*this) * inverse_length;
     }
 }

@@ -178,10 +178,10 @@ namespace FlightPath
 
         for (size_t row = 0; row < rows_; ++row)
         {
-            const double Ai0 = (*this)(row, 0); const double Bi0 = other(row, 0);
-            const double Ai1 = (*this)(row, 1); const double Bi1 = other(row, 1);
-            const double Ai2 = (*this)(row, 2); const double Bi2 = other(row, 2);
-            const double Ai3 = (*this)(row, 3); const double Bi3 = other(row, 3);
+            const REAL Ai0 = (*this)(row, 0); const REAL Bi0 = other(row, 0);
+            const REAL Ai1 = (*this)(row, 1); const REAL Bi1 = other(row, 1);
+            const REAL Ai2 = (*this)(row, 2); const REAL Bi2 = other(row, 2);
+            const REAL Ai3 = (*this)(row, 3); const REAL Bi3 = other(row, 3);
 
             C(row, 0) = Ai0 + Bi0;
             C(row, 1) = Ai1 + Bi1;
@@ -199,10 +199,10 @@ namespace FlightPath
 
         for (size_t row = 0; row < rows_; ++row)
         {
-            const double Ai0 = (*this)(row, 0); const double Bi0 = other(row, 0);
-            const double Ai1 = (*this)(row, 1); const double Bi1 = other(row, 1);
-            const double Ai2 = (*this)(row, 2); const double Bi2 = other(row, 2);
-            const double Ai3 = (*this)(row, 3); const double Bi3 = other(row, 3);
+            const REAL Ai0 = (*this)(row, 0); const REAL Bi0 = other(row, 0);
+            const REAL Ai1 = (*this)(row, 1); const REAL Bi1 = other(row, 1);
+            const REAL Ai2 = (*this)(row, 2); const REAL Bi2 = other(row, 2);
+            const REAL Ai3 = (*this)(row, 3); const REAL Bi3 = other(row, 3);
 
             C(row, 0) = Ai0 - Bi0;
             C(row, 1) = Ai1 - Bi1;
@@ -220,10 +220,10 @@ namespace FlightPath
 
         for (size_t i = 0; i < rows_; ++i)
         {
-            const double Ai0 = (*this)(i, 0);
-            const double Ai1 = (*this)(i, 1);
-            const double Ai2 = (*this)(i, 2);
-            const double Ai3 = (*this)(i, 3);
+            const REAL Ai0 = (*this)(i, 0);
+            const REAL Ai1 = (*this)(i, 1);
+            const REAL Ai2 = (*this)(i, 2);
+            const REAL Ai3 = (*this)(i, 3);
 
             C(i, 0) = Ai0 * scalar;
             C(i, 1) = Ai1 * scalar;
@@ -241,10 +241,10 @@ namespace FlightPath
 
         for (size_t i = 0; i < rows_; ++i)
         {
-            const double Ai0 = (*this)(i, 0);
-            const double Ai1 = (*this)(i, 1);
-            const double Ai2 = (*this)(i, 2);
-            const double Ai3 = (*this)(i, 3);
+            const REAL Ai0 = (*this)(i, 0);
+            const REAL Ai1 = (*this)(i, 1);
+            const REAL Ai2 = (*this)(i, 2);
+            const REAL Ai3 = (*this)(i, 3);
 
             C(i, 0) = Ai0 * B(0, 0) + Ai1 * B(1, 0) + Ai2 * B(2, 0) + Ai3 * B(3, 0);
             C(i, 1) = Ai0 * B(0, 1) + Ai1 * B(1, 1) + Ai2 * B(2, 1) + Ai3 * B(3, 1);
